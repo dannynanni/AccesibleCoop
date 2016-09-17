@@ -11,7 +11,9 @@
 	//
 	public class PlayerManager : MonoBehaviour
 	{
-		public GameObject playerPrefab;
+        private int playerNum;
+
+        public GameObject playerPrefab;
 
 		const int maxPlayers = 4;
 
@@ -31,7 +33,7 @@
 		void OnEnable()
 		{
 			InputManager.OnDeviceDetached += OnDeviceDetached;
-			//keyboardListener = PlayerActions.CreateWithKeyboardBindings();
+			keyboardListener = PlayerActions.CreateWithKeyboardBindings();
 			joystickListener = PlayerActions.CreateWithJoystickBindings();
 		}
 
@@ -42,7 +44,6 @@
 			joystickListener.Destroy();
 			keyboardListener.Destroy();
 		}
-
 
 		void Update()
 		{
@@ -136,8 +137,19 @@
 
 				var gameObject = (GameObject) Instantiate( playerPrefab, playerPosition, Quaternion.identity );
 				var player = gameObject.GetComponent<Player>();
+                var target = gameObject.GetComponent<ActionsOutputTarget>();
+                
+                // Assigns player number to Player prefab 
+                // Resets to 0 if all controllers are disconnected
+                if (players.Count == 0)
+                {
+                    playerNum = 0;
+                }
+                target.PLAYERNUMBER = playerNum;
+                playerNum++;
 
-				if (inputDevice == null)
+
+                if (inputDevice == null)
 				{
 					// We could create a new instance, but might as well reuse the one we have
 					// and it lets us easily find the keyboard player.

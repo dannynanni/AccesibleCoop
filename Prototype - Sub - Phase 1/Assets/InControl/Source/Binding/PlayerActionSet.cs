@@ -44,14 +44,25 @@ namespace InControl
 		public ulong UpdateTick { get; protected set; }
 
 		/// <summary>
-		/// The binding source type that provided input to this action set.
+		/// The binding source type that last provided input to this action set.
 		/// </summary>
 		public BindingSourceType LastInputType = BindingSourceType.None;
+
+		/// <summary>
+		/// Occurs when the binding source type that last provided input to this action set changes.
+		/// </summary>
+		public event Action<BindingSourceType> OnLastInputTypeChanged;
 
 		/// <summary>
 		/// Whether this action set should produce input. Default: <c>true</c>
 		/// </summary>
 		public bool Enabled { get; set; }
+
+
+		/// <summary>
+		/// This property can be used to store whatever arbitrary game data you want on this action set.
+		/// </summary>
+		public object UserData { get; set; }
 
 
 		List<PlayerAction> actions = new List<PlayerAction>();
@@ -79,6 +90,7 @@ namespace InControl
 		/// </summary>
 		public void Destroy()
 		{
+			OnLastInputTypeChanged = null;
 			InputManager.DetachPlayerActionSet( this );
 		}
 
@@ -169,6 +181,8 @@ namespace InControl
 		{
 			var device = Device ?? FindActiveDevice();
 
+			var lastInputType = LastInputType;
+
 			var actionsCount = actions.Count;
 			for (var i = 0; i < actionsCount; i++)
 			{
@@ -179,7 +193,7 @@ namespace InControl
 				if (action.UpdateTick > UpdateTick)
 				{
 					UpdateTick = action.UpdateTick;
-					LastInputType = action.LastInputType;
+					lastInputType = action.LastInputType;
 				}
 			}
 
@@ -193,6 +207,15 @@ namespace InControl
 			for (var i = 0; i < twoAxisActionsCount; i++)
 			{
 				twoAxisActions[i].Update( updateTick, deltaTime );
+			}
+
+			if (LastInputType != lastInputType)
+			{
+				LastInputType = lastInputType;
+				if (OnLastInputTypeChanged != null)
+				{
+					OnLastInputTypeChanged.Invoke( lastInputType );
+				}
 			}
 		}
 

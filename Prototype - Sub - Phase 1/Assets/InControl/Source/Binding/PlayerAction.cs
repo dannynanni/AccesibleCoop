@@ -1,5 +1,6 @@
 ﻿namespace InControl
 {
+	using System;
 	using System.Collections.Generic;
 	using System.Collections.ObjectModel;
 	using System.IO;
@@ -38,9 +39,19 @@
 		public BindingListenOptions ListenOptions = null;
 
 		/// <summary>
-		/// The binding source type that provided input to this action.
+		/// The binding source type that last provided input to this action set.
 		/// </summary>
 		public BindingSourceType LastInputType = BindingSourceType.None;
+
+		/// <summary>
+		/// Occurs when the binding source type that last provided input to this action set changes.
+		/// </summary>
+		public event Action<BindingSourceType> OnLastInputTypeChanged;
+
+		/// <summary>
+		/// This property can be used to store whatever arbitrary game data you want on this action.
+		/// </summary>
+		public object UserData { get; set; }
 
 		List<BindingSource> defaultBindings = new List<BindingSource>();
 		List<BindingSource> regularBindings = new List<BindingSource>();
@@ -534,6 +545,8 @@
 
 		void UpdateBindings( ulong updateTick, float deltaTime )
 		{
+			var lastInputType = LastInputType;
+
 			var bindingCount = regularBindings.Count;
 			for (var i = bindingCount - 1; i >= 0; i--)
 			{
@@ -549,7 +562,7 @@
 					var value = binding.GetValue( Device );
 					if (UpdateWithValue( value, updateTick, deltaTime ))
 					{
-						LastInputType = binding.BindingSourceType;
+						lastInputType = binding.BindingSourceType;
 					}
 				}
 			}
@@ -557,6 +570,15 @@
 			Commit();
 
 			Enabled = Owner.Enabled;
+
+			if (LastInputType != lastInputType)
+			{
+				LastInputType = lastInputType;
+				if (OnLastInputTypeChanged != null)
+				{
+					OnLastInputTypeChanged.Invoke( lastInputType );
+				}
+			}
 		}
 
 
@@ -696,6 +718,39 @@
 		}
 
 
+		[Obsolete( "Please set this property on device controls directly. It does nothing here." )]
+		public new float LowerDeadZone
+		{
+			get
+			{
+				return 0.0f;
+			}
+
+			set
+			{
+#pragma warning disable 0168
+				var dummy = value;
+#pragma warning restore 0168
+			}
+		}
+
+
+		[Obsolete( "Please set this property on device controls directly. It does nothing here." )]
+		public new float UpperDeadZone
+		{
+			get
+			{
+				return 0.0f;
+			}
+
+			set
+			{
+#pragma warning disable 0168
+				var dummy = value;
+#pragma warning restore 0168
+			}
+		}
+
 
 		internal void Load( BinaryReader reader )
 		{
@@ -709,6 +764,9 @@
 
 				switch (bindingSourceType)
 				{
+				case BindingSourceType.None:
+					continue;
+
 				case BindingSourceType.DeviceBindingSource:
 					bindingSource = new DeviceBindingSource();
 					break;

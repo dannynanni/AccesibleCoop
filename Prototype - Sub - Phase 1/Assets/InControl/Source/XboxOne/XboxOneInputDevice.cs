@@ -2,12 +2,17 @@
 
 
 #if UNITY_XBOXONE
+// If you're getting a compilation error about the type or namespace 'Gamepad' being missing,
+// you need to install the Gamepad plugin from Unity Native Plugins for Xbox One.
 using Gamepad;
 #endif
 
 
 namespace InControl
 {
+	using UnityEngine;
+
+
 	public class XboxOneInputDevice : InputDevice
 	{
 		const uint AnalogLeftStickX = 0;
@@ -34,9 +39,9 @@ namespace InControl
 			SortOrder = (int) joystickId;
 			Meta = "Xbox One Device #" + joystickId;
 
-			#if UNITY_XBOXONE
+#if UNITY_XBOXONE
 			ControllerId = XboxOneInput.GetControllerId( joystickId );
-			#endif
+#endif
 
 			AddControl( InputControlType.LeftStickLeft, "Left Stick Left", LowerDeadZone, UpperDeadZone );
 			AddControl( InputControlType.LeftStickRight, "Left Stick Right", LowerDeadZone, UpperDeadZone );
@@ -73,7 +78,7 @@ namespace InControl
 
 		public override void Update( ulong updateTick, float deltaTime )
 		{
-			#if UNITY_XBOXONE
+#if UNITY_XBOXONE
 			var lsv = new Vector2( GetAnalogValue( AnalogLeftStickX ), -GetAnalogValue( AnalogLeftStickY ) );
 			UpdateLeftStickWithValue( lsv, updateTick, deltaTime );
 
@@ -103,11 +108,11 @@ namespace InControl
 			UpdateWithState( InputControlType.Menu, GetButtonState( XboxOneKeyCode.GamepadButtonMenu ), updateTick, deltaTime );
 
 			Commit( updateTick, deltaTime );
-			#endif
+#endif
 		}
 
 
-		#if UNITY_XBOXONE
+#if UNITY_XBOXONE
 		XboxOneKeyCode GetButtonKeyCode( XboxOneKeyCode keyCode )
 		{
 			const int offset = XboxOneKeyCode.Gamepad2ButtonA - XboxOneKeyCode.Gamepad1ButtonA;
@@ -125,35 +130,35 @@ namespace InControl
 		{
 			return Input.GetAxisRaw( "joystick " + JoystickId + " analog " + analogId );
 		}
-		#endif
+#endif
 
 
 		public bool IsConnected
 		{
 			get
-			{ 
-				#if UNITY_XBOXONE
-				return XboxOneInput.IsGamepadActive( JoystickId ); 
-				#else
+			{
+#if UNITY_XBOXONE
+				return XboxOneInput.IsGamepadActive( JoystickId );
+#else
 				return false;
-				#endif
+#endif
 			}
 		}
 
 
 		public override void Vibrate( float leftMotor, float rightMotor )
 		{
-			#if UNITY_XBOXONE
+#if UNITY_XBOXONE
 			GamepadPlugin.SetGamepadVibration( ControllerId, leftMotor, rightMotor, leftMotor, rightMotor );
-			#endif
+#endif
 		}
 
 
 		public void Vibrate( float leftMotor, float rightMotor, float leftTrigger, float rightTrigger )
 		{
-			#if UNITY_XBOXONE
+#if UNITY_XBOXONE
 			GamepadPlugin.SetGamepadVibration( ControllerId, leftMotor, rightMotor, leftTrigger, rightTrigger );
-			#endif
+#endif
 		}
 	}
 }

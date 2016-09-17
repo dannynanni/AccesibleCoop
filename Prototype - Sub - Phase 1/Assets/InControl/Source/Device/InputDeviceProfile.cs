@@ -1,4 +1,4 @@
-﻿namespace InControl
+namespace InControl
 {
 	using System;
 	using System.Collections.Generic;
@@ -25,6 +25,12 @@
 		[SerializeField]
 		public string[] ExcludePlatforms { get; protected set; }
 
+		[SerializeField]
+		public int MaxSystemBuildNumber { get; protected set; }
+
+		[SerializeField]
+		public int MinSystemBuildNumber { get; protected set; }
+
 		static HashSet<Type> hideList = new HashSet<Type>();
 
 		float sensitivity = 1.0f;
@@ -42,6 +48,9 @@
 
 			IncludePlatforms = new string[0];
 			ExcludePlatforms = new string[0];
+
+			MinSystemBuildNumber = 0;
+			MaxSystemBuildNumber = 0;
 		}
 
 
@@ -88,6 +97,16 @@
 		{
 			get
 			{
+				var systemBuildNumber = Utility.GetSystemBuildNumber();
+				if (MaxSystemBuildNumber > 0 && systemBuildNumber > MaxSystemBuildNumber)
+				{
+					return false;
+				}
+				if (MinSystemBuildNumber > 0 && systemBuildNumber < MinSystemBuildNumber)
+				{
+					return false;
+				}
+
 				if (ExcludePlatforms != null)
 				{
 					var excludePlatformsCount = ExcludePlatforms.Length;

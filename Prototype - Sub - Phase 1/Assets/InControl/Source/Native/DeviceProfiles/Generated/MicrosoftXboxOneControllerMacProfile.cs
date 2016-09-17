@@ -1,5 +1,8 @@
 namespace InControl.NativeProfile
 {
+	using System;
+
+
 	// @cond nodoc
 	public class MicrosoftXboxOneControllerMacProfile : XboxOneDriverMacProfile
 	{
@@ -16,6 +19,10 @@ namespace InControl.NativeProfile
 				new NativeInputDeviceMatcher {
 					VendorID = 0x045e,
 					ProductID = 0x02dd,
+				},
+				new NativeInputDeviceMatcher {
+					VendorID = 0x045e,
+					ProductID = 0x02ea,
 				},
 			};
 		}

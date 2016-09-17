@@ -1,5 +1,8 @@
 namespace InControl.NativeProfile
 {
+	using System;
+
+
 	// @cond nodoc
 	public class HoriEX2ControllerMacProfile : Xbox360DriverMacProfile
 	{

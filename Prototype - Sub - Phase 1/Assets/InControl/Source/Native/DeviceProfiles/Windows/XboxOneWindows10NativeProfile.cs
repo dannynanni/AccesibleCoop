@@ -19,6 +19,8 @@ namespace InControl.NativeProfile
 				"Windows 8"
 			};
 
+			MaxSystemBuildNumber = 14392;
+
 			Matchers = new[] {
 				new NativeInputDeviceMatcher {
 					VendorID = 0x45e,

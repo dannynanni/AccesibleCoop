@@ -1,4 +1,4 @@
-﻿namespace InControl
+namespace InControl
 {
 	using System;
 	using System.IO;
@@ -258,13 +258,15 @@
 		// TODO: This meaningless distinction should probably be removed entirely.
 		internal static bool TargetIsButton( InputControlType target )
 		{
-			return (target >= InputControlType.Action1 && target <= InputControlType.Action12) || (target >= InputControlType.Button0 && target <= InputControlType.Button19);
+			return (target >= InputControlType.Action1 && target <= InputControlType.Action12) ||
+				   (target >= InputControlType.Button0 && target <= InputControlType.Button19);
 		}
 
 
 		internal static bool TargetIsStandard( InputControlType target )
 		{
-			return target >= InputControlType.LeftStickUp && target <= InputControlType.RightBumper;
+			return (target >= InputControlType.LeftStickUp && target <= InputControlType.Action12) ||
+				   (target >= InputControlType.Command && target <= InputControlType.DPadY);
 		}
 
 
@@ -482,9 +484,21 @@
 			{
 				var version = HKLM_GetString( @"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CSDVersion" );
 				var bitSize = Is32Bit ? "32Bit" : "64Bit";
-				return product + (version != null ? " " + version : "") + " " + bitSize;
+				var buildNumber = GetSystemBuildNumber();
+				return product + (version != null ? " " + version : "") + " " + bitSize + " Build " + buildNumber;
 			}
 			return SystemInfo.operatingSystem;
+		}
+
+
+		public static int GetSystemBuildNumber()
+		{
+			return Environment.OSVersion.Version.Build;
+		}
+#else
+		public static int GetSystemBuildNumber()
+		{
+			return 0;
 		}
 #endif
 

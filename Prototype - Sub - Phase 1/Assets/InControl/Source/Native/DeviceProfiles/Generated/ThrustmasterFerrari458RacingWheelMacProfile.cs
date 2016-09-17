@@ -1,5 +1,8 @@
 namespace InControl.NativeProfile
 {
+	using System;
+
+
 	// @cond nodoc
 	public class ThrustmasterFerrari458RacingWheelMacProfile : Xbox360DriverMacProfile
 	{

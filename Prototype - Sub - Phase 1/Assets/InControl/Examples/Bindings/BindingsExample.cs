@@ -14,6 +14,7 @@ namespace BindingsExample
 		{
 			// See PlayerActions.cs for this setup.
 			playerActions = PlayerActions.CreateWithDefaultBindings();
+			//playerActions.Move.OnLastInputTypeChanged += ( lastInputType ) => Debug.Log( lastInputType );
 
 			LoadBindings();
 		}
@@ -73,7 +74,7 @@ namespace BindingsExample
 			const float h = 22.0f;
 			var y = 10.0f;
 
-			GUI.Label( new Rect( 10, y, 300, y + h ), "Last Input Type: " + playerActions.LastInputType.ToString() );
+			GUI.Label( new Rect( 10, y, 300, y + h ), "Last Input Type: " + playerActions.LastInputType );
 			y += h;
 
 			var actionCount = playerActions.Actions.Count;

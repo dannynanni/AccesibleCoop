@@ -19,6 +19,8 @@ namespace InControl
 				"Windows 8"
 			};
 
+			MaxSystemBuildNumber = 14392;
+
 			JoystickNames = new[] {
 				"Controller (Xbox One For Windows)"
 			};

@@ -98,12 +98,12 @@
 		/// <summary>
 		/// Determines whether the specified object is equal to the current BindingSource.
 		/// </summary>
-		/// <param name="other">The object to compare with the current BindingSource.</param>
+		/// <param name="obj">The object to compare with the current BindingSource.</param>
 		/// <returns><c>true</c> if the specified object is equal to the current
 		/// BindingSource; otherwise, <c>false</c>.</returns>
-		public override bool Equals( object other )
+		public override bool Equals( object obj )
 		{
-			return Equals( (BindingSource) other );
+			return Equals( (BindingSource) obj );
 		}
 
 

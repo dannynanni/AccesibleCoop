@@ -109,6 +109,7 @@ namespace InControl
 			"InControl.Xbox360WinProfile",
 			"InControl.XboxOneMacProfile",
 			"InControl.XboxOneProfile",
+			"InControl.XboxOneWin10AEProfile",
 			"InControl.XboxOneWin10Profile",
 			"InControl.XboxOneWinProfile",
 		};

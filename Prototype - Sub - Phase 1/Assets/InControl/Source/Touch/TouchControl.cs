@@ -223,7 +223,7 @@ namespace InControl
 		}
 
 
-		protected static Vector2 SnapTo( Vector2 vector, SnapAngles snapAngles )
+		protected static Vector3 SnapTo( Vector2 vector, SnapAngles snapAngles )
 		{
 			if (snapAngles == SnapAngles.None)
 			{
@@ -236,7 +236,7 @@ namespace InControl
 		}
 
 
-		protected static Vector2 SnapTo( Vector2 vector, float snapAngle )
+		protected static Vector3 SnapTo( Vector2 vector, float snapAngle )
 		{
 			var angle = Vector2.Angle( vector, Vector2.up );
 

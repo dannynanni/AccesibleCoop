@@ -108,7 +108,12 @@ namespace InControl
 				AddControl( InputControlType.RightStickY, "Right Stick Y" );
 				AddControl( InputControlType.DPadX, "DPad X" );
 				AddControl( InputControlType.DPadY, "DPad Y" );
+
+#if UNITY_PS4
+				AddControl( InputControlType.Command, "OPTIONS button" );
+#else
 				AddControl( InputControlType.Command, "Command" );
+#endif
 
 				ExpireControlCache();
 			}

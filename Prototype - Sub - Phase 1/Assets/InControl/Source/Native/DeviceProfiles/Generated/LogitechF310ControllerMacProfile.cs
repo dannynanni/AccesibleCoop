@@ -1,5 +1,8 @@
 namespace InControl.NativeProfile
 {
+	using System;
+
+
 	// @cond nodoc
 	public class LogitechF310ControllerMacProfile : Xbox360DriverMacProfile
 	{

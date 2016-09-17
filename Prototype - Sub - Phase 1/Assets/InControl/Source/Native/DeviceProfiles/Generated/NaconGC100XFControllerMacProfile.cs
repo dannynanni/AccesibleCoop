@@ -1,5 +1,8 @@
 namespace InControl.NativeProfile
 {
+	using System;
+
+
 	// @cond nodoc
 	public class NaconGC100XFControllerMacProfile : Xbox360DriverMacProfile
 	{

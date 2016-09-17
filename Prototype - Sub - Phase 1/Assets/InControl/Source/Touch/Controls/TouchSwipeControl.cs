@@ -13,12 +13,12 @@
 		[SerializeField]
 		Rect activeArea = new Rect( 25.0f, 25.0f, 50.0f, 50.0f );
 
-		[Range( 0, 1 )] 
+		[Range( 0, 1 )]
 		public float sensitivity = 0.1f;
 
 
 		[Header( "Analog Target" )]
-		
+
 		public AnalogTarget target = AnalogTarget.None;
 		public SnapAngles snapAngles = SnapAngles.None;
 
@@ -57,19 +57,19 @@
 				currentTouch = null;
 			}
 		}
-		
-		
+
+
 		public override void ConfigureControl()
 		{
 			worldActiveArea = TouchManager.ConvertToWorld( activeArea, areaUnitType );
 		}
-		
-		
+
+
 		public override void DrawGizmos()
 		{
 			Utility.DrawRectGizmo( worldActiveArea, Color.yellow );
-//			Gizmos.color = Color.red;
-//			Gizmos.DrawLine( Vector3.zero, currentVector * 2.0f );
+			//			Gizmos.color = Color.red;
+			//			Gizmos.DrawLine( Vector3.zero, currentVector * 2.0f );
 		}
 
 
@@ -81,7 +81,7 @@
 				dirty = false;
 			}
 		}
-		
+
 
 		public override void SubmitControlState( ulong updateTick, float deltaTime )
 		{
@@ -112,8 +112,8 @@
 			CommitButton( rightTarget );
 			CommitButton( tapTarget );
 		}
-		
-		
+
+
 		public override void TouchBegan( Touch touch )
 		{
 			if (currentTouch != null)
@@ -133,8 +133,8 @@
 				lastButtonTarget = ButtonTarget.None;
 			}
 		}
-		
-		
+
+
 		public override void TouchMoved( Touch touch )
 		{
 			if (currentTouch != touch)
@@ -159,8 +159,8 @@
 				}
 			}
 		}
-		
-		
+
+
 		public override void TouchEnded( Touch touch )
 		{
 			if (currentTouch != touch)
@@ -189,7 +189,7 @@
 
 		ButtonTarget GetButtonTargetForVector( Vector2 vector )
 		{
-			var snappedVector = SnapTo( vector, SnapAngles.Four );
+			Vector2 snappedVector = SnapTo( vector, SnapAngles.Four );
 
 			if (snappedVector == Vector2.up)
 			{
@@ -216,7 +216,7 @@
 
 
 		public Rect ActiveArea
-		{ 
+		{
 			get
 			{
 				return activeArea;
@@ -234,7 +234,7 @@
 
 
 		public TouchUnitType AreaUnitType
-		{ 
+		{
 			get
 			{
 				return areaUnitType;

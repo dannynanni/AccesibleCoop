@@ -164,8 +164,8 @@ namespace InControl
 			{
 				var device = detachedDevices[i];
 				if (device.Info.HasSameVendorID( deviceInfo ) &&
-				    device.Info.HasSameProductID( deviceInfo ) &&
-				    device.Info.HasSameSerialNumber( deviceInfo ))
+					device.Info.HasSameProductID( deviceInfo ) &&
+					device.Info.HasSameSerialNumber( deviceInfo ))
 				{
 					return device;
 				}
@@ -175,8 +175,8 @@ namespace InControl
 			{
 				var device = detachedDevices[i];
 				if (device.Info.HasSameVendorID( deviceInfo ) &&
-				    device.Info.HasSameProductID( deviceInfo ) &&
-				    device.Info.HasSameLocation( deviceInfo ))
+					device.Info.HasSameProductID( deviceInfo ) &&
+					device.Info.HasSameLocation( deviceInfo ))
 				{
 					return device;
 				}
@@ -186,8 +186,8 @@ namespace InControl
 			{
 				var device = detachedDevices[i];
 				if (device.Info.HasSameVendorID( deviceInfo ) &&
-				    device.Info.HasSameProductID( deviceInfo ) &&
-				    device.Info.HasSameVersionNumber( deviceInfo ))
+					device.Info.HasSameProductID( deviceInfo ) &&
+					device.Info.HasSameVersionNumber( deviceInfo ))
 				{
 					return device;
 				}
@@ -228,14 +228,15 @@ namespace InControl
 		public static bool CheckPlatformSupport( ICollection<string> errors )
 		{
 			if (Application.platform != RuntimePlatform.OSXPlayer &&
-			    Application.platform != RuntimePlatform.OSXEditor &&
-			    Application.platform != RuntimePlatform.WindowsPlayer &&
-			    Application.platform != RuntimePlatform.WindowsEditor)
+				Application.platform != RuntimePlatform.OSXEditor &&
+				Application.platform != RuntimePlatform.WindowsPlayer &&
+				Application.platform != RuntimePlatform.WindowsEditor)
 			{
+				errors.Add( "Native input is currently only supported on Windows and Mac." );
 				return false;
 			}
 
-			#if UNITY_4_3 || UNITY_4_4 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7
+#if UNITY_4_3 || UNITY_4_4 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7
 			if (!Application.HasProLicense())
 			{
 				if (errors != null)
@@ -244,7 +245,7 @@ namespace InControl
 				}
 				return false;
 			}
-			#endif
+#endif
 
 			try
 			{

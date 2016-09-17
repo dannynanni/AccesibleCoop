@@ -37,10 +37,10 @@ namespace InControl
 		public SnapAngles snapAngles = SnapAngles.None;
 		public LockAxis lockToAxis = LockAxis.None;
 
-		[Range( 0, 1 )] 
+		[Range( 0, 1 )]
 		public float lowerDeadZone = 0.1f;
 
-		[Range( 0, 1 )] 
+		[Range( 0, 1 )]
 		public float upperDeadZone = 0.9f;
 
 		public AnimationCurve inputCurve = AnimationCurve.Linear( 0.0f, 0.0f, 1.0f, 1.0f );
@@ -66,7 +66,6 @@ namespace InControl
 		Rect worldActiveArea;
 		float worldKnobRange;
 		Vector3 value;
-		Vector3 snappedValue;
 		Touch currentTouch;
 		bool dirty;
 
@@ -145,7 +144,7 @@ namespace InControl
 
 		public override void SubmitControlState( ulong updateTick, float deltaTime )
 		{
-			SubmitAnalogValue( target, snappedValue, lowerDeadZone, upperDeadZone, updateTick, deltaTime );
+			SubmitAnalogValue( target, value, lowerDeadZone, upperDeadZone, updateTick, deltaTime );
 		}
 
 
@@ -217,37 +216,30 @@ namespace InControl
 
 			movedPosition = beganPosition + (Mathf.Clamp( length, 0.0f, worldKnobRange ) * normal);
 
+			if (lockToAxis == LockAxis.Horizontal)
+			{
+				movedPosition.y = beganPosition.y;
+			}
+			else
+			if (lockToAxis == LockAxis.Vertical)
+			{
+				movedPosition.x = beganPosition.x;
+			}
+
+			if (snapAngles != SnapAngles.None)
+			{
+				movedPosition = SnapTo( movedPosition - beganPosition, snapAngles ) + beganPosition;
+			}
+
+			// How to clamp to bottom half only:
+			// movedPosition.y = Mathf.Min( movedPosition.y, beganPosition.y );
+
+			RingPosition = beganPosition;
+			KnobPosition = movedPosition;
+
 			value = (movedPosition - beganPosition) / worldKnobRange;
 			value.x = inputCurve.Evaluate( Utility.Abs( value.x ) ) * Mathf.Sign( value.x );
 			value.y = inputCurve.Evaluate( Utility.Abs( value.y ) ) * Mathf.Sign( value.y );
-
-			if (snapAngles == SnapAngles.None)
-			{
-				snappedValue = value;
-
-				if (lockToAxis == LockAxis.Horizontal)
-				{
-					snappedValue.y = 0.0f;
-					KnobPosition = beganPosition + (snappedValue * worldKnobRange);
-				}
-				else
-				if (lockToAxis == LockAxis.Vertical)
-				{
-					snappedValue.x = 0.0f;
-					KnobPosition = beganPosition + (snappedValue * worldKnobRange);
-				}
-				else
-				{
-					KnobPosition = movedPosition;
-				}
-			}
-			else
-			{
-				snappedValue = SnapTo( value, snapAngles );
-				KnobPosition = beganPosition + (snappedValue * worldKnobRange);
-			}
-
-			RingPosition = beganPosition;
 		}
 
 
@@ -259,7 +251,6 @@ namespace InControl
 			}
 
 			value = Vector3.zero;
-			snappedValue = Vector3.zero;
 
 			var ringResetDelta = (resetPosition - RingPosition).magnitude;
 			ringResetSpeed = Utility.IsZero( resetDuration ) ? ringResetDelta : (ringResetDelta / resetDuration);
@@ -327,7 +318,7 @@ namespace InControl
 
 
 		public TouchControlAnchor Anchor
-		{ 
+		{
 			get
 			{
 				return anchor;
@@ -345,7 +336,7 @@ namespace InControl
 
 
 		public Vector2 Offset
-		{ 
+		{
 			get
 			{
 				return offset;
@@ -363,7 +354,7 @@ namespace InControl
 
 
 		public TouchUnitType OffsetUnitType
-		{ 
+		{
 			get
 			{
 				return offsetUnitType;
@@ -381,7 +372,7 @@ namespace InControl
 
 
 		public Rect ActiveArea
-		{ 
+		{
 			get
 			{
 				return activeArea;
@@ -399,7 +390,7 @@ namespace InControl
 
 
 		public TouchUnitType AreaUnitType
-		{ 
+		{
 			get
 			{
 				return areaUnitType;

@@ -614,11 +614,7 @@ namespace InControl
 
 		internal static void AttachPlayerActionSet( PlayerActionSet playerActionSet )
 		{
-			if (playerActionSets.Contains( playerActionSet ))
-			{
-				Logger.LogWarning( "Player action set is already attached." );
-			}
-			else
+			if (!playerActionSets.Contains( playerActionSet ))
 			{
 				playerActionSets.Add( playerActionSet );
 			}

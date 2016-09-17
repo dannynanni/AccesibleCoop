@@ -44,8 +44,8 @@ namespace InControl
 
 
 		internal void SetZeroTick()
-		{ 
-			zeroTick = UpdateTick; 
+		{
+			zeroTick = UpdateTick;
 		}
 
 

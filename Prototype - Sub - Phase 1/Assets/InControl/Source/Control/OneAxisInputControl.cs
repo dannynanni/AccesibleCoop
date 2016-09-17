@@ -36,7 +36,7 @@ namespace InControl
 
 		void PrepareForUpdate( ulong updateTick )
 		{
-			if (this == InputControl.Null)
+			if (IsNull)
 			{
 				return;
 			}
@@ -63,7 +63,7 @@ namespace InControl
 
 		public bool UpdateWithState( bool state, ulong updateTick, float deltaTime )
 		{
-			if (this == InputControl.Null)
+			if (IsNull)
 			{
 				return false;
 			}
@@ -78,7 +78,7 @@ namespace InControl
 
 		public bool UpdateWithValue( float value, ulong updateTick, float deltaTime )
 		{
-			if (this == InputControl.Null)
+			if (IsNull)
 			{
 				return false;
 			}
@@ -106,7 +106,7 @@ namespace InControl
 
 		internal bool UpdateWithRawValue( float value, ulong updateTick, float deltaTime )
 		{
-			if (this == InputControl.Null)
+			if (IsNull)
 			{
 				return false;
 			}
@@ -128,7 +128,7 @@ namespace InControl
 
 		internal void SetValue( float value, ulong updateTick )
 		{
-			if (this == InputControl.Null)
+			if (IsNull)
 			{
 				return;
 			}
@@ -158,7 +158,7 @@ namespace InControl
 
 		public void Commit()
 		{
-			if (this == InputControl.Null)
+			if (IsNull)
 			{
 				return;
 			}
@@ -348,22 +348,52 @@ namespace InControl
 
 		public float LowerDeadZone
 		{
-			get { return lowerDeadZone; }
-			set { lowerDeadZone = Mathf.Clamp01( value ); }
+			get
+			{
+				return lowerDeadZone;
+			}
+
+			set
+			{
+				lowerDeadZone = Mathf.Clamp01( value );
+			}
 		}
 
 
 		public float UpperDeadZone
 		{
-			get { return upperDeadZone; }
-			set { upperDeadZone = Mathf.Clamp01( value ); }
+			get
+			{
+				return upperDeadZone;
+			}
+
+			set
+			{
+				upperDeadZone = Mathf.Clamp01( value );
+			}
 		}
 
 
 		public float StateThreshold
 		{
-			get { return stateThreshold; }
-			set { stateThreshold = Mathf.Clamp01( value ); }
+			get
+			{
+				return stateThreshold;
+			}
+
+			set
+			{
+				stateThreshold = Mathf.Clamp01( value );
+			}
+		}
+
+
+		public bool IsNull
+		{
+			get
+			{
+				return ReferenceEquals( this, InputControl.Null );
+			}
 		}
 
 
