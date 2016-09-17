@@ -7,6 +7,8 @@ public class MovementScript : MonoBehaviour {
 
     public Transform Pilot;
 
+    public ParticleSystem TurnCav;
+
     private float thrust;
     public float thrustMin;
     public float thrustMax;
@@ -40,6 +42,7 @@ public class MovementScript : MonoBehaviour {
         {
             if (value != left)
             {
+                TurnCav.Emit(50);
                 left = value;
                 if (value)
                 {
