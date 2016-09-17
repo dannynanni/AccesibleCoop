@@ -56,6 +56,10 @@
                 playerStation = GameObject.Find(playerStations[playerNumber]);
                 myIO = playerStation.GetComponent <ControlIO> ();
             }
+            if (scene.buildIndex == 1)
+            {
+                myIO.playerNum = PLAYERNUMBER;
+            }
         }
 
         public void passLS (float leftRight, float upDown)
