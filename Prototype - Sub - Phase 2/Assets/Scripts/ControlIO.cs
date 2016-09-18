@@ -5,7 +5,10 @@ public class ControlIO : MonoBehaviour {
 
     public int playerNum;
 
+    public Component p0;
     public MovementScript p1;
+    public GunFireScript p2;
+    public Component p4;
 
     void Awake ()
     {
@@ -27,6 +30,10 @@ public class ControlIO : MonoBehaviour {
             {
                 p1.Button(true);
             }
+            if (playerNum == 2)
+            {
+                p2.PullTrigger(true);
+            }
         }
         else if (!pressed)
         {
@@ -34,6 +41,10 @@ public class ControlIO : MonoBehaviour {
             if (playerNum == 1)
             {
                 p1.Button(false);
+            }
+            if (playerNum == 2)
+            {
+                p2.PullTrigger(false);
             }
         }
 
