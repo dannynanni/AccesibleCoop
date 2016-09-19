@@ -77,5 +77,9 @@ public class BasicClaw : MonoBehaviour {
 				retracting = false;
 			}
 		}
+
+		if (Input.GetKeyDown(KeyCode.Space)){
+			Launch();
+		}
 	}
 }
