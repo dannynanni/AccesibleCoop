@@ -21,6 +21,7 @@ public class ModeSwitch : MonoBehaviour {
 		exploreFeatures = GameObject.FindGameObjectsWithTag("ExploreMode");
 	}
 
+	//Call this script to change the submarine between modes
 	public void SwitchMode(){
 		ReverseState(fightFeatures);
 		ReverseState(exploreFeatures);
