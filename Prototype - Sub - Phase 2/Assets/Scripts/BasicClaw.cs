@@ -12,7 +12,6 @@ using System.Collections;
 public class BasicClaw : ExplorePower {
 
 	protected Transform parent;
-	protected Rigidbody rb;
 
 	public float range = 30.0f; //how far from the submarine the claw should go
 	protected Vector3 extendedPoint = new Vector3(0.0f, 0.0f, 0.0f); //localPosition the claw is aiming toward
@@ -32,26 +31,10 @@ public class BasicClaw : ExplorePower {
 	protected const string COLLECTIBLE_TAG = "Collectible";
 
 	public float powerUpRangeBonus = 20.0f;
-//	protected new bool poweredUp = false;
-//	public new bool PoweredUp{
-//		get { return poweredUp; }
-//		set{
-//			if (poweredUp != value){
-//				poweredUp = value;
-//
-//				if (poweredUp){
-//					range += powerUpRangeBonus;
-//				} else {
-//					range -= powerUpRangeBonus;
-//				}
-//			}
-//
-//		}
-//	}
+
 
 	protected void Start(){
 		parent = transform.parent;
-		rb = GetComponent<Rigidbody>();
 		extendedPoint.x = range;
 	}
 
@@ -132,8 +115,10 @@ public class BasicClaw : ExplorePower {
 		if (base.poweredUp != potentialState){
 			if (potentialState){
 				range += powerUpRangeBonus;
+				extendedPoint.x = range;
 			} else {
 				range -= powerUpRangeBonus;
+				extendedPoint.x = range;
 			}
 			return potentialState;
 		} else {

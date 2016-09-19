@@ -19,6 +19,7 @@ public class ExplorePower : MonoBehaviour {
 		}
 	}
 
+	//override this to enable powerups; see BasicClaw for an example
 	protected virtual bool PowerUpCheck(bool potentialState){
 		if (poweredUp != potentialState){
 			return potentialState;
