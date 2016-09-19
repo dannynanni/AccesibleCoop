@@ -9,7 +9,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class BasicClaw : MonoBehaviour {
+public class BasicClaw : ExplorePower {
 
 	protected Transform parent;
 	protected Rigidbody rb;
@@ -30,6 +30,24 @@ public class BasicClaw : MonoBehaviour {
 	protected bool retracting = false;
 
 	protected const string COLLECTIBLE_TAG = "Collectible";
+
+	public float powerUpRangeBonus = 20.0f;
+//	protected new bool poweredUp = false;
+//	public new bool PoweredUp{
+//		get { return poweredUp; }
+//		set{
+//			if (poweredUp != value){
+//				poweredUp = value;
+//
+//				if (poweredUp){
+//					range += powerUpRangeBonus;
+//				} else {
+//					range -= powerUpRangeBonus;
+//				}
+//			}
+//
+//		}
+//	}
 
 	protected void Start(){
 		parent = transform.parent;
@@ -88,7 +106,7 @@ public class BasicClaw : MonoBehaviour {
 		return pos;
 	}
 
-	void Update(){
+	protected void Update(){
 		if (deploying){
 			transform.localPosition = Deploy();
 			TryToPickUp();
@@ -106,6 +124,20 @@ public class BasicClaw : MonoBehaviour {
 
 		if (Input.GetKeyDown(KeyCode.Space)){
 			Launch();
+		}
+	}
+
+	//provides the powerup unique to the claw
+	protected override bool PowerUpCheck (bool potentialState){
+		if (base.poweredUp != potentialState){
+			if (potentialState){
+				range += powerUpRangeBonus;
+			} else {
+				range -= powerUpRangeBonus;
+			}
+			return potentialState;
+		} else {
+			return base.poweredUp;
 		}
 	}
 }
