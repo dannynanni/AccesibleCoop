@@ -33,7 +33,7 @@ public class BasicClaw : MonoBehaviour {
 	//call this to begin
 	public void Launch(){
 		//this if statement prevents the claw from launching before it has fully retracted
-		if (Vector3.Distance(transform.localPosition, parent.localPosition <= Mathf.Epsilon))
+		if (Vector3.Distance(transform.localPosition, parent.localPosition) <= Mathf.Epsilon)
 		{
 			deploying = true;
 			retracting = false;
@@ -67,13 +67,13 @@ public class BasicClaw : MonoBehaviour {
 	void Update(){
 		if (deploying){
 			transform.localPosition = Deploy();
-			if (Vector3.Distance(transform.localPosition, extendedPoint <= Mathf.Epsilon)){
+			if (Vector3.Distance(transform.localPosition, extendedPoint) <= Mathf.Epsilon){
 				deploying = false;
 				retracting = true;
 			}
 		} else if (retracting){
 			transform.localPosition = Retract();
-			if (Vector3.Distance(transform.localPosition, parent.localPosition <= Mathf.Epsilon)){
+			if (Vector3.Distance(transform.localPosition, parent.localPosition) <= Mathf.Epsilon){
 				retracting = false;
 			}
 		}
