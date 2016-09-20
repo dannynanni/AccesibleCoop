@@ -11,6 +11,12 @@ using System.Collections;
 
 public class FightPower : MonoBehaviour {
 
+	protected bool active = true;
+	public bool Active{
+		get { return active; }
+		set { active = value; }
+	}
+
 	protected bool poweredUp = false;
 	public bool PoweredUp{
 		get { return poweredUp; }

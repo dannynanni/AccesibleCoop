@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GunFireScript : MonoBehaviour {
+public class GunFireScript : FightPower {
 
     public GameObject bullet;
     private bool triggerPulled;
@@ -16,11 +16,13 @@ public class GunFireScript : MonoBehaviour {
     {
         timer += Time.deltaTime;
 
-        if (timer >= reloadTime && triggerPulled)
-        {
-            Fire();
-            timer = 0;
-        }
+		if (Active){
+	        if (timer >= reloadTime && triggerPulled)
+	        {
+	            Fire();
+	            timer = 0;
+	        }
+		}
     }
 
     void Fire ()
