@@ -40,9 +40,6 @@ public class BasicClaw : ExplorePower {
 
 	//call this to begin
 	public void Launch(){
-		//this if statement prevents the claw from launching before it has fully retracted
-		if (Vector3.Distance(transform.localPosition, parent.localPosition) <= Mathf.Epsilon)
-		{
 			deploying = true;
 			retracting = false;
 
@@ -52,7 +49,6 @@ public class BasicClaw : ExplorePower {
 
 			//find items potentially close enough to retrieve
 			collectibles = Physics.OverlapSphere(transform.position, range);
-		}
 	}
 		
 	protected Vector3 Deploy(){
@@ -104,10 +100,6 @@ public class BasicClaw : ExplorePower {
 				retracting = false;
 			}
 		}
-
-		if (Input.GetKeyDown(KeyCode.Space)){
-			Launch();
-		}
 	}
 
 	//provides the powerup unique to the claw
@@ -123,6 +115,15 @@ public class BasicClaw : ExplorePower {
 			return potentialState;
 		} else {
 			return base.poweredUp;
+		}
+	}
+
+	public void Button(bool pressed){
+		if (pressed){
+			//this if statement prevents the claw from launching before it has fully retracted
+			if (Vector3.Distance(transform.localPosition, parent.localPosition) <= Mathf.Epsilon){
+				Launch();
+			}
 		}
 	}
 }

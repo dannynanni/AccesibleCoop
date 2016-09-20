@@ -7,6 +7,7 @@ public class ShieldScript : FightPower {
 	Vector3 deployed = new Vector3(1.0f, 1.0f, 1.0f);
 	Vector3 retracted = new Vector3(0.0f, 0.0f, 0.0f);
 
+
 	void Update(){
 		if (Active){
 			Vector3 newScale = Vector3.Lerp(transform.localScale, deployed, sizeChangeRate);

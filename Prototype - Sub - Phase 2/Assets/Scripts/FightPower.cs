@@ -11,7 +11,7 @@ using System.Collections;
 
 public class FightPower : MonoBehaviour {
 
-	protected bool active = true;
+	protected bool active = false;
 	public bool Active{
 		get { return active; }
 		set { active = value; }
