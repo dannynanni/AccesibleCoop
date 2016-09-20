@@ -17,7 +17,7 @@ public class ControlIO : MonoBehaviour {
 	public ModeSwitch p0Explore;
 	public MovementScript p1Explore;
 	public BasicClaw p2Explore;
-	//public SonarScript p3Explore;
+    public SonarScript p3Explore;
 
 	public ModeSwitch p0Fight;
 	public MovementScript p1Fight;
@@ -35,13 +35,13 @@ public class ControlIO : MonoBehaviour {
 
     }
 
-    public void LS (float leftRight, float upDown)
+    public void LS(float leftRight, float upDown)
     {
         //Debug.Log(gameObject.name + " is pressing the stick to " + Mathf.Atan2(upDown, leftRight) * Mathf.Rad2Deg + " degrees");
         transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(upDown, leftRight) * Mathf.Rad2Deg);
     }
 
-	//send button presses to the correct script, depending on which mode the captain has set
+    //send button presses to the correct script, depending on which mode the captain has set
     public void AButton (bool pressed )
     {
 		switch(Mode1){
@@ -63,13 +63,13 @@ public class ControlIO : MonoBehaviour {
 	void FightAbilities(bool pressed){
 		switch(playerNum){
 			case 0:
-				p0Explore.Button(pressed);
+				p0Fight.Button(pressed);
 				break;
 			case 1:
-				p1Explore.Button(pressed);
+				p1Fight.Button(pressed);
 				break;
 			case 2:
-				p2Explore.Button(pressed);
+				p2Fight.PullTrigger(pressed);
 				break;
 			default:
 				Debug.Log("Illegal playerNum: " + playerNum);
@@ -86,16 +86,16 @@ public class ControlIO : MonoBehaviour {
 	void ExploreAbilities(bool pressed){
 		switch(playerNum){
 			case 0:
-				p0Fight.Button(pressed);
+				p0Explore.Button(pressed);
 				break;
 			case 1:
-				p1Fight.Button(pressed);
+				p1Explore.Button(pressed);
 				break;
 			case 2:
-				p2Fight.PullTrigger(pressed);
+				p2Explore.Button(pressed);
 				break;
 			default:
-				Debug.Log("Illegal playerNum: " + playerNum);
+                p3Explore.MakeAPing(pressed);
 				break;
 		}
 	}

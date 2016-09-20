@@ -33,7 +33,7 @@ public class ModeSwitch : MonoBehaviour {
 	//Call this script to change the submarine between modes
 	void SwitchMode(){
 		foreach (GameObject fightPower in fightFeatures){
-			fightPower.GetComponent<FightPower>().Active = !fightPower.GetComponent<ExplorePower>().Active;
+			fightPower.GetComponent<FightPower>().Active = !fightPower.GetComponent<FightPower>().Active;
 		}
 
 		foreach (GameObject explorePower in exploreFeatures){
