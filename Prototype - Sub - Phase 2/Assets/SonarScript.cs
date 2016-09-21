@@ -10,7 +10,7 @@ public class SonarScript : MonoBehaviour {
         if (onDown)
         {
             GameObject myPing = (GameObject)Instantiate(pingPrefab, transform.position, Quaternion.identity);
-            myPing.GetComponent<PingScript>().PingInit(500, 3, 2);
+            myPing.GetComponent<PingScript>().PingInit(500, 3, 5);
         }
     }
 
