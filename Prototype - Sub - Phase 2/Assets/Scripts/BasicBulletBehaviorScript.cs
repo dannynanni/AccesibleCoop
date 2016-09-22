@@ -3,13 +3,13 @@ using System.Collections;
 
 public class BasicBulletBehaviorScript : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	/// <summary>
+	/// What happens if this bullet hits something?
+	/// </summary>
+	/// <param name="other">The collider of the thing the bullet hit.</param>
+	void OnTriggerEnter(Collider other){
+		if (other.tag.Contains("Enemy")){
+			other.gameObject.GetComponent<BasicEnemyBehavior>().GetHit();
+		}
 	}
 }

@@ -16,6 +16,10 @@ public class CaptainPowerUp : MonoBehaviour {
 		fightPowers = GameObject.FindGameObjectsWithTag(FIGHT_TAG);
 	}
 
+	/// <summary>
+	/// Power up crewmembers' abilities when the captain is aligned with them. This powers up abilities
+	/// of all modes; it doesn't worry about whether the ability is on or off.
+	/// </summary>
 	protected void Update(){
 		foreach (GameObject crewmember in explorePowers){
 			if (Mathf.Abs(captain.eulerAngles.z - crewmember.transform.eulerAngles.z) <= powerUpAngle){

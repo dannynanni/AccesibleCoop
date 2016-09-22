@@ -30,7 +30,11 @@ public class ModeSwitch : MonoBehaviour {
 		controlIOs = new ControlIO[] { p0, p1, p2, p3 };
 	}
 
-	//Call this script to change the submarine between modes
+	/// <summary>
+	/// Call this script to change the submarine between modes. IMPORTANT: This assumes that the initial states of
+	/// the "Active" bools in FightPower and ExplorePower are consistent with the initial state of Mode1 in
+	/// the ControlIOs.
+	/// </summary>
 	void SwitchMode(){
 		foreach (GameObject fightPower in fightFeatures){
 			fightPower.GetComponent<FightPower>().Active = !fightPower.GetComponent<FightPower>().Active;

@@ -1,8 +1,9 @@
 ﻿/*
- * This class' only purpose is to allow other classes to inherit from it so that the captain's power up can find
- * all of them.
  * 
- * This class doesn't do anything on its own! It's only a reference.
+ * This class allows other classes to inherit from it so that the captain's power up can find all of them.
+ * 
+ * It also provides some functionality shared by all abilities: the possibility of being powered up,
+ * and being turned on or off based on the submarine's mode.
  * 
  */
 

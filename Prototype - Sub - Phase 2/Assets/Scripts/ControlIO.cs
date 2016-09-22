@@ -24,7 +24,7 @@ public class ControlIO : MonoBehaviour {
 	public GunFireScript p2Fight;
 	public ShieldScript p3Fight;
 
-	bool mode1 = true; //currently 1 == fight, 2 == explore
+	bool mode1 = false; //currently 1 == fight, 2 == explore
 	public bool Mode1{
 		get { return mode1; }
 		set { mode1 = value; }

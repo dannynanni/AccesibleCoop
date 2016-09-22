@@ -29,6 +29,9 @@ public class BasicClaw : ExplorePower {
 	protected bool retracting = false;
 
 	protected const string COLLECTIBLE_TAG = "Collectible";
+	protected ScoreScript scoreScript;
+	protected const string SCORESCRIPT_CANVAS = "Score canvas";
+	protected const string SCORESCRIPT_OBJ = "Score";
 
 	public float powerUpRangeBonus = 20.0f;
 
@@ -36,6 +39,7 @@ public class BasicClaw : ExplorePower {
 	protected void Start(){
 		parent = transform.parent;
 		extendedPoint.x = range;
+		scoreScript = GameObject.Find(SCORESCRIPT_CANVAS).transform.Find(SCORESCRIPT_OBJ).GetComponent<ScoreScript>();
 	}
 
 	//call this to begin
@@ -50,7 +54,10 @@ public class BasicClaw : ExplorePower {
 			//find items potentially close enough to retrieve
 			collectibles = Physics.OverlapSphere(transform.position, range);
 	}
-		
+
+	/// <summary>
+	/// Move the claw out toward its furthest extent
+	/// </summary>
 	protected Vector3 Deploy(){
 		deployTimer += Time.deltaTime;
 
@@ -61,6 +68,10 @@ public class BasicClaw : ExplorePower {
 		return pos;
 	}
 
+	/// <summary>
+	/// See if the claw can grab something. If close enough to the collectible, it grabs the collectible,
+	/// starts retracting back toward the submarine, and the score increases by one.
+	/// </summary>
 	protected void TryToPickUp(){
 		foreach (Collider item in collectibles){
 			if (item.tag.Contains(COLLECTIBLE_TAG)){
@@ -69,12 +80,17 @@ public class BasicClaw : ExplorePower {
 					deploying = false;
 					retracting = true;
 					retractPoint = transform.localPosition;
+					scoreScript.Score++;
 					break;
 				}
 			}
 		}
 	}
 
+
+	/// <summary>
+	/// Move the claw back toward the submarine.
+	/// </summary>
 	protected Vector3 Retract(){
 		retractTimer += Time.deltaTime;
 
@@ -118,6 +134,10 @@ public class BasicClaw : ExplorePower {
 		}
 	}
 
+	/// <summary>
+	/// What happens when the weaponeer presses their button?
+	/// </summary>
+	/// <param name="pressed">If set to <c>true</c>, the button is pressed; this is <c>false</c> otherwise.</param>
 	public void Button(bool pressed){
 		if (pressed){
 			//this if statement prevents the claw from launching before it has fully retracted
