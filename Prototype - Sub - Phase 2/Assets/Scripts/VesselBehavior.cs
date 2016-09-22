@@ -38,7 +38,7 @@ public class VesselBehavior : MonoBehaviour {
 		shipModel.SetActive(visible);
 	}
 
-	private bool HitFeedback(){
+	private void HitFeedback(){
 		totalBlinkTimer += Time.deltaTime;
 
 		if (totalBlinkTimer >= totalBlinkDuration){

@@ -148,8 +148,7 @@ public class BasicEnemyBehavior : MonoBehaviour {
 	/// <param name="other">The collider of the thing the enemy hit.</param>
 	protected void OnTriggerEnter(Collider other){
 		if (other.name.Contains(PLAYER_NAME)){
-			//do something
-			Debug.Log("You got hit by an enemy!");
+			other.gameObject.GetComponent<VesselBehavior>().GotHit = true;
 		} else if (other.name.Contains(SHIELD_NAME_FRAGMENT)){
 			//do something
 			Destroy(gameObject);
