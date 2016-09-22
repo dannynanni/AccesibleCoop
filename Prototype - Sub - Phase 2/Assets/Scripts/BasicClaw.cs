@@ -36,6 +36,16 @@ public class BasicClaw : ExplorePower {
 
     public float powerUpRangeBonus = 20.0f;
 
+    private GameObject openClaw;
+    private GameObject closedClaw;
+
+    void Awake ()
+    {
+        openClaw = GameObject.Find("clawOpen");
+        closedClaw = GameObject.Find("clawClosed");
+        openClaw.SetActive(false);
+        closedClaw.SetActive(false);
+    }
 
 	protected void Start(){
 		parent = transform.parent;
@@ -54,6 +64,9 @@ public class BasicClaw : ExplorePower {
 
 			//find items potentially close enough to retrieve
 			collectibles = Physics.OverlapSphere(transform.position, range);
+
+        openClaw.SetActive(true);
+        closedClaw.SetActive(false);
 	}
 
 	/// <summary>
@@ -87,6 +100,10 @@ public class BasicClaw : ExplorePower {
                     retracting = true;
                     retractPoint = transform.localPosition;
                     scoreScript.Score++;
+
+                    openClaw.SetActive(false);
+                    closedClaw.SetActive(true);
+
                     break;
                 }
             }
@@ -118,6 +135,9 @@ public class BasicClaw : ExplorePower {
                 deploying = false;
                 retracting = true;
                 retractPoint = transform.localPosition;
+
+                openClaw.SetActive(false);
+                closedClaw.SetActive(true);
             }
         }
         else if (retracting)
@@ -126,7 +146,7 @@ public class BasicClaw : ExplorePower {
             if (Vector3.Distance(transform.localPosition, parent.localPosition) <= Mathf.Epsilon)
             {
                 retracting = false;
-                if (transform.childCount > 0)
+                if (transform.childCount > 4)
                 {
                     Destroy(transform.Find(GRABBED_COLLECTIBLE_NAME).gameObject);
                 }
