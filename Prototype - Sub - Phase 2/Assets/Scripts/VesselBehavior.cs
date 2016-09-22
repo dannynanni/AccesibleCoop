@@ -17,11 +17,19 @@ public class VesselBehavior : MonoBehaviour {
 
 			if (GotHit){
 				visible = false;
+				foreach (ControlIO controlScript in controlIOs){
+					controlScript.TakingInput = false;
+				}
 			} else {
 				visible = true;
+				foreach (ControlIO controlScript in controlIOs){
+					controlScript.TakingInput = true;
+				}
 			}
 		}
 	}
+
+	public ControlIO[] controlIOs;
 
 	private GameObject shipModel;
 	private const string SHIP_MODEL_NAME = "ShipModelStatic";
@@ -39,6 +47,10 @@ public class VesselBehavior : MonoBehaviour {
 	}
 
 	private void HitFeedback(){
+		Blink();
+	}
+
+	private void Blink(){
 		totalBlinkTimer += Time.deltaTime;
 
 		if (totalBlinkTimer >= totalBlinkDuration){

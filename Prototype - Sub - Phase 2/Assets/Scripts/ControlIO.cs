@@ -30,6 +30,14 @@ public class ControlIO : MonoBehaviour {
 		set { mode1 = value; }
 	}
 
+	bool takingInput = true;
+	public bool TakingInput{
+		get { return takingInput; }
+		set{
+			takingInput = value;
+		}
+	}
+
     void Awake ()
     {
 
@@ -37,20 +45,23 @@ public class ControlIO : MonoBehaviour {
 
     public void LS(float leftRight, float upDown)
     {
-        //Debug.Log(gameObject.name + " is pressing the stick to " + Mathf.Atan2(upDown, leftRight) * Mathf.Rad2Deg + " degrees");
-        transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(upDown, leftRight) * Mathf.Rad2Deg);
+		if (TakingInput){
+        	transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(upDown, leftRight) * Mathf.Rad2Deg);
+		}
     }
 
     //send button presses to the correct script, depending on which mode the captain has set
     public void AButton (bool pressed )
     {
-		switch(Mode1){
-			case true:
-				FightAbilities(pressed);
-				break;
-			case false:
-				ExploreAbilities(pressed);
-				break;
+		if (TakingInput){
+			switch(Mode1){
+				case true:
+					FightAbilities(pressed);
+					break;
+				case false:
+					ExploreAbilities(pressed);
+					break;
+			}
 		}
     }
 
