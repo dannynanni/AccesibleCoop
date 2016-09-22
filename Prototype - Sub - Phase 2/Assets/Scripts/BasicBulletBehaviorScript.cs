@@ -8,7 +8,7 @@ public class BasicBulletBehaviorScript : MonoBehaviour {
 	/// </summary>
 	/// <param name="other">The collider of the thing the bullet hit.</param>
 	void OnTriggerEnter(Collider other){
-		if (other.tag.Contains("Enemy")){
+		if (other.tag.Contains("enemy")){
 			other.gameObject.GetComponent<BasicEnemyBehavior>().GetHit();
 		}
 	}
