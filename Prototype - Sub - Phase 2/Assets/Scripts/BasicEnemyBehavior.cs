@@ -5,7 +5,7 @@ public class BasicEnemyBehavior : MonoBehaviour {
 
 	protected SpriteRenderer spriteRenderer;
 	protected const float MAX_ALPHA = 1.0f;
-	protected const float LOW_ALPHA = 0.1f;
+	protected const float LOW_ALPHA = 0f;
 	protected float disappearTimer = 0.0f;
 	public float disappearTime = 2.0f;
 	public AnimationCurve disappearCurve;
@@ -58,6 +58,7 @@ public class BasicEnemyBehavior : MonoBehaviour {
 	/// </summary>
 	public void ResetVisibility(){
 		disappearTimer = 0.0f;
+        Debug.Log("Reset vis");
 	}
 
 

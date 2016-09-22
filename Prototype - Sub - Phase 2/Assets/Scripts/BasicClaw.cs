@@ -32,8 +32,9 @@ public class BasicClaw : ExplorePower {
 	protected ScoreScript scoreScript;
 	protected const string SCORESCRIPT_CANVAS = "Score canvas";
 	protected const string SCORESCRIPT_OBJ = "Score";
+    protected const string GRABBED_COLLECTIBLE_NAME = "Acquired";
 
-	public float powerUpRangeBonus = 20.0f;
+    public float powerUpRangeBonus = 20.0f;
 
 
 	protected void Start(){
@@ -68,30 +69,35 @@ public class BasicClaw : ExplorePower {
 		return pos;
 	}
 
-	/// <summary>
-	/// See if the claw can grab something. If close enough to the collectible, it grabs the collectible,
-	/// starts retracting back toward the submarine, and the score increases by one.
-	/// </summary>
-	protected void TryToPickUp(){
-		foreach (Collider item in collectibles){
-			if (item.tag.Contains(COLLECTIBLE_TAG)){
-				if (Vector3.Distance(transform.position, item.transform.position) <= grabDist){
-					item.transform.parent.parent = transform;
-					deploying = false;
-					retracting = true;
-					retractPoint = transform.localPosition;
-					scoreScript.Score++;
-					break;
-				}
-			}
-		}
-	}
+    /// <summary>
+    /// See if the claw can grab something. If close enough to the collectible, it grabs the collectible,
+    /// starts retracting back toward the submarine, and the score increases by one.
+    /// </summary>
+    protected void TryToPickUp()
+    {
+        foreach (Collider item in collectibles)
+        {
+            if (item.tag.Contains(COLLECTIBLE_TAG))
+            {
+                if (Vector3.Distance(transform.position, item.transform.position) <= grabDist)
+                {
+                    item.transform.parent.parent = transform;
+                    item.transform.parent.name = GRABBED_COLLECTIBLE_NAME;
+                    deploying = false;
+                    retracting = true;
+                    retractPoint = transform.localPosition;
+                    scoreScript.Score++;
+                    break;
+                }
+            }
+        }
+    }
 
 
-	/// <summary>
-	/// Move the claw back toward the submarine.
-	/// </summary>
-	protected Vector3 Retract(){
+    /// <summary>
+    /// Move the claw back toward the submarine.
+    /// </summary>
+    protected Vector3 Retract(){
 		retractTimer += Time.deltaTime;
 
 		Vector3 pos = Vector3.Lerp(retractPoint,
@@ -101,25 +107,35 @@ public class BasicClaw : ExplorePower {
 		return pos;
 	}
 
-	protected void Update(){
-		if (deploying){
-			transform.localPosition = Deploy();
-			TryToPickUp();
-			if (Vector3.Distance(transform.localPosition, extendedPoint) <= Mathf.Epsilon){
-				deploying = false;
-				retracting = true;
-				retractPoint = transform.localPosition;
-			}
-		} else if (retracting){
-			transform.localPosition = Retract();
-			if (Vector3.Distance(transform.localPosition, parent.localPosition) <= Mathf.Epsilon){
-				retracting = false;
-			}
-		}
-	}
+    protected void Update()
+    {
+        if (deploying)
+        {
+            transform.localPosition = Deploy();
+            TryToPickUp();
+            if (Vector3.Distance(transform.localPosition, extendedPoint) <= Mathf.Epsilon)
+            {
+                deploying = false;
+                retracting = true;
+                retractPoint = transform.localPosition;
+            }
+        }
+        else if (retracting)
+        {
+            transform.localPosition = Retract();
+            if (Vector3.Distance(transform.localPosition, parent.localPosition) <= Mathf.Epsilon)
+            {
+                retracting = false;
+                if (transform.childCount > 0)
+                {
+                    Destroy(transform.Find(GRABBED_COLLECTIBLE_NAME).gameObject);
+                }
+            }
+        }
+    }
 
-	//provides the powerup unique to the claw
-	protected override bool PowerUpCheck (bool potentialState){
+    //provides the powerup unique to the claw
+    protected override bool PowerUpCheck (bool potentialState){
 		if (base.poweredUp != potentialState){
 			if (potentialState){
 				range += powerUpRangeBonus;
@@ -134,16 +150,20 @@ public class BasicClaw : ExplorePower {
 		}
 	}
 
-	/// <summary>
-	/// What happens when the weaponeer presses their button?
-	/// </summary>
-	/// <param name="pressed">If set to <c>true</c>, the button is pressed; this is <c>false</c> otherwise.</param>
-	public void Button(bool pressed){
-		if (pressed){
-			//this if statement prevents the claw from launching before it has fully retracted
-			if (Vector3.Distance(transform.localPosition, parent.localPosition) <= Mathf.Epsilon){
-				Launch();
-			}
-		}
-	}
+    /// <summary>
+    /// What happens when the weaponeer presses their button?
+    /// </summary>
+    /// <param name="pressed">If set to <c>true</c>, the button is pressed; this is <c>false</c> otherwise.</param>
+
+    public void Button(bool pressed)
+    {
+        if (pressed)
+        {
+            //this if statement prevents the claw from launching before it has fully retracted
+            if (!deploying && !retracting)
+            {
+                Launch();
+            }
+        }
+    }
 }
