@@ -22,12 +22,15 @@ public class ModeSwitch : MonoBehaviour {
 	public ControlIO p3;
 	ControlIO[] controlIOs;
 
+    MovementScript movementScript;
+
 	bool newInstruction = false;
 
 	void Start(){
 		fightFeatures = GameObject.FindGameObjectsWithTag("FightMode");
 		exploreFeatures = GameObject.FindGameObjectsWithTag("ExploreMode");
 		controlIOs = new ControlIO[] { p0, p1, p2, p3 };
+        movementScript = transform.root.gameObject.GetComponent<MovementScript>();
 	}
 
 	/// <summary>
@@ -47,6 +50,8 @@ public class ModeSwitch : MonoBehaviour {
 		foreach (ControlIO controlScript in controlIOs){
 			controlScript.Mode1 = !controlScript.Mode1;
 		}
+
+        movementScript.FIGHTMODE = !movementScript.FIGHTMODE;
 	}
 
 	//switch modes when the button is pressed, one time per press.

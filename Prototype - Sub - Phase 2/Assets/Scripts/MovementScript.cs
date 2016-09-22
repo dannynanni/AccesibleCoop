@@ -3,6 +3,35 @@ using System.Collections;
 
 public class MovementScript : MonoBehaviour {
 
+    public delegate void movementMode();
+    public movementMode runningMode;
+
+    private bool FightMode = true;
+    public bool FIGHTMODE
+    {
+        get
+        {
+            return FightMode;
+        }
+        set
+        {
+            if (value != FightMode)
+            {
+                if (value)
+                {
+                    FightMode = value;
+                    runningMode = fightMove;
+                    destination = transform.position;
+                }
+                else
+                {
+                    FightMode = value;
+                    runningMode = exploreMove;
+                }
+            }
+        }
+    }
+
     public GameObject StaticModel;
 
     public Transform Pilot;
@@ -27,6 +56,8 @@ public class MovementScript : MonoBehaviour {
     public float ctrlSurfMax;
     private float ctrlSurfLerp;
     private Vector3 ctrlSurfVector;
+
+    private Vector3 destination;
 
     public PropRotationScript PropScript;
 
@@ -57,6 +88,11 @@ public class MovementScript : MonoBehaviour {
             }
         }
     }
+
+    void Awake()
+    {
+        FIGHTMODE = false;
+    }
     
     void Start ()
     {
@@ -67,7 +103,30 @@ public class MovementScript : MonoBehaviour {
 
     // Update is called once per frame
     void FixedUpdate () {
+        runningMode();       
+    }
 
+    // ------------------------------
+
+    private void fightMove()
+    {
+        raw = Pilot.localRotation.eulerAngles.z;
+        if (raw >= 180)
+        {
+            corrected = raw - 360;
+        }
+        else
+        {
+            corrected = raw;
+        }
+
+        GetComponent<Rigidbody>().MovePosition(Vector3.Lerp(transform.position, destination, .0425f));
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+    }
+
+    private void exploreMove()
+    {
         // thrustLerp is the smoothed factor applied to the thrustVector
         thrustLerp = Mathf.Lerp(thrustLerp, thrust, .05f);
         thrustVector = Vector3.right * thrustLerp * leftFlip;
@@ -105,16 +164,29 @@ public class MovementScript : MonoBehaviour {
         }
     }
 
+    // ------------------------------
+
     public void Button (bool pressed)
     {
-        thrustFactor = 1 / thrustMax;
-        if (pressed)
+        if (FIGHTMODE)
         {
-            thrust = thrustMax;
+            if (pressed)
+            {
+                destination = transform.position + new Vector3(Mathf.Cos(corrected * Mathf.Deg2Rad), Mathf.Sin(corrected * Mathf.Deg2Rad), 0) * 20;
+            }
         }
         else
         {
-            thrust = thrustMin;
+            thrustFactor = 1 / thrustMax;
+            if (pressed)
+            {
+                thrust = thrustMax;
+            }
+            else
+            {
+                thrust = thrustMin;
+            }
         }
+
     }
 }
