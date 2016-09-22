@@ -9,6 +9,17 @@ public class SonarScript : MonoBehaviour {
 
     private List<Collider> pingHit = new List<Collider>();
 
+    private AudioSource pingMake;
+    private AudioSource pingSuccess;
+    private AudioSource pingFail;
+
+    public void Awake ()
+    {
+        pingMake = GetComponent<AudioSource>();
+        pingSuccess = transform.GetChild(0).GetComponent<AudioSource>();
+        pingFail = transform.GetChild(1).GetComponent<AudioSource>();
+    }
+
     public void MakeAPing(bool onDown)
     {
         if (onDown)
@@ -16,6 +27,7 @@ public class SonarScript : MonoBehaviour {
             GameObject myPing = (GameObject)Instantiate(pingPrefab, transform.position, Quaternion.identity);
             //myPing.GetComponent<DrawCircleScript>().PingInit(500, 3, 5);
             activePing = myPing;
+            pingMake.Play();
         }
         else
         {
@@ -32,6 +44,11 @@ public class SonarScript : MonoBehaviour {
                         myCol.GetComponent<BasicEnemyBehavior>().ResetVisibility();
                     }
                 }
+                pingSuccess.Play();
+            }
+            else
+            {
+                pingFail.Play();
             }
             activePing.GetComponent<DrawCircleScript>().NegatePing();
             Debug.Log("Destroy ping");

@@ -39,12 +39,16 @@ public class BasicClaw : ExplorePower {
     private GameObject openClaw;
     private GameObject closedClaw;
 
+    public AudioSource clawSound;
+
     void Awake ()
     {
         openClaw = GameObject.Find("clawOpen");
         closedClaw = GameObject.Find("clawClosed");
         openClaw.SetActive(false);
         closedClaw.SetActive(false);
+
+        clawSound = GetComponent<AudioSource>();
     }
 
 	protected void Start(){
@@ -67,6 +71,8 @@ public class BasicClaw : ExplorePower {
 
         openClaw.SetActive(true);
         closedClaw.SetActive(false);
+
+        clawSound.Play();
 	}
 
 	/// <summary>
@@ -146,7 +152,7 @@ public class BasicClaw : ExplorePower {
             if (Vector3.Distance(transform.localPosition, parent.localPosition) <= Mathf.Epsilon)
             {
                 retracting = false;
-                if (transform.childCount > 4)
+                if (transform.childCount > 2)
                 {
                     Destroy(transform.Find(GRABBED_COLLECTIBLE_NAME).gameObject);
                 }
