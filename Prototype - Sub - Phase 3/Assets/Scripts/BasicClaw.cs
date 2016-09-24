@@ -29,9 +29,6 @@ public class BasicClaw : ExplorePower {
 	protected bool retracting = false;
 
 	protected const string COLLECTIBLE_TAG = "Collectible";
-	protected ScoreScript scoreScript;
-	protected const string SCORESCRIPT_CANVAS = "Score canvas";
-	protected const string SCORESCRIPT_OBJ = "Score";
     protected const string GRABBED_COLLECTIBLE_NAME = "Acquired";
 
     public float powerUpRangeBonus = 20.0f;
@@ -50,7 +47,6 @@ public class BasicClaw : ExplorePower {
 	protected void Start(){
 		parent = transform.parent;
 		extendedPoint.x = range;
-		scoreScript = GameObject.Find(SCORESCRIPT_CANVAS).transform.Find(SCORESCRIPT_OBJ).GetComponent<ScoreScript>();
 	}
 
 	//call this to begin
@@ -99,7 +95,6 @@ public class BasicClaw : ExplorePower {
                     deploying = false;
                     retracting = true;
                     retractPoint = transform.localPosition;
-                    scoreScript.Score++;
 
                     openClaw.SetActive(false);
                     closedClaw.SetActive(true);

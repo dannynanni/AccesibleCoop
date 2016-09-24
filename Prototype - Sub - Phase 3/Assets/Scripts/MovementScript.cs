@@ -32,6 +32,22 @@ public class MovementScript : MonoBehaviour {
 
     public PropRotationScript PropScript;
 
+	//variables relating to the submarine's use of fuel to move
+	public float fuelStart = 100;
+	public float normalFuelUsage = 0.5f;
+	public float boostFuelUsage = 5.0f;
+	private float currentFuel = 100;
+	public float CurrentFuel{
+		get { return currentFuel; }
+		set{
+			currentFuel = value;
+			if (currentFuel > fuelStart){ //the submarine can never have more fuel than it started with
+				currentFuel = fuelStart;
+			}
+		}
+	}
+
+
     private int leftFlip;
     private bool left;
     public bool LEFT
