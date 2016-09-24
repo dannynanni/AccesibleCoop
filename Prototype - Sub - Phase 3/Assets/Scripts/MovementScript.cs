@@ -38,7 +38,7 @@ public class MovementScript : MonoBehaviour {
 	public float fuelStart = 100;
 	public float normalFuelUsage = 0.5f;
 	public float boostFuelUsage = 5.0f;
-	private float currentFuel = 100;
+	private float currentFuel = 100.0f;
 	public float CurrentFuel{
 		get { return currentFuel; }
 		set{

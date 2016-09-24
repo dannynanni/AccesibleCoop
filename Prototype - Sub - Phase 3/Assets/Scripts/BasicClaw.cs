@@ -7,6 +7,7 @@
  */
 
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class BasicClaw : ExplorePower {
@@ -36,12 +37,30 @@ public class BasicClaw : ExplorePower {
     private GameObject openClaw;
     private GameObject closedClaw;
 
+	//variables relating to the claw's ammunition
+	public float ammoStart = 100.0f;
+	public float ammoForLaunch = 50.0f;
+	private float currentAmmo = 100.0f;
+	public float CurrentAmmo{
+		get { return currentAmmo; }
+		set{
+			currentAmmo = value;
+			if (currentAmmo > ammoStart){ //the submarine can never have more ammo than it started with
+				currentAmmo = ammoStart;
+			} else if (currentAmmo < 0.0f){ //ammo can never be a negative number
+				currentAmmo = 0.0f;
+			}
+		}
+	}
+	Image ammoGauge;
+
     void Awake ()
     {
         openClaw = GameObject.Find("clawOpen");
         closedClaw = GameObject.Find("clawClosed");
         openClaw.SetActive(false);
         closedClaw.SetActive(false);
+		ammoGauge = GameObject.Find("Claw ammo gauge").GetComponent<Image>();
     }
 
 	protected void Start(){
@@ -51,18 +70,22 @@ public class BasicClaw : ExplorePower {
 
 	//call this to begin
 	public void Launch(){
-			deploying = true;
-			retracting = false;
+		deploying = true;
+		retracting = false;
 
-			//reset timers for proper lerping
-			deployTimer = 0.0f;
-			retractTimer = 0.0f;
+		//reset timers for proper lerping
+		deployTimer = 0.0f;
+		retractTimer = 0.0f;
 
-			//find items potentially close enough to retrieve
-			collectibles = Physics.OverlapSphere(transform.position, range);
+		//find items potentially close enough to retrieve
+		collectibles = Physics.OverlapSphere(transform.position, range);
 
         openClaw.SetActive(true);
         closedClaw.SetActive(false);
+
+		//expend ammo
+		CurrentAmmo -= ammoForLaunch;
+		ammoGauge.fillAmount = CurrentAmmo/ammoStart;
 	}
 
 	/// <summary>
@@ -174,8 +197,9 @@ public class BasicClaw : ExplorePower {
     {
         if (pressed)
         {
-            //this if statement prevents the claw from launching before it has fully retracted
-            if (!deploying && !retracting)
+            //this if statement prevents the claw from launching before it has fully retracted, and if there's
+			//insufficient ammo
+			if (!deploying && !retracting && (CurrentAmmo >= ammoForLaunch))
             {
                 Launch();
             }
