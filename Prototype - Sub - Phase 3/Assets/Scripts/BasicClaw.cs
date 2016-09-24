@@ -175,7 +175,7 @@ namespace PlayerAbility
 	    }
 
 	    /// <summary>
-	    /// What happens when the weaponeer presses their button?
+	    /// What happens when the player presses their button?
 	    /// </summary>
 	    /// <param name="pressed">If set to <c>true</c>, the button is pressed; this is <c>false</c> otherwise.</param>
 

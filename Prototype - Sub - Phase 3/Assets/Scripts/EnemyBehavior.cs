@@ -5,7 +5,7 @@ public class EnemyBehavior : MonoBehaviour {
 
 	protected Rigidbody rigidBody;
 	public float turnRate = 2.0f; //turn rate in degrees/second
-	public float speed = 1.0f;
+	public float speed = 1.0f;	//maximum forward speed
 
 	public float spotPlayerDistance = 10.0f; //how far away the enemy will see the player and respond
 	protected Transform player;

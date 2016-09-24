@@ -22,6 +22,12 @@ public class ControlIO : MonoBehaviour {
     public void LS(float leftRight, float upDown)
     {
         transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(upDown, leftRight) * Mathf.Rad2Deg);
+
+		if (playerNum == 0){ //the captain should always be playerNum == 0!
+			if (leftRight <= -0.5f || leftRight >= 0.5f){
+				GetComponent<PlayerAbility.ResourceDistribution>().ChangeSelectedAbility(leftRight);
+			}
+		}
     }
 
     //send button presses to the correct script, depending on which mode the captain has set

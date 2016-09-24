@@ -14,9 +14,9 @@
 			}
 		}
 
-		public float normalDamage = 1.0f;
-		public float lowPowerDamage = 0.1f;
-		private float damage = 0.0f;
+		public float normalDamage = 1.0f;	//the weapon's damage when it has power
+		public float lowPowerDamage = 0.1f;	//the weapon's damage when it's out of power
+		private float damage = 0.0f;		//the current damage inflicted; set based on circumstances
 		public float Damage{
 			get { return Damage; }
 			set{ Damage = value; }
@@ -30,6 +30,11 @@
 			energyGauge = GameObject.Find("Energy gauge").GetComponent<Image>();
 		}
 
+		/// <summary>
+		/// When the button is pressed, use up energy and reflect that on the screen.
+		/// This is not how damage is done! Enemies check whether the weapon is Active, and if so ask for its
+		/// Damage. No damage is actually done by this script.
+		/// </summary>
 		private void Update(){
 			if (Active){
 				CurrentResource -= normalResourceUse;
