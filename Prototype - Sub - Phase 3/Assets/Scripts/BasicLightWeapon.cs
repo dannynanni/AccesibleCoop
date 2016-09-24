@@ -14,7 +14,9 @@
 			}
 		}
 
-		public float damage = 1.0f;
+		public float normalDamage = 1.0f;
+		public float lowPowerDamage = 0.1f;
+		private float damage = 0.0f;
 		public float Damage{
 			get { return Damage; }
 			set{ Damage = value; }
@@ -37,9 +39,15 @@
 
 		public void Button (bool pressed)
 		{
-			//only shoot if the button is pressed and there's enough energy
-			if (pressed && CurrentResource >= normalResourceUse){
-				Active = true;;
+			//shoot if the button is pressed
+			//if there's enough energy, shoot normally; otherwise, shoot at much-reduced power
+			if (pressed){
+				if (CurrentResource >= normalResourceUse){
+					Damage = normalDamage;
+				} else {
+					Damage = lowPowerDamage;
+				}
+				Active = true;
 			} else {
 				Active = false;
 			}

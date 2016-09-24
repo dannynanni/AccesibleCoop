@@ -63,10 +63,8 @@ public class EnemyBehavior : MonoBehaviour {
 	/// </summary>
 	protected virtual void OnTriggerStay(Collider other){
 		if (other.gameObject.name.Contains(PLAYER_WEAPON_NAME)){
-			health -= playerWeapon.Damage;
-			if (health <= 0.0f){
-				Destroy(gameObject);
-			}
+			if (playerWeapon.Active) { health -= playerWeapon.Damage; }
+			if (health <= 0.0f){ Destroy(gameObject); }
 		}
 	}
 
