@@ -7736,7 +7736,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resourceMax: 100
-  normalResourceUse: 0.2
+  normalResourceUse: 0.01
   boostResourceUsage: 1
   StaticModel: {fileID: 1932995255}
   Pilot: {fileID: 1166608858}

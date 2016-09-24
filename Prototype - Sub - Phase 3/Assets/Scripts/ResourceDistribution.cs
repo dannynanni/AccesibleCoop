@@ -26,6 +26,7 @@
 
 		public float refillRate = 0.01f; //how fast the submarine's power reserve naturally refills
 		public float dispenseRate = 0.5f; //how fast power flows from the reserve to other player abilities
+		private bool dispensing = false;
 
 		private void Start(){
 			refillGauge = GameObject.Find("Refill gauge").GetComponent<Image>();
@@ -35,6 +36,8 @@
 		private void Update(){
 			CurrentResource += refillRate;
 			refillGauge.fillAmount = CurrentResource/resourceMax;
+
+			if (dispensing) { DistributeResource(); }
 		}
 
 		public void ChangeSelectedAbility(float leftRight){
@@ -72,7 +75,11 @@
 		}
 
 		public void Button(bool pressed){
-			if (pressed) { DistributeResource(); }
+			if (pressed){
+				dispensing = true;
+			} else {
+				dispensing = false;
+			}
 		}
 
 		private void DistributeResource(){
