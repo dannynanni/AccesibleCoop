@@ -35,7 +35,7 @@ public class MovementScript : MonoBehaviour {
     public PropRotationScript PropScript;
 
 	//variables relating to the submarine's use of fuel to move
-	public float fuelStart = 100;
+	public float fuelStart = 100.0f;
 	public float normalFuelUsage = 0.5f;
 	public float boostFuelUsage = 5.0f;
 	private float currentFuel = 100.0f;
@@ -50,7 +50,7 @@ public class MovementScript : MonoBehaviour {
 			}
 		}
 	}
-	Image fuelGauge;
+	private Image fuelGauge;
 
 
     private int leftFlip;

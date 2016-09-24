@@ -10,7 +10,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class BasicClaw : ExplorePower {
+public class BasicClaw : MonoBehaviour {
 
 	protected Transform parent;
 
@@ -58,7 +58,7 @@ public class BasicClaw : ExplorePower {
 			}
 		}
 	}
-	Image ammoGauge;
+	private Image ammoGauge;
 
     void Awake ()
     {
@@ -185,22 +185,6 @@ public class BasicClaw : ExplorePower {
             }
         }
     }
-
-    //provides the powerup unique to the claw
-    protected override bool PowerUpCheck (bool potentialState){
-		if (base.poweredUp != potentialState){
-			if (potentialState){
-				range += powerUpRangeBonus;
-				extendedPoint.x = range;
-			} else {
-				range -= powerUpRangeBonus;
-				extendedPoint.x = range;
-			}
-			return potentialState;
-		} else {
-			return base.poweredUp;
-		}
-	}
 
     /// <summary>
     /// What happens when the weaponeer presses their button?
