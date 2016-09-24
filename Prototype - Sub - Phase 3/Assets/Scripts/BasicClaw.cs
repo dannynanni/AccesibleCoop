@@ -13,7 +13,7 @@ namespace PlayerAbility
 
 	public class BasicClaw : ResourceUse {
 
-		protected Transform parent;
+		Transform clawTarget;
 
 		public float range = 30.0f; //how far from the submarine the claw should go
 		protected Vector3 startPoint = new Vector3(0.0f, 0.0f, 0.0f);
@@ -26,7 +26,7 @@ namespace PlayerAbility
 
 		public float deployTime = 1.0f; //how long it takes the claw to reach maximum extension
 		protected float deployTimer = 0.0f;
-		public AnimationCurve deployCurve; //animation curves allow for more realistic lerping; must set in the inspector
+		public AnimationCurve deployCurve; //animation curves allow for more realistic lerping; set in the inspector
 		public float retractTime = 3.0f; //how long it takes the claw to retract
 		protected float retractTimer = 0.0f;
 		public AnimationCurve retractCurve;
@@ -50,6 +50,7 @@ namespace PlayerAbility
 
 	    void Awake ()
 	    {
+			clawTarget = transform.parent.Find("Claw target");
 	        openClaw = GameObject.Find("clawOpen");
 	        closedClaw = GameObject.Find("clawClosed");
 			openClaw.transform.position = openClawWaitPoint;
@@ -59,9 +60,11 @@ namespace PlayerAbility
 			ammoGauge = GameObject.Find("Claw ammo gauge").GetComponent<Image>();
 	    }
 
+		//put the claw target at the appropriate range
 		protected void Start(){
-			parent = transform.parent;
-			extendedPoint.x = range;
+			Vector3 temp = clawTarget.position;
+			temp.x = range;
+			clawTarget.position = temp;
 		}
 
 		//call this to begin
@@ -79,6 +82,7 @@ namespace PlayerAbility
 	        openClaw.SetActive(true);
 			openClaw.transform.position = transform.position;
 			startPoint = transform.position;
+			extendedPoint = clawTarget.position;
 	        closedClaw.SetActive(false);
 
 			//expend ammo
@@ -172,6 +176,8 @@ namespace PlayerAbility
 	                }
 	            }
 	        }
+
+			ammoGauge.fillAmount = CurrentResource/resourceMax;
 	    }
 
 	    /// <summary>
