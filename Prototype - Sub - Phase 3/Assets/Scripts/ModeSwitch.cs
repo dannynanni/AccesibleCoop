@@ -8,7 +8,7 @@
  * 
  */
 
-using UnityEngine;
+/*using UnityEngine;
 using System.Collections;
 
 public class ModeSwitch : MonoBehaviour {
@@ -64,4 +64,4 @@ public class ModeSwitch : MonoBehaviour {
 			}
 		}
 	}
-}
+}*/

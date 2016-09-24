@@ -17,14 +17,8 @@ public class VesselBehavior : MonoBehaviour {
 
 			if (GotHit){
 				visible = false;
-				foreach (ControlIO controlScript in controlIOs){
-					controlScript.TakingInput = false;
-				}
 			} else {
 				visible = true;
-				foreach (ControlIO controlScript in controlIOs){
-					controlScript.TakingInput = true;
-				}
 			}
 		}
 	}
