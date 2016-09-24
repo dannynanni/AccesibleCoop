@@ -15,8 +15,14 @@ public class BasicClaw : ExplorePower {
 	protected Transform parent;
 
 	public float range = 30.0f; //how far from the submarine the claw should go
-	protected Vector3 extendedPoint = new Vector3(0.0f, 0.0f, 0.0f); //localPosition the claw is aiming toward
-	protected Vector3 retractPoint = new Vector3(0.0f, 0.0f, 0.0f); //localPosition claw actually reaches
+	protected Vector3 startPoint = new Vector3(0.0f, 0.0f, 0.0f);
+	protected Vector3 extendedPoint = new Vector3(0.0f, 0.0f, 0.0f); //position the claw is aiming toward
+	protected Vector3 retractPoint = new Vector3(0.0f, 0.0f, 0.0f); //position claw actually reaches
+
+	//off-screen location where the claws stay when they're not in use
+	protected Vector3 openClawWaitPoint = new Vector3(-100.0f, -100.0f, -100.0f);
+	protected Vector3 closedClawWaitPoint = new Vector3(-100.0f, -100.0f, -100.0f);
+
 	public float deployTime = 1.0f; //how long it takes the claw to reach maximum extension
 	protected float deployTimer = 0.0f;
 	public AnimationCurve deployCurve; //animation curves allow for more realistic lerping; must set in the inspector
@@ -58,6 +64,8 @@ public class BasicClaw : ExplorePower {
     {
         openClaw = GameObject.Find("clawOpen");
         closedClaw = GameObject.Find("clawClosed");
+		openClaw.transform.position = openClawWaitPoint;
+		closedClaw.transform.position = closedClawWaitPoint;
         openClaw.SetActive(false);
         closedClaw.SetActive(false);
 		ammoGauge = GameObject.Find("Claw ammo gauge").GetComponent<Image>();
@@ -81,6 +89,8 @@ public class BasicClaw : ExplorePower {
 		collectibles = Physics.OverlapSphere(transform.position, range);
 
         openClaw.SetActive(true);
+		openClaw.transform.position = transform.position;
+		startPoint = transform.position;
         closedClaw.SetActive(false);
 
 		//expend ammo
@@ -94,7 +104,7 @@ public class BasicClaw : ExplorePower {
 	protected Vector3 Deploy(){
 		deployTimer += Time.deltaTime;
 
-		Vector3 pos = Vector3.Lerp(parent.localPosition,
+		Vector3 pos = Vector3.Lerp(startPoint,
 								   extendedPoint,
 								   deployCurve.Evaluate(deployTimer/deployTime));
 
@@ -117,11 +127,12 @@ public class BasicClaw : ExplorePower {
                     item.transform.parent.name = GRABBED_COLLECTIBLE_NAME;
                     deploying = false;
                     retracting = true;
-                    retractPoint = transform.localPosition;
-
-                    openClaw.SetActive(false);
+                    retractPoint = transform.position;
+					    
                     closedClaw.SetActive(true);
-
+					closedClaw.transform.position = openClaw.transform.position;
+					openClaw.transform.position = openClawWaitPoint;
+					openClaw.SetActive(false);
                     break;
                 }
             }
@@ -136,7 +147,7 @@ public class BasicClaw : ExplorePower {
 		retractTimer += Time.deltaTime;
 
 		Vector3 pos = Vector3.Lerp(retractPoint,
-								   parent.localPosition,
+								   transform.position,
 								   retractCurve.Evaluate(retractTimer/retractTime));
 
 		return pos;
@@ -146,25 +157,28 @@ public class BasicClaw : ExplorePower {
     {
         if (deploying)
         {
-            transform.localPosition = Deploy();
+            openClaw.transform.position = Deploy();
             TryToPickUp();
-            if (Vector3.Distance(transform.localPosition, extendedPoint) <= Mathf.Epsilon)
+			if (Vector3.Distance(openClaw.transform.position, extendedPoint) <= Mathf.Epsilon)
             {
                 deploying = false;
                 retracting = true;
-                retractPoint = transform.localPosition;
+                retractPoint = transform.position;
 
-                openClaw.SetActive(false);
                 closedClaw.SetActive(true);
+				closedClaw.transform.position = openClaw.transform.position;
+				openClaw.transform.position = openClawWaitPoint;
+				openClaw.SetActive(false);
             }
         }
         else if (retracting)
         {
-            transform.localPosition = Retract();
-            if (Vector3.Distance(transform.localPosition, parent.localPosition) <= Mathf.Epsilon)
+            closedClaw.transform.position = Retract();
+			if (Vector3.Distance(closedClaw.transform.position, transform.position) <= Mathf.Epsilon)
             {
+				closedClaw.transform.position = closedClawWaitPoint;
                 retracting = false;
-                if (transform.childCount > 4)
+                if (transform.childCount > 2) //there are normally two children: "Arrow" and "Claw."
                 {
                     Destroy(transform.Find(GRABBED_COLLECTIBLE_NAME).gameObject);
                 }
