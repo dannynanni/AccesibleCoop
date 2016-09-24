@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class MovementScript : MonoBehaviour {
@@ -12,6 +13,7 @@ public class MovementScript : MonoBehaviour {
     private float thrust;
     public float thrustMin;
     public float thrustMax;
+	public float thrustNoFuel;
     private float thrustFactor;
     private float thrustLerp;
     private Vector3 thrustVector;
@@ -43,9 +45,12 @@ public class MovementScript : MonoBehaviour {
 			currentFuel = value;
 			if (currentFuel > fuelStart){ //the submarine can never have more fuel than it started with
 				currentFuel = fuelStart;
+			} else if (currentFuel < 0.0f){ //fuel can never be a negative number
+				currentFuel = 0.0f;
 			}
 		}
 	}
+	Image fuelGauge;
 
 
     private int leftFlip;
@@ -81,6 +86,7 @@ public class MovementScript : MonoBehaviour {
         Button(false);
         LEFT = false;
         leftFlip = 1;
+		fuelGauge = GameObject.Find("Fuel gauge").GetComponent<Image>();
     }
 
     // Update is called once per frame
@@ -90,6 +96,11 @@ public class MovementScript : MonoBehaviour {
 
     private void Move()
     {
+		//if out of fuel, cap the submarine's speed
+		if (CurrentFuel <= Mathf.Epsilon){
+			thrust = thrustNoFuel;
+		}
+
         // thrustLerp is the smoothed factor applied to the thrustVector
         thrustLerp = Mathf.Lerp(thrustLerp, thrust, .05f);
         thrustVector = Vector3.right * thrustLerp * leftFlip;
@@ -125,6 +136,14 @@ public class MovementScript : MonoBehaviour {
         {
             LEFT = false;
         }
+
+		//use fuel
+		if (thrust == thrustMax){
+			CurrentFuel -= boostFuelUsage;
+		} else if (thrust == thrustMin){
+			CurrentFuel -= normalFuelUsage;
+		}
+		fuelGauge.fillAmount = CurrentFuel/fuelStart;
     }
 
     // ------------------------------

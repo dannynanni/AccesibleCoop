@@ -7287,7 +7287,7 @@ GameObject:
   - 222: {fileID: 1710253360}
   - 114: {fileID: 1710253359}
   m_Layer: 5
-  m_Name: Fuel
+  m_Name: Fuel gauge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7568,6 +7568,7 @@ MonoBehaviour:
   TurnCav: {fileID: 1438586095}
   thrustMin: 100
   thrustMax: 400
+  thrustNoFuel: 20
   buoyancyEffectMin: 0
   buoyancyEffectMax: 2
   ctrlSurfMax: 5
