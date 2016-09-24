@@ -14,6 +14,12 @@ public class ControlIO : MonoBehaviour {
 
     public int playerNum;
 
+	public PlayerAbility.ResourceDistribution p0Ability;
+	public PlayerAbility.MovementScript p1Ability;
+	public PlayerAbility.BasicClaw p2Ability;
+	public PlayerAbility.BasicLightWeapon p3Ability;
+
+
     void Awake ()
     {
 
@@ -25,14 +31,30 @@ public class ControlIO : MonoBehaviour {
 
 		if (playerNum == 0){ //the captain should always be playerNum == 0!
 			if (leftRight <= -0.5f || leftRight >= 0.5f){
-				GetComponent<PlayerAbility.ResourceDistribution>().ChangeSelectedAbility(leftRight);
+				p0Ability.ChangeSelectedAbility(leftRight);
 			}
 		}
     }
 
     //send button presses to the correct script, depending on which mode the captain has set
-    public void AButton (bool pressed )
+    public void AButton (bool pressed)
     {
-		//send out to relevant scripts here
+		switch (playerNum){
+			case 0:
+				p0Ability.Button(pressed);
+				break;
+			case 1:
+				p1Ability.Button(pressed);
+				break;
+			case 2:
+				p2Ability.Button(pressed);
+				break;
+			case 3:
+				p3Ability.Button(pressed);
+				break;
+			default:
+				Debug.Log("Illegal playerNum: " + playerNum);
+				break;
+		}
     }
 }

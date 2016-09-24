@@ -1016,6 +1016,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNum: 0
+  p0Ability: {fileID: 1854790841}
+  p1Ability: {fileID: 1821445519}
+  p2Ability: {fileID: 1141167876}
+  p3Ability: {fileID: 1037027883}
 --- !u!4 &569392473
 Transform:
   m_ObjectHideFlags: 0
@@ -1430,6 +1434,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNum: 0
+  p0Ability: {fileID: 1854790841}
+  p1Ability: {fileID: 1821445519}
+  p2Ability: {fileID: 1141167876}
+  p3Ability: {fileID: 1037027883}
 --- !u!4 &1100449651
 Transform:
   m_ObjectHideFlags: 0
@@ -1504,6 +1512,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNum: 0
+  p0Ability: {fileID: 1854790841}
+  p1Ability: {fileID: 1821445519}
+  p2Ability: {fileID: 1141167876}
+  p3Ability: {fileID: 1037027883}
 --- !u!4 &1103920408
 Transform:
   m_ObjectHideFlags: 0
@@ -1603,6 +1615,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNum: 0
+  p0Ability: {fileID: 1854790841}
+  p1Ability: {fileID: 1821445519}
+  p2Ability: {fileID: 1141167876}
+  p3Ability: {fileID: 1037027883}
 --- !u!4 &1166608858
 Transform:
   m_ObjectHideFlags: 0
