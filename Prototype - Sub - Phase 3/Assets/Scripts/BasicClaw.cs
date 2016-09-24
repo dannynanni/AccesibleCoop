@@ -10,7 +10,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class BasicClaw : MonoBehaviour {
+public class BasicClaw : ResourceUse {
 
 	protected Transform parent;
 
@@ -43,22 +43,9 @@ public class BasicClaw : MonoBehaviour {
     private GameObject openClaw;
     private GameObject closedClaw;
 
-	//variables relating to the claw's ammunition
-	public float ammoStart = 100.0f;
-	public float ammoForLaunch = 50.0f;
-	private float currentAmmo = 100.0f;
-	public float CurrentAmmo{
-		get { return currentAmmo; }
-		set{
-			currentAmmo = value;
-			if (currentAmmo > ammoStart){ //the submarine can never have more ammo than it started with
-				currentAmmo = ammoStart;
-			} else if (currentAmmo < 0.0f){ //ammo can never be a negative number
-				currentAmmo = 0.0f;
-			}
-		}
-	}
 	private Image ammoGauge;
+
+
 
     void Awake ()
     {
@@ -94,8 +81,8 @@ public class BasicClaw : MonoBehaviour {
         closedClaw.SetActive(false);
 
 		//expend ammo
-		CurrentAmmo -= ammoForLaunch;
-		ammoGauge.fillAmount = CurrentAmmo/ammoStart;
+		CurrentResource -= normalResourceUse;
+		ammoGauge.fillAmount = CurrentResource/resourceMax;
 	}
 
 	/// <summary>
@@ -197,7 +184,7 @@ public class BasicClaw : MonoBehaviour {
         {
             //this if statement prevents the claw from launching before it has fully retracted, and if there's
 			//insufficient ammo
-			if (!deploying && !retracting && (CurrentAmmo >= ammoForLaunch))
+			if (!deploying && !retracting && (CurrentResource >= normalResourceUse))
             {
                 Launch();
             }
