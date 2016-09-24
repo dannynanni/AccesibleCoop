@@ -7876,7 +7876,7 @@ MonoBehaviour:
   - {fileID: 1821445519}
   - {fileID: 1141167876}
   - {fileID: 1037027883}
-  refillRate: 0.1
+  refillRate: 0.01
   dispenseRate: 0.5
 --- !u!1 &1932995255
 GameObject:
