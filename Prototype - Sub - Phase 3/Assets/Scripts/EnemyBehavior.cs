@@ -62,6 +62,7 @@ public class EnemyBehavior : MonoBehaviour {
 	/// What happens when this enemy is getting hit?
 	/// </summary>
 	protected virtual void OnTriggerStay(Collider other){
+		Debug.Log("OnTriggerStay() called");
 		if (other.gameObject.name.Contains(PLAYER_WEAPON_NAME)){
 			if (playerWeapon.Active) { health -= playerWeapon.Damage; }
 			if (health <= 0.0f){ Destroy(gameObject); }

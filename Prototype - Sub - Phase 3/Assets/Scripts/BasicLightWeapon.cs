@@ -21,6 +21,7 @@
 			get { return Damage; }
 			set{ Damage = value; }
 		}
+		private float debugDamage = 1000000.0f; //a rediculous amount; if this ever happens, something is wrong!
 			
 		private Image energyGauge;
 
@@ -37,9 +38,20 @@
 		/// </summary>
 		private void Update(){
 			if (Active){
+				Damage = SetDamage();
 				CurrentResource -= normalResourceUse;
 				energyGauge.fillAmount = CurrentResource/resourceMax;
 			}
+		}
+
+		private float SetDamage(){
+			if (CurrentResource >= normalResourceUse){
+				return normalDamage;
+			} else {
+				return lowPowerDamage;
+			}
+
+			return debugDamage; //if the weapon is insta-destroying everything, something is wrong 
 		}
 
 		public void Button (bool pressed)
@@ -47,11 +59,6 @@
 			//shoot if the button is pressed
 			//if there's enough energy, shoot normally; otherwise, shoot at much-reduced power
 			if (pressed){
-				if (CurrentResource >= normalResourceUse){
-					Damage = normalDamage;
-				} else {
-					Damage = lowPowerDamage;
-				}
 				Active = true;
 			} else {
 				Active = false;
