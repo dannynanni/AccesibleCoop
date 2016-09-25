@@ -151,6 +151,8 @@ namespace PlayerAbility
 
 	    protected void Update()
 	    {
+			//if the claw has been launched, send it further out, try to pick things up, and then
+			//start retracting if it's reached its full range without grabbing anything
 	        if (deploying)
 	        {
 	            openClaw.transform.position = Deploy();
@@ -167,6 +169,9 @@ namespace PlayerAbility
 					openClaw.SetActive(false);
 	            }
 	        }
+
+			//if the claw is retracting, pull it back, and check to see if it's reached the sub
+			//if so, get it off the screen and consume any collectible it grabbed
 	        else if (retracting)
 	        {
 	            closedClaw.transform.position = Retract();
@@ -184,14 +189,13 @@ namespace PlayerAbility
 	            }
 	        }
 
-			ammoGauge.fillAmount = CurrentResource/resourceMax;
+			ammoGauge.fillAmount = CurrentResource/resourceMax; //keep the ammo gauge up-to-date
 	    }
 
 	    /// <summary>
 	    /// What happens when the player presses their button?
 	    /// </summary>
 	    /// <param name="pressed">If set to <c>true</c>, the button is pressed; this is <c>false</c> otherwise.</param>
-
 	    public void Button(bool pressed)
 	    {
 	        if (pressed)

@@ -43,6 +43,11 @@
 			}
 		}
 
+
+		/// <summary>
+		/// Set the damage amount to normal if there's enough energy, to a low-power setting otherwise
+		/// </summary>
+		/// <returns>The damage.</returns>
 		private float SetDamage(){
 			if (CurrentResource >= normalResourceUse){
 				return normalDamage;
