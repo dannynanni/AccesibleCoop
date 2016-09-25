@@ -138,7 +138,7 @@ namespace PlayerAbility
 	    protected Vector3 Retract(){
 			retractTimer += Time.deltaTime;
 
-			Vector3 pos = Vector3.Lerp(retractPoint,
+			Vector3 pos = Vector3.Lerp(closedClaw.transform.position,
 									   transform.position,
 									   retractCurve.Evaluate(retractTimer/retractTime));
 
