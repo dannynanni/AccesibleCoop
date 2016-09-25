@@ -18,8 +18,8 @@
 		public float lowPowerDamage = 0.1f;	//the weapon's damage when it's out of power
 		private float damage = 0.0f;		//the current damage inflicted; set based on circumstances
 		public float Damage{
-			get { return Damage; }
-			set{ Damage = value; }
+			get { return damage; }
+			set{ damage = value; }
 		}
 		private float debugDamage = 1000000.0f; //a rediculous amount; if this ever happens, something is wrong!
 			
