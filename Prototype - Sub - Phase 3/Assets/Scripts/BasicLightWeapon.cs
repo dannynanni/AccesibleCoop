@@ -21,7 +21,6 @@
 			get { return damage; }
 			set{ damage = value; }
 		}
-		private float debugDamage = 1000000.0f; //a rediculous amount; if this ever happens, something is wrong!
 			
 		private Image energyGauge;
 
@@ -50,8 +49,6 @@
 			} else {
 				return lowPowerDamage;
 			}
-
-			return debugDamage; //if the weapon is insta-destroying everything, something is wrong 
 		}
 
 		public void Button (bool pressed)

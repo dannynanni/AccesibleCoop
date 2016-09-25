@@ -46,6 +46,8 @@ namespace PlayerAbility
 
 		private Image ammoGauge;
 
+		private PlayerAbility.ResourceDistribution captainResourceDistro;
+
 
 
 	    void Awake ()
@@ -58,6 +60,8 @@ namespace PlayerAbility
 	        openClaw.SetActive(false);
 	        closedClaw.SetActive(false);
 			ammoGauge = GameObject.Find("Claw ammo gauge").GetComponent<Image>();
+			captainResourceDistro = GameObject.Find("ResourceDistribution")
+				.GetComponent<PlayerAbility.ResourceDistribution>();
 	    }
 
 		//put the claw target at the appropriate range
@@ -113,16 +117,16 @@ namespace PlayerAbility
 	        {
 	            if (item.tag.Contains(COLLECTIBLE_TAG))
 	            {
-	                if (Vector3.Distance(transform.position, item.transform.position) <= grabDist)
+	                if (Vector3.Distance(openClaw.transform.position, item.transform.position) <= grabDist)
 	                {
-	                    item.transform.parent.parent = transform;
-	                    item.transform.parent.name = GRABBED_COLLECTIBLE_NAME;
 	                    deploying = false;
 	                    retracting = true;
 	                    retractPoint = transform.position;
 						    
 	                    closedClaw.SetActive(true);
 						closedClaw.transform.position = openClaw.transform.position;
+						item.transform.parent.parent = closedClaw.transform;
+						item.transform.parent.name = GRABBED_COLLECTIBLE_NAME;
 						openClaw.transform.position = openClawWaitPoint;
 						openClaw.SetActive(false);
 	                    break;
@@ -170,9 +174,12 @@ namespace PlayerAbility
 	            {
 					closedClaw.transform.position = closedClawWaitPoint;
 	                retracting = false;
-	                if (transform.childCount > 2) //there are normally two children: "Arrow" and "Claw."
+	                if (closedClaw.transform.childCount > 0) //if >0, it has picked up a collectible
 	                {
-	                    Destroy(transform.Find(GRABBED_COLLECTIBLE_NAME).gameObject);
+						GameObject collectible = GameObject.Find(GRABBED_COLLECTIBLE_NAME).gameObject;
+						captainResourceDistro.CurrentResource +=
+							collectible.GetComponent<ResourceCollectibleScript>().ResourceContained;
+						Destroy(collectible);
 	                }
 	            }
 	        }
