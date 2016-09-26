@@ -103,6 +103,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stn1: Captain
   stn2: Pilot
-  stn3: Mission Specialist
+  stn3: MissionSpecialist
   stn4: Tactical
   playerNumber: 0

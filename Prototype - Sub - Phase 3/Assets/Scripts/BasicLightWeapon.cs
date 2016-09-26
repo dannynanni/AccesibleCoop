@@ -24,6 +24,9 @@
 			
 		private Image energyGauge;
 
+        public SpriteRenderer lightBlastCutout;
+
+        public ParticleSystem lightParts;
 
 
 		private void Start(){
@@ -35,12 +38,18 @@
 		/// This is not how damage is done! Enemies check whether the weapon is Active, and if so ask for its
 		/// Damage. No damage is actually done by this script.
 		/// </summary>
-		private void Update(){
+		private void FixedUpdate(){
 			if (Active){
 				Damage = SetDamage();
 				CurrentResource -= normalResourceUse;
 				energyGauge.fillAmount = CurrentResource/resourceMax;
+                lightBlastCutout.color = Color32.Lerp(lightBlastCutout.color, new Color(255, 255, 255, 255), .02f);
+                lightParts.Emit(8);
 			}
+            else
+            {
+                lightBlastCutout.color = Color32.Lerp(lightBlastCutout.color, new Color(255, 255, 255, 0), .05f);
+            }
 		}
 
 
