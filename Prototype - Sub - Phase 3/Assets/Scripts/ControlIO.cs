@@ -30,8 +30,8 @@ public class ControlIO : MonoBehaviour {
         transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(upDown, leftRight) * Mathf.Rad2Deg);
 
 		if (playerNum == 0){ //the captain should always be playerNum == 0!
-			if (leftRight <= -0.5f || leftRight >= 0.5f){
-				p0Ability.ChangeSelectedAbility(leftRight);
+			if (leftRight <= -0.5f || leftRight >= 0.5f || upDown >= 0.5f){
+				p0Ability.ChangeSelectedAbility(leftRight, upDown);
 			}
 		}
     }

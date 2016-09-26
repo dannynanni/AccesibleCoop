@@ -54,13 +54,22 @@
 		/// Move between the three ability resource gauges, to decide who to refill.
 		/// </summary>
 		/// <param name="leftRight">The horizontal axis value from the left thumbstick.</param>
-		public void ChangeSelectedAbility(float leftRight){
+        /// 
+
+        // Left - Fuel
+        // Up - Claw
+        // Right - Light
+		public void ChangeSelectedAbility(float leftRight, float upDown){
 			if (!waitForNextSelect){
-				if (leftRight < 0.0f){
-					SelectedAbility--;
-				} else if (leftRight > 0.0f){
-					SelectedAbility++;
-				}
+				if (leftRight < -0.5f){
+                    //SelectedAbility--;
+                    SelectedAbility = 0;
+				} else if (leftRight > 0.5f){
+                    //SelectedAbility++;
+                    SelectedAbility = 2;
+				} else if (upDown > 0.5f){
+                    SelectedAbility = 1;
+                }
 
 				selectionMarker.anchoredPosition = MoveSelectionMarker();
 				waitForNextSelect = true;

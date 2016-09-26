@@ -21,8 +21,8 @@ namespace PlayerAbility
 		protected Vector3 retractPoint = new Vector3(0.0f, 0.0f, 0.0f); //position claw actually reaches
 
 		//off-screen location where the claws stay when they're not in use
-		protected Vector3 openClawWaitPoint = new Vector3(-100.0f, -100.0f, -100.0f);
-		protected Vector3 closedClawWaitPoint = new Vector3(-100.0f, -100.0f, -100.0f);
+		protected Vector3 openClawWaitPoint = new Vector3(-100.0f, -100.0f, -1000.0f);
+		protected Vector3 closedClawWaitPoint = new Vector3(-100.0f, -100.0f, -1000.0f);
 
 		public float deployTime = 1.0f; //how long it takes the claw to reach maximum extension
 		protected float deployTimer = 0.0f;
@@ -32,6 +32,8 @@ namespace PlayerAbility
 		public AnimationCurve retractCurve;
 		protected Collider[] collectibles;
 		public float grabDist = 1.0f; //how close the claw has to get to a collectible to pick it up
+
+        public float pauseTime = 0.5f; //how long the claw pauses after grabbing before being retracted
 
 		protected bool deploying = false;
 		protected bool retracting = false;
@@ -43,6 +45,7 @@ namespace PlayerAbility
 
 	    private GameObject openClaw;
 	    private GameObject closedClaw;
+        private GameObject closedClawPart;
 
 		private Image ammoGauge;
 
@@ -55,6 +58,9 @@ namespace PlayerAbility
 			clawTarget = transform.parent.Find("Claw target");
 	        openClaw = GameObject.Find("clawOpen");
 	        closedClaw = GameObject.Find("clawClosed");
+
+            closedClawPart = GameObject.Find("LineSnapParticles");
+
 			openClaw.transform.position = openClawWaitPoint;
 			closedClaw.transform.position = closedClawWaitPoint;
 	        openClaw.SetActive(false);
@@ -84,9 +90,11 @@ namespace PlayerAbility
 			collectibles = Physics.OverlapSphere(transform.position, range);
 
 	        openClaw.SetActive(true);
+            openClaw.GetComponent<WavyLineScript>().init();
 			openClaw.transform.position = transform.position;
 			startPoint = transform.position;
 			extendedPoint = clawTarget.position;
+            closedClaw.GetComponent<StraightLineScript>().shutDown();
 	        closedClaw.SetActive(false);
 
 			//expend ammo
@@ -124,10 +132,19 @@ namespace PlayerAbility
 	                    retractPoint = transform.position;
 						    
 	                    closedClaw.SetActive(true);
-						closedClaw.transform.position = openClaw.transform.position;
-						item.transform.parent.parent = closedClaw.transform;
+                        closedClaw.transform.position = openClaw.transform.position;
+                        closedClawPart.transform.position = openClaw.transform.position;
+
+                        closedClawPart.transform.position = Vector3.Lerp(clawTarget.position, transform.position, .5f);
+                        closedClawPart.transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(clawTarget.position.y - transform.position.y, clawTarget.position.x - transform.position.x));
+                        float length = Vector3.Distance(clawTarget.position, transform.position);
+                        GetComponent<ParticleSystem>().shape.box.Equals(new Vector3(length * 2, 0, 0));
+                        closedClaw.GetComponent<StraightLineScript>().init();
+
+                        item.transform.parent.parent = closedClaw.transform;
 						item.transform.parent.name = GRABBED_COLLECTIBLE_NAME;
 						openClaw.transform.position = openClawWaitPoint;
+                        openClaw.GetComponent<WavyLineScript>().shutDown();
 						openClaw.SetActive(false);
 	                    break;
 	                }
@@ -144,7 +161,7 @@ namespace PlayerAbility
 
 			Vector3 pos = Vector3.Lerp(closedClaw.transform.position,
 									   transform.position,
-									   retractCurve.Evaluate(retractTimer/retractTime));
+									   retractCurve.Evaluate((retractTimer - pauseTime)/retractTime));
 
 			return pos;
 		}
@@ -164,9 +181,17 @@ namespace PlayerAbility
 	                retractPoint = transform.position;
 
 	                closedClaw.SetActive(true);
-					closedClaw.transform.position = openClaw.transform.position;
-					openClaw.transform.position = openClawWaitPoint;
-					openClaw.SetActive(false);
+                    closedClaw.transform.position = openClaw.transform.position;
+
+                    closedClawPart.transform.position = Vector3.Lerp(clawTarget.position, transform.position, .5f);
+                    closedClawPart.transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(clawTarget.position.y - transform.position.y, clawTarget.position.x - transform.position.x));
+                    float length = Vector3.Distance(clawTarget.position, transform.position);
+                    GetComponent<ParticleSystem>().shape.box.Equals(new Vector3(length * 2, 0, 0));
+                    closedClaw.GetComponent<StraightLineScript>().init();
+
+                    openClaw.transform.position = openClawWaitPoint;
+                    openClaw.GetComponent<WavyLineScript>().shutDown();
+                    openClaw.SetActive(false);
 	            }
 	        }
 
@@ -177,9 +202,11 @@ namespace PlayerAbility
 	            closedClaw.transform.position = Retract();
 				if (Vector3.Distance(closedClaw.transform.position, transform.position) <= Mathf.Epsilon)
 	            {
+                    Debug.Log("Shutting down straight line, because close.");
+                    closedClaw.GetComponent<StraightLineScript>().shutDown();
 					closedClaw.transform.position = closedClawWaitPoint;
 	                retracting = false;
-	                if (closedClaw.transform.childCount > 0) //if >0, it has picked up a collectible
+	                if (closedClaw.transform.childCount > 2) //if >0, it has picked up a collectible
 	                {
 						GameObject collectible = GameObject.Find(GRABBED_COLLECTIBLE_NAME).gameObject;
 						captainResourceDistro.CurrentResource +=
