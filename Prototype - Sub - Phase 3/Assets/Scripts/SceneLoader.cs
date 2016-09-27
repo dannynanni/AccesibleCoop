@@ -5,6 +5,6 @@ using System.Collections;
 public class SceneLoader : MonoBehaviour {
 
 	void Awake(){
-		SceneManager.LoadScene("Test Level 1", LoadSceneMode.Additive);
+		SceneManager.LoadScene("Test Level 2", LoadSceneMode.Additive);
 	}
 }
