@@ -83,12 +83,12 @@
 			}
 		}
 
-		protected virtual Quaternion GetRotationToward(Transform target){
+		protected override Quaternion GetRotationToward(Transform target){
 			Vector3 vectorRotation = (target.position - transform.position).normalized;
 
 			float zRotation = Mathf.Atan2(vectorRotation.y, vectorRotation.x) * Mathf.Rad2Deg;
 
-			vectorRotation.z = zRotation - 90; //correction for difference between orientation of sprite * gameobj axis
+			vectorRotation.z = zRotation - 90; //correction for difference between orientation of sprite v. gameobj axis
 
 			return Quaternion.Euler(vectorRotation);
 		}
