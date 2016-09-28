@@ -15,3 +15,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Kraken.unity
   - enabled: 1
     path: Assets/Scenes/Tom's Workbench.unity
+  - enabled: 1
+    path: Assets/Scenes/DesLevel1.unity
