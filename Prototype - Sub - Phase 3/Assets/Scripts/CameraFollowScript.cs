@@ -9,7 +9,7 @@ public class CameraFollowScript : MonoBehaviour {
 	// Update is called once per frame
 	void LateUpdate () {
 
-        transform.position = Vector3.Lerp(transform.position, CamFollowTgt.position, .05f);
+        transform.position = Vector3.Lerp(transform.position, CamFollowTgt.position, .01f);
         transform.LookAt(LookTarget);
 	
 	}
