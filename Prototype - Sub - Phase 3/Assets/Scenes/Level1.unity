@@ -1570,7 +1570,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 14.41, y: 4.35, z: 10}
+  m_Size: {x: 14.41, y: 7.79, z: 10}
   m_Center: {x: 7.6, y: 0.27, z: 0}
 --- !u!114 &1037027885
 MonoBehaviour:
@@ -8192,8 +8192,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 652692f60569d40f9a9503fcc6acf725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalBlinkDuration: 2
-  totalBlinkTimer: 0
+  totalEffectDuration: 2
+  totalEffectTimer: 0
   individualBlinkDuration: 0.5
   controlIOs: []
 --- !u!1 &1854149023

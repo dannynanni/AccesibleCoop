@@ -16,6 +16,9 @@
 		protected Vector3 startPosition = new Vector3(0.0f, 0.0f, 0.0f);
 		protected Vector3 currentDestination = new Vector3(0.0f, 0.0f, 0.0f);
 		public AnimationCurve movementCurve;
+		protected bool scared = false;
+		public float scaredDuration = 10.0f;
+		protected float scaredTimer = 0.0f;
 
 
 		protected override void Start(){
@@ -44,8 +47,17 @@
 				findTimer = 0.0f;
 				movementTimer = 0.0f;
 				startPosition = transform.position;
-				currentDestination = FindPlayer();
-				transform.rotation = GetRotationToward(player);
+				if (!scared){
+					currentDestination = FindPlayer();
+					transform.rotation = GetRotationToward(player);
+				} else if (scared){
+					currentDestination = -1 * FindPlayer();
+					transform.rotation = GetRotationToward(player);
+				}
+			}
+
+			if (scared){
+				scared = RunScaredTimer();
 			}
 		}
 
@@ -79,6 +91,25 @@
 			vectorRotation.z = zRotation - 90; //correction for difference between orientation of sprite * gameobj axis
 
 			return Quaternion.Euler(vectorRotation);
+		}
+
+		protected override void OnTriggerStay(Collider other){
+			if (other.gameObject.name.Contains(PLAYER_WEAPON_NAME)){
+				if (playerWeapon.Active){
+					scared = true;
+					scaredTimer = 0.0f;
+				}
+			}
+		}
+
+		protected bool RunScaredTimer(){
+			scaredTimer += scaredDuration;
+
+			if (scaredTimer >= scaredDuration){
+				return false;
+			} else {
+				return true;
+			}
 		}
 	}
 }

@@ -12,7 +12,7 @@ public class BasicLightFadeInScript : MonoBehaviour {
 	void Start () {
         SR = GetComponent<SpriteRenderer>();
         SRAlphaBase = SR.color.a;
-        SR.color = new Color (255, 255, 255, 0);
+        SR.color = new Color (255, 255, 255, 255);
     }
 	
 	// Update is called once per frame
