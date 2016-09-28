@@ -27,7 +27,9 @@ public class SeaMineScript : MonoBehaviour {
     {
         if (other.gameObject.name == "Players")
         {
-            Debug.Log("Explode");
+            
+			other.gameObject.GetComponent<VesselBehavior>().GotHit = true;
+
             explosion = transform.Find("UnderwaterExplosion").GetComponent<ParticleSystem>();
             explosion.Emit(100);
 

@@ -3,8 +3,8 @@ using System.Collections;
 
 public class VesselBehavior : MonoBehaviour {
 
-	public float totalBlinkDuration = 2.0f;
-	public float totalBlinkTimer = 0.0f;
+	public float totalEffectDuration = 2.0f; //how long the submarine is frozen and blinking
+	public float totalEffectTimer = 0.0f;
 	public float individualBlinkDuration = 0.5f;
 	private float individualBlinkTimer = 0.0f;
 
@@ -20,8 +20,10 @@ public class VesselBehavior : MonoBehaviour {
 			gotHit = value;
 
 			if (GotHit){
+				mobilityState = false;
 				visibilityState = false;
 			} else {
+				mobilityState = true;
 				visibilityState = true;
 			}
 		}
@@ -47,34 +49,17 @@ public class VesselBehavior : MonoBehaviour {
 	}
 
 	private void HitFeedback(){
-		mobilityState = MobilityDetermination();
-		Blink();
-	}
+		totalEffectTimer += Time.deltaTime;
 
-	private void Blink(){
-		totalBlinkTimer += Time.deltaTime;
-
-		if (totalBlinkTimer >= totalBlinkDuration){
+		if (totalEffectTimer >= totalEffectDuration){
 			GotHit = false;
-			mobilityState = true;
-			visibilityState = true;
-			totalBlinkTimer = 0.0f;
+			totalEffectTimer = 0.0f;
 			individualBlinkTimer = 0.0f;
 		} else {
-			mobilityState = false;
 			individualBlinkTimer += Time.deltaTime;
 			if (individualBlinkTimer >= individualBlinkDuration){
-				visibilityState = !visibilityState;
 				individualBlinkTimer = 0.0f;
 			}
-		}
-	}
-
-	private bool MobilityDetermination(){
-		if (totalBlinkTimer < totalBlinkDuration){
-			return false;
-		} else {
-			return true;
 		}
 	}
 }
