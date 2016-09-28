@@ -104,11 +104,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000014016804186, guid: 270953de018914e23a3e14ec62e7a1cc, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4000014016804186, guid: 270953de018914e23a3e14ec62e7a1cc, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4000014016804186, guid: 270953de018914e23a3e14ec62e7a1cc, type: 2}
       propertyPath: m_LocalPosition.z

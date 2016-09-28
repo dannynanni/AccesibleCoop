@@ -18,6 +18,8 @@
 
 		public float health = 100.0f;
 
+		public GameObject inkExplosion;
+
 		protected virtual void Start(){
 			rigidBody = GetComponent<Rigidbody>();
 			player = GameObject.Find(PLAYER_NAME).transform;
@@ -77,6 +79,8 @@
 		protected void OnTriggerEnter(Collider other){
 			if (other.gameObject.name.Contains(PLAYER_NAME)){
 				other.gameObject.GetComponent<VesselBehavior>().GotHit = true;
+				Instantiate(inkExplosion, transform.position, Quaternion.identity);
+				Destroy(gameObject);
 			}
 		}
 	}
