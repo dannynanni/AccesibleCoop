@@ -68,6 +68,12 @@
 	        }
 	    }
 
+		private bool active = true;
+		public bool Active{
+			get { return active; }
+			set { active = value; Debug.Log("Active set to " + Active); }
+		}
+
 
 	    
 	    void Start ()
@@ -80,7 +86,12 @@
 
 	    // Update is called once per frame
 	    void FixedUpdate () {
-	        Move();       
+			if (Active){
+				Move();
+			} else if (!Active){
+				GetComponent<Rigidbody>().velocity = Vector3.zero;
+				GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+			}
 	    }
 
 	    private void Move()

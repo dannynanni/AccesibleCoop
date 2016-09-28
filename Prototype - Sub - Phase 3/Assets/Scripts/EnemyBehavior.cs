@@ -50,7 +50,7 @@
 		/// </summary>
 		/// <returns>The angle pointing toward the target.</returns>
 		/// <param name="target">The transform of the target.</param>
-		protected Quaternion GetRotationToward(Transform target){
+		protected virtual Quaternion GetRotationToward(Transform target){
 			Vector3 vectorRotation = (target.position - transform.position).normalized;
 
 			float zRotation = Mathf.Atan2(vectorRotation.y, vectorRotation.x) * Mathf.Rad2Deg;
@@ -64,7 +64,6 @@
 		/// What happens when this enemy is getting hit?
 		/// </summary>
 		protected virtual void OnTriggerStay(Collider other){
-			Debug.Log("OnTriggerStay() called");
 			if (other.gameObject.name.Contains(PLAYER_WEAPON_NAME)){
 				if (playerWeapon.Active) { health -= playerWeapon.Damage; }
 				if (health <= 0.0f){ Destroy(gameObject); }
