@@ -8143,7 +8143,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 78
+  m_Constraints: 72
   m_CollisionDetection: 0
 --- !u!135 &1821445518
 SphereCollider:
@@ -8193,6 +8193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalBlinkDuration: 2
+  totalBlinkTimer: 0
   individualBlinkDuration: 0.5
   controlIOs: []
 --- !u!1 &1854149023

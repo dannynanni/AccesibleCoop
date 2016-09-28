@@ -71,7 +71,7 @@
 		private bool active = true;
 		public bool Active{
 			get { return active; }
-			set { active = value; Debug.Log("Active set to " + Active); }
+			set { active = value; }
 		}
 
 
