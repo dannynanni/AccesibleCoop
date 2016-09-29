@@ -27,6 +27,7 @@
 			playerWeapon = GameObject.Find(PLAYER_WEAPON_NAME).GetComponent<PlayerAbility.BasicLightWeapon>();
 			spriteRenderer = GetComponent<SpriteRenderer>();
 			startPosition = transform.position;
+			currentDestination = transform.position;
 		}
 
 		protected override void FixedUpdate(){
