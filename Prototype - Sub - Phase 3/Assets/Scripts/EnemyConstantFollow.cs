@@ -29,10 +29,6 @@
 				rigidBody.angularVelocity = Vector3.zero;
 				spriteRenderer.sprite = ChaseOrWaitSprite("wait");
 			}
-
-			if (scared){
-				scared = RunScaredTimer();
-			}
 		}
 
 		/// <summary>
@@ -66,25 +62,6 @@
 			vectorRotation.z = zRotation; //correction for difference between orientation of sprite v. gameobj axis
 
 			return Quaternion.Euler(vectorRotation);
-		}
-
-		protected override void OnTriggerStay(Collider other){
-			if (other.gameObject.name.Contains(PLAYER_WEAPON_NAME)){
-				if (playerWeapon.Active){
-					scared = true;
-					scaredTimer = 0.0f;
-				}
-			}
-		}
-
-		protected bool RunScaredTimer(){
-			scaredTimer += scaredDuration;
-
-			if (scaredTimer >= scaredDuration){
-				return false;
-			} else {
-				return true;
-			}
 		}
 	}
 }

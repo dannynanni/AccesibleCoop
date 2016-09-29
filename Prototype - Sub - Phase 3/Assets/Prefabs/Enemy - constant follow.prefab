@@ -84,7 +84,7 @@ MonoBehaviour:
   turnRate: 40
   speed: 1000
   spotPlayerDistance: 1000
-  health: 100
+  health: 1
   inkExplosion: {fileID: 1000010371486608, guid: a9b9c1a7f34028842aa1f25078022454,
     type: 2}
   sprites:

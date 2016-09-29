@@ -51,9 +51,6 @@
 				if (!scared){
 					currentDestination = FindPlayer();
 					transform.rotation = GetRotationToward(player);
-				} else if (scared){
-					currentDestination = -1 * FindPlayer();
-					transform.rotation = GetRotationToward(player);
 				}
 			}
 
@@ -65,6 +62,9 @@
 		protected virtual Vector3 FindPlayer(){
 
 			Vector3 destinationVector = (player.position - transform.position).normalized;
+
+			if (scared) { destinationVector = destinationVector * -1; }
+
 			return transform.position + (destinationVector * movementDistance);
 		}
 
