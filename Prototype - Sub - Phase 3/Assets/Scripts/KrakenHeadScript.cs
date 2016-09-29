@@ -7,13 +7,13 @@ public class KrakenHeadScript : MonoBehaviour {
 
     public float xRate;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    // Use this for initialization
+    void Start() {
+
+    }
+
+    // Update is called once per frame
+    void Update() {
 
         if (tgt == null)
         {
@@ -23,5 +23,10 @@ public class KrakenHeadScript : MonoBehaviour {
         {
             transform.position = new Vector3(transform.position.x + xRate, tgt.transform.position.y, 0);
         }
+    }
+
+    public void newSpeed(float spd)
+    {
+        xRate = spd;
     }
 }

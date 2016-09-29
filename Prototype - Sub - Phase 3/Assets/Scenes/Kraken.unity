@@ -148,14 +148,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37db18db8c6b9fb42ac8e1ebf0cc69fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeedInitial: 0.5
-  time1: 10
-  moveSpeed1: 0.6
-  time2: 20
-  moveSpeed2: 0.7
-  time3: 30
-  moveSpeed3: 0.8
-  time4: 40
-  moveSpeed4: 0.9
-  time5: 50
-  moveSpeed5: 1
+  moveSpeedInitial: 0.2
+  time1: 20
+  moveSpeed1: 0.3
+  time2: 40
+  moveSpeed2: 0.4
+  time3: 60
+  moveSpeed3: 0.5
+  time4: 80
+  moveSpeed4: 0.6
+  time5: 100
+  moveSpeed5: 0.7

@@ -82,9 +82,9 @@
 		/// </summary>
 		/// <returns>The (x, y) coordinates the selection marker should go to.</returns>
 		private Vector2 MoveSelectionMarker(){
-			Vector2 leftPos = new Vector2(69.5f, 292.0f);
-			Vector2 centerPos = new Vector2(138.0f, 292.0f);
-			Vector2 rightPos = new Vector2(211.0f, 292.0f);
+			Vector2 leftPos = new Vector2(1664.7f, 663.2f);
+			Vector2 centerPos = new Vector2(1734.4f, 663.2f);
+			Vector2 rightPos = new Vector2(1809f, 663.2f);
 			Vector2 temp = new Vector2(0.0f, 0.0f);
 
 			switch (SelectedAbility){
