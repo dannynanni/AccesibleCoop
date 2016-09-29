@@ -43,7 +43,7 @@
 				Damage = SetDamage();
 				CurrentResource -= normalResourceUse;
 				energyGauge.fillAmount = CurrentResource/resourceMax;
-                lightBlastCutout.color = Color32.Lerp(lightBlastCutout.color, new Color(255, 255, 255, 255), .02f);
+                lightBlastCutout.color = Color32.Lerp(lightBlastCutout.color, new Color(255, 255, 255, 220), .02f);
                 lightParts.Emit(8);
 			}
             else
