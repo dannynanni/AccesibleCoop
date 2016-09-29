@@ -130,7 +130,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
 --- !u!1 &68584393
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,7 +400,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: e2ef2b5704061ef46839617b9881766e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
@@ -733,48 +733,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b64a87241fa9d420fb860d0337d15b9a, type: 2}
-  m_IsPrefabParent: 0
---- !u!1001 &491887862
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4000012113692836, guid: 1f66300b2f02a4ea8967ddb1eb3ba18d, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 51.29
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012113692836, guid: 1f66300b2f02a4ea8967ddb1eb3ba18d, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 13.04
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012113692836, guid: 1f66300b2f02a4ea8967ddb1eb3ba18d, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012113692836, guid: 1f66300b2f02a4ea8967ddb1eb3ba18d, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012113692836, guid: 1f66300b2f02a4ea8967ddb1eb3ba18d, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012113692836, guid: 1f66300b2f02a4ea8967ddb1eb3ba18d, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012113692836, guid: 1f66300b2f02a4ea8967ddb1eb3ba18d, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012113692836, guid: 1f66300b2f02a4ea8967ddb1eb3ba18d, type: 2}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 1f66300b2f02a4ea8967ddb1eb3ba18d, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &504125739
 GameObject:
@@ -1538,7 +1496,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 2a0517cc7d7fb454292d2f27625ad845, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.547}
   m_FlipX: 0
@@ -1555,9 +1513,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resourceMax: 100
-  normalResourceUse: 0
+  normalResourceUse: 0.6
   normalDamage: 1
-  lowPowerDamage: 0.1
+  lowPowerDamage: 0
   lightBlastCutout: {fileID: 220229567}
   lightParts: {fileID: 1880339301}
 --- !u!65 &1037027884
