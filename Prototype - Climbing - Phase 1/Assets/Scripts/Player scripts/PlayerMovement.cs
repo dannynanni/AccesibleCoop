@@ -48,8 +48,8 @@
 		}
 
 		/// <summary>
-		/// Send a ray along the transform's forward axis. If it hits the mountain, snap this object's rotation to
-		/// flat against the mountainside.
+		/// Send a ray toward the center of the mountain, parallel with the ground.
+		/// If it hits the mountain, snap this object's rotation to flat against the mountainside.
 		/// 
 		/// IMPORTANT: This assumes that the mountain extends upward along the y-axis from (0, 0, 0).
 		/// </summary>
@@ -69,7 +69,6 @@
 
 			if (Physics.Raycast(transform.position, dirToMountainAxis, out hitInfo)){
 				if (hitInfo.collider.gameObject.name.Contains("Pyramid")){
-					Debug.Log("hit");
 					mountainNormal = hitInfo.normal;
 					Debug.DrawRay(new Vector3(0.0f, transform.position.y, 0.0f), mountainNormal, Color.magenta, 2.0f);
 
@@ -82,10 +81,6 @@
 			} else {
 				return false;
 			}
-		}
-
-		protected void SwitchSides(){
-
 		}
 	}
 }
