@@ -12,14 +12,32 @@
 		public KeyCode left;
 		public KeyCode right;
 
+		protected int mountainFace = 0; //mountain has four faces, numbered 0-3.
+		protected int MountainFace{
+			get { return mountainFace; }
+			set{
+				if (value >= 0 && value < 4){
+					mountainFace = value;
+				} else if (value >= 4){ //prevent mountainFace from going above 3 by wrapping around
+					mountainFace = 0;
+				} else if (value < 0){ //prevent mountainFace from going below 0 by wrapping around
+					mountainFace = 3;
+				}
+			}
+		}
+		//how far the climber can turn on the y-axis while staying on a given facing
+		//NEVER more than 45.0f
+		//see GetCurrentFace() for more details
+		public float mountainFaceAngleTolerance = 45;
+
+
 		protected void FixedUpdate(){
 			Move();
 			AlignToMountainside();
 		}
 
-		protected void Move(){
-			Vector3 temp = transform.position;
 
+		protected void Move(){
 			float timeAdjustedSpeed = speed * Time.deltaTime;
 
 			MoveByKey(up, transform.up * timeAdjustedSpeed);
@@ -41,11 +59,13 @@
 		/// </summary>
 		protected void AlignToMountainside(){
 			if (AlignWithCurrentSide()){
-				//do nothing; the player is properly aligned	
+				MountainFace = GetCurrentFace();
+				//transform.position = StayCloseToMountain();
 			} else {
 				Debug.Log("missed!");
 			}
 		}
+
 
 		/// <summary>
 		/// Send a ray toward the center of the mountain, parallel with the ground.
@@ -82,5 +102,42 @@
 				return false;
 			}
 		}
+
+
+		/// <summary>
+		/// Determine which face of the mountain the climber is on, so that the rope can be drawn correctly.
+		/// 
+		/// This uses the climber's y-axis rotation in degrees. As a result, if the climber's y-axis rotation
+		/// changes too far, it will cause the climber to be thought to be on the wrong face.
+		/// 
+		/// mountainFaceAngleTolerance determines how far the climber can turn away from the face of the mountain.
+		/// mountainFaceAngleTolerance can never be more than 45 degrees, or else the angle ranges for different faces
+		/// will blend into each other.
+		/// </summary>
+		/// <returns>The current face.</returns>
+		protected int GetCurrentFace(){
+			float angle = transform.eulerAngles.y;
+			Debug.Log(angle);
+
+			if (angle > 270 - mountainFaceAngleTolerance && angle < 270 + mountainFaceAngleTolerance){
+				return 0;
+			} else if (angle > 360 - mountainFaceAngleTolerance || angle < 0 + mountainFaceAngleTolerance) {
+				return 1;
+			} else if (angle > 90 - mountainFaceAngleTolerance && angle < 90 + mountainFaceAngleTolerance) {
+				return 2;
+			} else {
+				return 3;
+			}
+		}
+
+//		protected Vector3 StayCloseToMountain(){
+//			RaycastHit hitInfo;
+//			Vector3 dirToMountainAxis = new Vector3(0.0f, transform.position.y, 0.0f) - transform.position;
+//
+//
+//			if (Physics.Raycast(transform.position, dirToMountainAxis, out hitInfo)){
+//				//do something
+//			}
+//		}
 	}
 }
