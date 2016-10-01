@@ -11,6 +11,17 @@
 		public KeyCode down;
 		public KeyCode left;
 		public KeyCode right;
+		protected float leftRight = 0.0f;
+		public float LeftRight{
+			get { return leftRight; }
+			set{ leftRight = value; }
+		}
+		protected float upDown = 0.0f;
+		public float UpDown{
+			get { return upDown; }
+			set{ upDown = value; }
+		}
+		public float inputDeadZone = 0.5f; //how far does the thumbstick have to move to be registered? <= 1.0f
 
 		protected int mountainFace = 0; //mountain has four faces, numbered 0-3.
 		protected int MountainFace{
@@ -40,13 +51,14 @@
 
 
 		protected void FixedUpdate(){
-			Move();
+			KeyboardMove();
+			ControllerMove();
 			AlignToMountainside();
 			ropeLinkingScript.PlayerFaceUpdate(MountainFace, playerNum);
 		}
 
 
-		protected void Move(){
+		protected void KeyboardMove(){
 			float timeAdjustedSpeed = speed * Time.deltaTime;
 
 			MoveByKey(up, transform.up * timeAdjustedSpeed);
@@ -61,6 +73,25 @@
 			}
 		}
 
+		protected void ControllerMove(){
+			float timeAdjustedSpeed = speed * Time.deltaTime;
+
+			if (UpDown > inputDeadZone){
+				MoveByController(transform.up * timeAdjustedSpeed);
+			} else if (UpDown < -inputDeadZone){
+				MoveByController(-transform.up * timeAdjustedSpeed);
+			}
+
+			if (LeftRight < -inputDeadZone){
+				MoveByController(-transform.right * timeAdjustedSpeed);
+			} else if (LeftRight > inputDeadZone){
+				MoveByController(transform.right * timeAdjustedSpeed);
+			}
+		}
+
+		protected void MoveByController(Vector3 movement){
+			transform.position += movement;
+		}
 
 		/// <summary>
 		/// Start by trying to stay aligned with the side you're climbing up.
