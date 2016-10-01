@@ -24,7 +24,7 @@ GameObject:
   - 23: {fileID: 23000011795845426}
   - 54: {fileID: 54000011986699878}
   m_Layer: 0
-  m_Name: Falling rock
+  m_Name: Rock
   m_TagString: Hazard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
