@@ -6,11 +6,19 @@
 	public class PlayerMovement : MonoBehaviour {
 
 		public float speed;
+		public float moveDistance = 10.0f;
+		protected float usedDistance = 0.0f;
+		protected Vector3 start = new Vector3(0.0f, 0.0f, 0.0f);
+		protected Vector3 currentLocation = new Vector3(0.0f, 0.0f, 0.0f);
+		TurnOrderManager turnOrderManager;
+		protected bool active = false;
 
 		public KeyCode up;
 		public KeyCode down;
 		public KeyCode left;
 		public KeyCode right;
+
+		//float values from InControl, so that players can use the D-Pad/thumbstick
 		protected float leftRight = 0.0f;
 		public float LeftRight{
 			get { return leftRight; }
@@ -45,15 +53,27 @@
 		protected int playerNum = 0;
 
 		protected void Start(){
+			start = transform.position;
+			turnOrderManager = transform.root.Find("TurnOrderManager").GetComponent<TurnOrderManager>();
 			ropeLinkingScript = transform.root.Find("RopeManager").GetComponent<RopeLinkingScript>();
 			playerNum = int.Parse(gameObject.name[6].ToString()); //assumes players are named "Player#" with no space
 		}
 
 
 		protected void FixedUpdate(){
-			KeyboardMove();
-			ControllerMove();
-			AlignToMountainside();
+			if (active){
+				KeyboardMove();
+				ControllerMove();
+				usedDistance = GetDistanceTraveled();
+				if (usedDistance >= moveDistance){
+					turnOrderManager.NewActivePlayer(playerNum);
+					active = false;
+				}
+				start = transform.position; //set the start position for the next frame
+
+				AlignToMountainside();
+			}
+
 			ropeLinkingScript.PlayerFaceUpdate(MountainFace, playerNum);
 		}
 
@@ -91,6 +111,11 @@
 
 		protected void MoveByController(Vector3 movement){
 			transform.position += movement;
+		}
+
+		protected float GetDistanceTraveled(){
+			currentLocation = transform.position;
+			return usedDistance += Vector3.Distance(start, currentLocation);
 		}
 
 		/// <summary>
@@ -178,5 +203,10 @@
 //				//do something
 //			}
 //		}
+
+		public void Reset(){
+			usedDistance = 0.0f;
+			active = true;
+		}
 	}
 }
