@@ -19,6 +19,7 @@ public class RopeLinkingScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
 		//initialize the array used to track the players' positions
+		VectrosityTest();
 		face = new bool[4][];
 		face[0] = new bool[4];
 		face[1] = new bool[4];
@@ -36,6 +37,12 @@ public class RopeLinkingScript : MonoBehaviour {
                 face[i][j] = false;
             }
         }
+	}
+
+	void VectrosityTest(){
+		List<Vector2> points = new List<Vector2>() { new Vector2(0, 0), new Vector2(Screen.width - 1, Screen.height - 1) };
+		VectorLine line = new VectorLine("Line", points, 2.0f);
+		line.Draw();
 	}
 	
 	// Update is called once per frame
@@ -68,6 +75,12 @@ public class RopeLinkingScript : MonoBehaviour {
                 }
             }
         }
+
+		if(lines.Count > 0){
+			foreach (VectorLine line in lines){
+				line.Draw();
+			}
+		}
 	}
 
     public void PlayerFaceUpdate(int faceNum, int playerNum)
@@ -85,8 +98,8 @@ public class RopeLinkingScript : MonoBehaviour {
     {
         foreach (VectorLine thisLine in lines)
         {
-//            VectorLine bob = thisLine;
-//            VectorLine.Destroy(ref bob);
+            VectorLine bob = thisLine;
+            VectorLine.Destroy(ref bob);
         }
         lines.Clear();
     }
@@ -105,7 +118,7 @@ public class RopeLinkingScript : MonoBehaviour {
         VectorLine myLine = new VectorLine("aLine", new List<Vector3>(segmentNumber * 2), null, lineWidth, LineType.Discrete, Joins.Weld);
         Vector3[] startFinish = new Vector3[2];
         startFinish[0] = players[fromPlayer].transform.position;
-        startFinish[1] = players[fromPlayer].transform.position;
+        startFinish[1] = players[toPlayer].transform.position;
         myLine.MakeSpline(startFinish, false);
         lines.Add(myLine);
     }

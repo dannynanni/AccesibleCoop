@@ -88,13 +88,13 @@
 			Vector3 dirToMountainAxis = new Vector3(0.0f, transform.position.y, 0.0f) - transform.position;
 			RaycastHit hitInfo;
 
-			Debug.DrawRay(transform.position, transform.forward, Color.red, 2.0f);
-			Debug.DrawRay(transform.position, transform.right, Color.blue, 2.0f);
-			Debug.DrawRay(transform.position, transform.up, Color.green, 2.0f);
-			Debug.DrawRay(transform.position,
-						  new Vector3(0.0f, transform.position.y, 0.0f) - transform.position,
-						  Color.yellow,
-						  2.0f);
+//			Debug.DrawRay(transform.position, transform.forward, Color.red, 2.0f);
+//			Debug.DrawRay(transform.position, transform.right, Color.blue, 2.0f);
+//			Debug.DrawRay(transform.position, transform.up, Color.green, 2.0f);
+//			Debug.DrawRay(transform.position,
+//						  new Vector3(0.0f, transform.position.y, 0.0f) - transform.position,
+//						  Color.yellow,
+//						  2.0f);
 
 			if (Physics.Raycast(transform.position, dirToMountainAxis, out hitInfo)){
 				if (hitInfo.collider.gameObject.name.Contains("Pyramid")){
