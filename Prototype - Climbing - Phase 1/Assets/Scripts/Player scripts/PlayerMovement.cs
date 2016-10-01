@@ -11,6 +11,7 @@
 		protected Vector3 start = new Vector3(0.0f, 0.0f, 0.0f);
 		protected Vector3 currentLocation = new Vector3(0.0f, 0.0f, 0.0f);
 		TurnOrderManager turnOrderManager;
+		TimeKeeper timeKeeper;
 		protected bool active = false;
 
 		public KeyCode up;
@@ -52,11 +53,13 @@
 		protected RopeLinkingScript ropeLinkingScript;
 		protected int playerNum = 0;
 
-		protected void Start(){
+		protected void Awake(){
 			start = transform.position;
 			turnOrderManager = transform.root.Find("TurnOrderManager").GetComponent<TurnOrderManager>();
+			timeKeeper = GetComponent<TimeKeeper>();
 			ropeLinkingScript = transform.root.Find("RopeManager").GetComponent<RopeLinkingScript>();
 			playerNum = int.Parse(gameObject.name[6].ToString()); //assumes players are named "Player#" with no space
+			Debug.Log(playerNum);
 		}
 
 
@@ -68,6 +71,7 @@
 				if (usedDistance >= moveDistance){
 					turnOrderManager.NewActivePlayer(playerNum);
 					active = false;
+					timeKeeper.Timescale = 0.0f;
 				}
 				start = transform.position; //set the start position for the next frame
 
@@ -79,7 +83,7 @@
 
 
 		protected void KeyboardMove(){
-			float timeAdjustedSpeed = speed * Time.deltaTime;
+			float timeAdjustedSpeed = speed * timeKeeper.DeltaTime;
 
 			MoveByKey(up, transform.up * timeAdjustedSpeed);
 			MoveByKey(left, -transform.right * timeAdjustedSpeed);
@@ -207,6 +211,8 @@
 		public void Reset(){
 			usedDistance = 0.0f;
 			active = true;
+			timeKeeper.Timescale = 1.0f;
+			Debug.Log("playerNum " + playerNum + " set to active");
 		}
 	}
 }

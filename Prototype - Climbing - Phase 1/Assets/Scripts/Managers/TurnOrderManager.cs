@@ -1,20 +1,21 @@
 ﻿using UnityEngine;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
 public class TurnOrderManager : MonoBehaviour {
 
 	//assumes 4 players; change this if that changes
-	private Player.PlayerMovement[] players = new Player.PlayerMovement[4];
+	private List<Player.PlayerMovement> playerList = new List<Player.PlayerMovement>();
+
 
 	private void Start(){
 		GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
 
-		if (playerObjects.Length != players.Length) { Debug.Log("Length mismatch!"); }
-
 		for (int i = 0; i < playerObjects.Length; i++){
-			players[i] = playerObjects[i].GetComponent<Player.PlayerMovement>();
+			playerList.Add(playerObjects[i].GetComponent<Player.PlayerMovement>());
 		}
+		playerList.Sort(CompareByNames);
 
 		NewActivePlayer(-1); //start with player 0.
 	}
@@ -29,10 +30,22 @@ public class TurnOrderManager : MonoBehaviour {
 		previousPlayerNum++;
 		int newPlayerNum = previousPlayerNum;
 
-		if (newPlayerNum > players.Length - 1){
+		if (newPlayerNum > playerList.Count - 1){
 			newPlayerNum = 0;
 		}
 
-		players[newPlayerNum].Reset();
+		playerList[newPlayerNum].Reset();
+		Debug.Log("new active player: " + newPlayerNum);
+	}
+
+
+	/// <summary>
+	/// Determine which of two objects comes first in name order.
+	/// </summary>
+	/// <returns>An int that the Sort function can use to order the objects.</returns>
+	/// <param name="x">The first object to sort.</param>
+	/// <param name="y">The second object to sort.</param>
+	private int CompareByNames(Player.PlayerMovement x, Player.PlayerMovement y){
+		return x.gameObject.name.CompareTo(y.gameObject.name);
 	}
 }
