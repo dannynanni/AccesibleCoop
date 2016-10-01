@@ -1,18 +1,17 @@
-﻿namespace Player
+﻿namespace TurnTakers
 {
 	using UnityEngine;
 	using System.Collections;
 
-	public class PlayerMovement : MonoBehaviour {
+	public class PlayerMovement : ThingsThatTakeTurns {
 
 		public float speed;
 		public float moveDistance = 10.0f;
 		protected float usedDistance = 0.0f;
 		protected Vector3 start = new Vector3(0.0f, 0.0f, 0.0f);
 		protected Vector3 currentLocation = new Vector3(0.0f, 0.0f, 0.0f);
-		TurnOrderManager turnOrderManager;
-		TimeKeeper timeKeeper;
-		protected bool active = false;
+		public Color activeColor;
+		protected Renderer render;
 
 		public KeyCode up;
 		public KeyCode down;
@@ -51,15 +50,15 @@
 		public float mountainFaceAngleTolerance = 45;
 
 		protected RopeLinkingScript ropeLinkingScript;
-		protected int playerNum = 0;
 
-		protected void Awake(){
+
+		protected override void Awake(){
+			render = GetComponent<Renderer>();
 			start = transform.position;
 			turnOrderManager = transform.root.Find("TurnOrderManager").GetComponent<TurnOrderManager>();
 			timeKeeper = GetComponent<TimeKeeper>();
 			ropeLinkingScript = transform.root.Find("RopeManager").GetComponent<RopeLinkingScript>();
 			playerNum = int.Parse(gameObject.name[6].ToString()); //assumes players are named "Player#" with no space
-			Debug.Log(playerNum);
 		}
 
 
@@ -72,6 +71,7 @@
 					turnOrderManager.NewActivePlayer(playerNum);
 					active = false;
 					timeKeeper.Timescale = 0.0f;
+					render.material.color = Color.white;
 				}
 				start = transform.position; //set the start position for the next frame
 
@@ -98,7 +98,7 @@
 		}
 
 		protected void ControllerMove(){
-			float timeAdjustedSpeed = speed * Time.deltaTime;
+			float timeAdjustedSpeed = speed * timeKeeper.DeltaTime;
 
 			if (UpDown > inputDeadZone){
 				MoveByController(transform.up * timeAdjustedSpeed);
@@ -208,11 +208,11 @@
 //			}
 //		}
 
-		public void Reset(){
+		public override void Reset(){
 			usedDistance = 0.0f;
 			active = true;
 			timeKeeper.Timescale = 1.0f;
-			Debug.Log("playerNum " + playerNum + " set to active");
+			render.material.color = activeColor;
 		}
 	}
 }

@@ -6,14 +6,15 @@ using System.Collections.Generic;
 public class TurnOrderManager : MonoBehaviour {
 
 	//assumes 4 players; change this if that changes
-	private List<Player.PlayerMovement> playerList = new List<Player.PlayerMovement>();
+	private List<TurnTakers.ThingsThatTakeTurns> playerList = new List<TurnTakers.ThingsThatTakeTurns>();
 
 
 	private void Start(){
+		//prepare the list of everything that will have a turn, inlcuding both players and the environment
 		GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
 
 		for (int i = 0; i < playerObjects.Length; i++){
-			playerList.Add(playerObjects[i].GetComponent<Player.PlayerMovement>());
+			playerList.Add(playerObjects[i].GetComponent<TurnTakers.ThingsThatTakeTurns>());
 		}
 		playerList.Sort(CompareByNames);
 
@@ -35,7 +36,6 @@ public class TurnOrderManager : MonoBehaviour {
 		}
 
 		playerList[newPlayerNum].Reset();
-		Debug.Log("new active player: " + newPlayerNum);
 	}
 
 
@@ -45,7 +45,7 @@ public class TurnOrderManager : MonoBehaviour {
 	/// <returns>An int that the Sort function can use to order the objects.</returns>
 	/// <param name="x">The first object to sort.</param>
 	/// <param name="y">The second object to sort.</param>
-	private int CompareByNames(Player.PlayerMovement x, Player.PlayerMovement y){
+	private int CompareByNames(TurnTakers.ThingsThatTakeTurns x, TurnTakers.ThingsThatTakeTurns y){
 		return x.gameObject.name.CompareTo(y.gameObject.name);
 	}
 }
