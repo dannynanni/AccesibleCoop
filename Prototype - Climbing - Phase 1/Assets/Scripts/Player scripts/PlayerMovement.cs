@@ -30,10 +30,19 @@
 		//see GetCurrentFace() for more details
 		public float mountainFaceAngleTolerance = 45;
 
+		protected RopeLinkingScript ropeLinkingScript;
+		protected int playerNum = 0;
+
+		protected void Start(){
+			ropeLinkingScript = transform.root.Find("RopeManager").GetComponent<RopeLinkingScript>();
+			playerNum = int.Parse(gameObject.name[6].ToString()); //assumes players are named "Player#" with no space
+		}
+
 
 		protected void FixedUpdate(){
 			Move();
 			AlignToMountainside();
+			ropeLinkingScript.PlayerFaceUpdate(MountainFace, playerNum);
 		}
 
 
@@ -117,7 +126,6 @@
 		/// <returns>The current face.</returns>
 		protected int GetCurrentFace(){
 			float angle = transform.eulerAngles.y;
-			Debug.Log(angle);
 
 			if (angle > 270 - mountainFaceAngleTolerance && angle < 270 + mountainFaceAngleTolerance){
 				return 0;

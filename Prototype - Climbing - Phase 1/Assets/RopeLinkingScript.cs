@@ -6,7 +6,7 @@ using Vectrosity;
 public class RopeLinkingScript : MonoBehaviour {
 
     private GameObject[] players = new GameObject[4];
-    private bool[][] face;
+	private bool[][] face;
     private bool[] thisFace = new bool[4];
 
     public float linkDistMax;
@@ -18,13 +18,20 @@ public class RopeLinkingScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+		//initialize the array used to track the players' positions
+		face = new bool[4][];
+		face[0] = new bool[4];
+		face[1] = new bool[4];
+		face[2] = new bool[4];
+		face[3] = new bool[4];
+
 
         // Initializes the players into an array.
         // Players must be named Player0, Player1, Player2, and Player3
         for (int i = 0; i < players.Length; i++)
         {
             players[i] = GameObject.Find("Player" + i);
-            for (int j = 0; j < players.Length; i++)
+			for (int j = 0; j < players.Length; j++)
             {
                 face[i][j] = false;
             }
@@ -78,8 +85,8 @@ public class RopeLinkingScript : MonoBehaviour {
     {
         foreach (VectorLine thisLine in lines)
         {
-            VectorLine bob = thisLine;
-            VectorLine.Destroy(ref bob);
+//            VectorLine bob = thisLine;
+//            VectorLine.Destroy(ref bob);
         }
         lines.Clear();
     }
@@ -94,6 +101,7 @@ public class RopeLinkingScript : MonoBehaviour {
 
     private void addLineToDraw(int fromPlayer, int toPlayer)
     {
+		Debug.Log("addLineToDraw() called");
         VectorLine myLine = new VectorLine("aLine", new List<Vector3>(segmentNumber * 2), null, lineWidth, LineType.Discrete, Joins.Weld);
         Vector3[] startFinish = new Vector3[2];
         startFinish[0] = players[fromPlayer].transform.position;
