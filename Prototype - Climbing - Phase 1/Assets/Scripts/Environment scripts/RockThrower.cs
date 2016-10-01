@@ -2,6 +2,7 @@
 {
 	using UnityEngine;
 	using System.Collections;
+	using System.Collections.Generic;
 
 	public class RockThrower : ThingsThatTakeTurns {
 
@@ -11,7 +12,8 @@
 		private float throwTimer = 0.0f;
 		private GameObject rock;
 		public float maxForce = 1.0f; //how hard rocks are thrown in the x and z directions
-
+		private List<Rigidbody> players = new List<Rigidbody>();
+		private float ropeDistance = 0.0f;
 
 
 		protected override void Awake(){
@@ -19,6 +21,21 @@
 			turnOrderManager = transform.root.Find("TurnOrderManager").GetComponent<TurnOrderManager>();
 			playerNum = int.Parse(gameObject.name[6].ToString()); //name must start with "Player#" with no space
 			rock = Resources.Load("Rock") as GameObject;
+			players = FindPlayers();
+			ropeDistance = transform.root.Find("RopeManager").GetComponent<RopeLinkingScript>().linkDistMax;
+		}
+
+		private List<Rigidbody> FindPlayers(){
+			List<Rigidbody> temp = new List<Rigidbody>();
+			GameObject[] playerObjs = GameObject.FindGameObjectsWithTag("Player");
+
+			foreach (GameObject obj in playerObjs){
+				if (!obj.name.Contains("-")){
+					temp.Add(obj.GetComponent<Rigidbody>());
+				}
+			}
+
+			return temp;
 		}
 
 		private void Update(){
@@ -31,18 +48,17 @@
 		private void MeasureTurnDuration(){
 			turnTimer += timeKeeper.DeltaTime;
 
-			//Debug.Log(turnTimer);
 			if (turnTimer >= turnDuration){
 				turnOrderManager.NewActivePlayer(playerNum);
 				active = false;
 				timeKeeper.Timescale = 0.0f;
 				StopHazardsInPlace();
+				UnlinkPlayers();
 			}
 		}
 
 		private void PrepareToThrowRock(){
 			throwTimer += Time.deltaTime;
-			Debug.Log(throwTimer);
 			if (throwTimer >= turnDuration/rocksPerTurn){
 				Debug.Log("throwing");
 				throwTimer = 0.0f;
@@ -56,12 +72,12 @@
 		}
 
 		public override void Reset(){
-			Debug.Log("starting turn");
 			active = true;
 			turnTimer = 0.0f;
 			throwTimer = 0.0f;
 			timeKeeper.Timescale = 1.0f;
 			StartHazardsMoving();
+			LinkPlayers();
 		}
 
 		private void StopHazardsInPlace(){
@@ -77,6 +93,28 @@
 
 			foreach (GameObject hazard in hazards){
 				hazard.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+			}
+		}
+
+
+		/// <summary>
+		/// Which players are linked together? Freeze their positions so that they're immune to the rocks
+		/// </summary>
+		private void LinkPlayers(){
+			for (int i = 0; i < players.Count; i++){
+				for (int j = 0; j < players.Count; j++){
+					if (players[i].gameObject.name != players[j].gameObject.name && 
+						Vector3.Distance(players[i].transform.position, players[j].transform.position) <= ropeDistance){
+						players[i].constraints = RigidbodyConstraints.FreezeAll;
+						players[j].constraints = RigidbodyConstraints.FreezeAll;
+					}
+				}
+			}
+		}
+
+		private void UnlinkPlayers(){
+			for (int i = 0; i < players.Count; i++){
+				players[i].constraints = RigidbodyConstraints.None;
 			}
 		}
 	}
