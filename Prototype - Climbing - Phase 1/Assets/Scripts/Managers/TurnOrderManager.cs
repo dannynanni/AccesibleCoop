@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class TurnOrderManager : MonoBehaviour {
 
+	CameraManagerScript cameraManager;
 	//assumes 4 players; change this if that changes
 	private List<TurnTakers.ThingsThatTakeTurns> playerList = new List<TurnTakers.ThingsThatTakeTurns>();
 
@@ -17,6 +18,7 @@ public class TurnOrderManager : MonoBehaviour {
 			playerList.Add(playerObjects[i].GetComponent<TurnTakers.ThingsThatTakeTurns>());
 		}
 		playerList.Sort(CompareByNames);
+		cameraManager = transform.root.Find("CameraManager").GetComponent<CameraManagerScript>();
 
 		NewActivePlayer(-1); //start with player 0.
 	}
@@ -34,8 +36,9 @@ public class TurnOrderManager : MonoBehaviour {
 		if (newPlayerNum > playerList.Count - 1){
 			newPlayerNum = 0;
 		}
-
+			
 		playerList[newPlayerNum].Reset();
+		cameraManager.SetActivePlayer(playerList[newPlayerNum].gameObject);
 	}
 
 

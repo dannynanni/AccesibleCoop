@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44692558, g: 0.49678743, b: 0.57508624, a: 1}
+  m_IndirectSpecularColor: {r: 0.4469245, g: 0.49678475, b: 0.5750831, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -182,14 +182,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 270833364}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 432666088}
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_Father: {fileID: 882925218}
+  m_RootOrder: 0
 --- !u!1 &341827845
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,7 +446,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
   m_Children: []
   m_Father: {fileID: 882925218}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!108 &799728615
 Light:
   m_ObjectHideFlags: 0
@@ -507,6 +507,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 270833366}
   - {fileID: 799728614}
   - {fileID: 1150707132}
   - {fileID: 2111877050}
@@ -623,7 +624,7 @@ Transform:
   m_Children:
   - {fileID: 936404298}
   m_Father: {fileID: 882925218}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!1 &1370756096
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,7 +657,7 @@ Transform:
   - {fileID: 2047319038}
   - {fileID: 192754853}
   m_Father: {fileID: 882925218}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!1 &1454986659
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,7 +686,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 882925218}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!114 &1454986661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1115,7 +1116,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 882925218}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!114 &2111877051
 MonoBehaviour:
   m_ObjectHideFlags: 0

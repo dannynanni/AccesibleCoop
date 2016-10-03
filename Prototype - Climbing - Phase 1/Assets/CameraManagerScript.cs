@@ -24,7 +24,7 @@ public class CameraManagerScript : MonoBehaviour {
 	void Start () {
         // Add points from bottom to top
         spinePoints.Add(Vector3.zero);
-        spinePoints.Add(new Vector3(0, 15, 0));
+        spinePoints.Add(new Vector3(0, 17, 0));
 
 	}
 	
