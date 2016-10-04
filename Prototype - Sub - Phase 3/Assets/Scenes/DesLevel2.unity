@@ -146,7 +146,7 @@ GameObject:
   - 4: {fileID: 458948033}
   - 114: {fileID: 458948032}
   m_Layer: 0
-  m_Name: TreasureSpawn (2)
+  m_Name: ConstantSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,8 +167,8 @@ MonoBehaviour:
   numTreasure: 50
   xMin: -1000
   xMax: 1000
-  yMin: -5000
-  yMax: 5000
+  yMin: -1000
+  yMax: 1000
 --- !u!4 &458948033
 Transform:
   m_ObjectHideFlags: 0
@@ -210,7 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   treasure: {fileID: 1000013872036622, guid: 1f66300b2f02a4ea8967ddb1eb3ba18d, type: 2}
-  numTreasure: 500
+  numTreasure: 100
   xMin: 20
   xMax: 1000
   yMin: -200
@@ -238,7 +238,7 @@ GameObject:
   - 4: {fileID: 667101056}
   - 114: {fileID: 667101055}
   m_Layer: 0
-  m_Name: TreasureSpawn (1)
+  m_Name: IntermittentSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -259,8 +259,8 @@ MonoBehaviour:
   numTreasure: 50
   xMin: -1000
   xMax: 1000
-  yMin: -5000
-  yMax: 5000
+  yMin: -1000
+  yMax: 1000
 --- !u!4 &667101056
 Transform:
   m_ObjectHideFlags: 0
