@@ -115,5 +115,7 @@ public class RopeLinkingScript : MonoBehaviour {
         myLine.MakeSpline(startFinish, false);
 		myLine.SetColor(ropeColor);
         lines.Add(myLine);
+
+    
     }
 }
