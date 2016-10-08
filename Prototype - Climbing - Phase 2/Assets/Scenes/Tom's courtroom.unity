@@ -420,7 +420,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010208114590, guid: 03102c0bd5dd243fca0557a385882de0, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1000010645316966, guid: 03102c0bd5dd243fca0557a385882de0, type: 2}
       propertyPath: m_Name
@@ -822,8 +822,8 @@ MonoBehaviour:
   xMax: 12
   yMin: 12
   yMax: 12
-  tMin: 20
-  tMax: 50
+  tMin: 5
+  tMax: 15
 --- !u!1001 &1006430462
 Prefab:
   m_ObjectHideFlags: 0

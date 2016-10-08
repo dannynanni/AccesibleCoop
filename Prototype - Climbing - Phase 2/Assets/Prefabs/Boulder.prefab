@@ -36,6 +36,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000012721534654}
+  - 114: {fileID: 114000013232570184}
   m_Layer: 0
   m_Name: Boulder
   m_TagString: Untagged
@@ -52,7 +53,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000014097129198}
   - 212: {fileID: 212000010067020422}
-  - 114: {fileID: 114000011768400414}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -101,12 +101,12 @@ Transform:
   - {fileID: 4000012744750732}
   m_Father: {fileID: 4000012721534654}
   m_RootOrder: 0
---- !u!114 &114000011768400414
+--- !u!114 &114000013232570184
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012371082904}
+  m_GameObject: {fileID: 1000012030643454}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e518135b7a37ac045b8c3461e0705a83, type: 3}
