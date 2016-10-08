@@ -16,6 +16,8 @@ public class SimplePlatformController : MonoBehaviour {
 	private Animator anim;
 	private Rigidbody2D rb2d;
 
+	public GameObject explosion; //the particle that warns players that they stepped on the wrong color
+
 
 	// Use this for initialization
 	void Awake () 
@@ -45,7 +47,7 @@ public class SimplePlatformController : MonoBehaviour {
 		RaycastHit2D hit = Physics2D.Linecast(transform.position,
 											  groundCheck.position,
 											  1 << LayerMask.NameToLayer("Ground"));
-		if (hit == null){
+		if (!hit){
 			return false; //didn't find any ground; player is in the air
 		} else {
 			if (hit.collider.tag == gameObject.tag || hit.collider.tag == "Ground"){
