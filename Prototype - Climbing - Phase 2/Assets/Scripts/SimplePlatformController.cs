@@ -67,7 +67,7 @@ public class SimplePlatformController : MonoBehaviour {
 	}
 
 	private void ResetPosition(){
-
+		rb2d.position = startPos;
 	}
 
 	void FixedUpdate()
