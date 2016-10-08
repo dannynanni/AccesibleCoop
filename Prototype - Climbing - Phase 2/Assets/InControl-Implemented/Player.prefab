@@ -101,8 +101,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eba3d0a907024714ba9f9c0957b29fe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stn1: Captain
-  stn2: Pilot
-  stn3: Mission Specialist
-  stn4: Tactical
+  stn1: Blue player
+  stn2: Red player
+  stn3: 
+  stn4: 
   playerNumber: 0
