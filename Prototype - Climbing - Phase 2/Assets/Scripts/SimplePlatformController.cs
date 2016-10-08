@@ -101,22 +101,20 @@ public class SimplePlatformController : MonoBehaviour {
 	{
 		if (!resetting)
 		{
-			float h = Input.GetAxis("Horizontal");
-	        if (h == 0)
+            float h;
+	        if (controllerRight)
 	        {
-	            if (controllerRight)
-	            {
-	                h = 1;
-	            }
-	            else if (controllerLeft)
-	            {
-	                h = -1;
-	            }
-	            else
-	            {
-	                h = 0;
-	            }
+	            h = 1;
 	        }
+	        else if (controllerLeft)
+	        {
+	            h = -1;
+	        }
+	        else
+	        {
+	            h = 0;
+	        }
+
 
 			//anim.SetFloat("Speed", Mathf.Abs(h));
 
@@ -159,12 +157,13 @@ public class SimplePlatformController : MonoBehaviour {
 
     public void ControllerLeftRight (float leftRight)
     {
-        if (leftRight > 0)
+        Debug.Log("controller left stick input");
+        if (leftRight > 0.25)
         {
             controllerRight = true;
             controllerLeft = false;
         }
-        else if (leftRight < 0)
+        else if (leftRight < -.25f)
         {
             controllerRight = false;
             controllerLeft = true;

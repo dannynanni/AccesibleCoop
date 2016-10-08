@@ -15,7 +15,7 @@
         public string stn3;
         public string stn4;
 
-        private ControlIO myIO;
+        public ControlIO myIO;
 
 
         // PLAYERNUMBER must be set in scene 0

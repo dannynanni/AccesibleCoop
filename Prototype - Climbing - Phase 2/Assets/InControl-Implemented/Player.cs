@@ -13,7 +13,7 @@ namespace MultiplayerWithBindingsExample
 	{
 		public PlayerActions Actions { get; set; }
 
-        private float stickThresh = .25f;
+        private float stickThresh = .5f;
 
         private ActionsOutputTarget AOT;
 
@@ -101,7 +101,13 @@ namespace MultiplayerWithBindingsExample
         private void playIOFunc()
         {
             if (Mathf.Abs(Actions.Rotate.X) >= stickThresh || Mathf.Abs(Actions.Rotate.Y) >= stickThresh)
-            AOT.passLS(Actions.Rotate.X, Actions.Rotate.Y);
+            {
+                AOT.passLS(Actions.Rotate.X, Actions.Rotate.Y);
+            }
+            else
+            {
+                AOT.passLS(0, 0);
+            }
             if (Actions.AButton.WasPressed)
             {
                 AOT.passAButton(true);

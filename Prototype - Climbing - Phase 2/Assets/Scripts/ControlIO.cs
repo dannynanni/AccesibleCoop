@@ -22,10 +22,7 @@ public class ControlIO : MonoBehaviour {
 
     public void LS(float leftRight, float upDown)
     {
-        if (Mathf.Abs(leftRight) > 0)
-        {
             myControl.ControllerLeftRight(leftRight);
-        }
     }
 
     //send button presses to the correct script, depending on which mode the captain has set
