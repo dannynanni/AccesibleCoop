@@ -88,7 +88,7 @@ public class SimplePlatformController : MonoBehaviour {
 	private void CrashLand(){
 		resetting = true;
 		explodePos = rb2d.position;
-		Instantiate(explosion, rb2d.position, Quaternion.identity);
+		Instantiate(explosion, rb2d.position, Quaternion.Euler(new Vector3(-90.0f, 0.0f, 0.0f)));
 	}
 
 	private Vector2 ResetPosition(){
