@@ -383,6 +383,52 @@ Transform:
   m_PrefabParentObject: {fileID: 4000010090791226, guid: 38309982298fb426ab618b6f415c8bd1,
     type: 2}
   m_PrefabInternal: {fileID: 94909245}
+--- !u!1001 &716721518
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4000010208114590, guid: 03102c0bd5dd243fca0557a385882de0, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 5.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010208114590, guid: 03102c0bd5dd243fca0557a385882de0, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 3.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010208114590, guid: 03102c0bd5dd243fca0557a385882de0, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010208114590, guid: 03102c0bd5dd243fca0557a385882de0, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010208114590, guid: 03102c0bd5dd243fca0557a385882de0, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010208114590, guid: 03102c0bd5dd243fca0557a385882de0, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010208114590, guid: 03102c0bd5dd243fca0557a385882de0, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010208114590, guid: 03102c0bd5dd243fca0557a385882de0, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000010645316966, guid: 03102c0bd5dd243fca0557a385882de0, type: 2}
+      propertyPath: m_Name
+      value: Purple idol (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 03102c0bd5dd243fca0557a385882de0, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &749198650
 Prefab:
   m_ObjectHideFlags: 0
@@ -534,6 +580,48 @@ Transform:
   m_Children: []
   m_Father: {fileID: 949944662}
   m_RootOrder: 1
+--- !u!1001 &811855673
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4000010208114590, guid: 03102c0bd5dd243fca0557a385882de0, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010208114590, guid: 03102c0bd5dd243fca0557a385882de0, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 3.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010208114590, guid: 03102c0bd5dd243fca0557a385882de0, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010208114590, guid: 03102c0bd5dd243fca0557a385882de0, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010208114590, guid: 03102c0bd5dd243fca0557a385882de0, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010208114590, guid: 03102c0bd5dd243fca0557a385882de0, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010208114590, guid: 03102c0bd5dd243fca0557a385882de0, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010208114590, guid: 03102c0bd5dd243fca0557a385882de0, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 03102c0bd5dd243fca0557a385882de0, type: 2}
+  m_IsPrefabParent: 0
 --- !u!4 &838465428 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000010090791226, guid: 38309982298fb426ab618b6f415c8bd1,
