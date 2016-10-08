@@ -15,4 +15,10 @@ public class BoulderBehavior : MonoBehaviour {
         }
 	
 	}
+
+	private void OnTriggerEnter2D(Collider2D other){
+		if (other.gameObject.name.Contains("player")){
+			other.gameObject.GetComponent<SimplePlatformController>().Stunned = true;
+		}
+	}
 }

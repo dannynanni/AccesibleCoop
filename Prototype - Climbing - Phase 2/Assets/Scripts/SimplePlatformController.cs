@@ -27,6 +27,13 @@ public class SimplePlatformController : MonoBehaviour {
 	public AnimationCurve returnCurve;
 	private float returnTimer = 0.0f;
 	public GameObject explosion; //particle effect for when player lands on wrong-colored platform
+	private bool stunned = false; //whether the player has been hit by a boulder
+	public bool Stunned{
+		get { return stunned; }
+		set { stunned = value; }
+	}
+	public float stunDuration = 1.0f;
+	private float stunTimer = 0.0f;
 
 
 	// Use this for initialization
@@ -40,6 +47,8 @@ public class SimplePlatformController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		//under normal circumstances, check to see if the player is on the wrong color ground,
+		//and allow the player to jump
 		if (!resetting)
 		{
 			grounded = CheckGround();
@@ -54,11 +63,21 @@ public class SimplePlatformController : MonoBehaviour {
 	        {
 	            jump = true;
 	        }
+		//if the player landed on the wrong color, take them back to start
 		} else {
 			transform.position = ResetPosition();
 			if (Vector2.Distance(rb2d.position, startPos) <= Mathf.Epsilon){
 				returnTimer = 0.0f;
 				resetting = false;
+			}
+		}
+
+		//if the player is stunned, run a timer until the time to be stunned runs out
+		if (stunned){
+			stunTimer += Time.deltaTime;
+			if (stunTimer >= stunDuration){
+				stunned = false;
+				stunTimer = 0.0f;
 			}
 		}
 	}
@@ -120,7 +139,7 @@ public class SimplePlatformController : MonoBehaviour {
 
 			//anim.SetFloat("Speed", Mathf.Abs(h));
 
-			if (h * rb2d.velocity.x < maxSpeed)
+			if (h * rb2d.velocity.x < maxSpeed && !stunned)
 				rb2d.AddForce(Vector2.right * h * moveForce);
 
 			if (Mathf.Abs (rb2d.velocity.x) > maxSpeed)
@@ -131,7 +150,7 @@ public class SimplePlatformController : MonoBehaviour {
 			else if (h < 0 && facingRight)
 				Flip ();
 
-			if (jump)
+			if (jump && !stunned)
 			{
 				//anim.SetTrigger("Jump");
 				rb2d.AddForce(new Vector2(0f, jumpForce));

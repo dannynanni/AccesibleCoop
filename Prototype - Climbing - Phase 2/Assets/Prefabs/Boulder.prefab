@@ -37,6 +37,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012721534654}
   - 114: {fileID: 114000013232570184}
+  - 58: {fileID: 58000013806326538}
+  - 50: {fileID: 50000012068796964}
   m_Layer: 0
   m_Name: Boulder
   m_TagString: Untagged
@@ -101,6 +103,37 @@ Transform:
   - {fileID: 4000012744750732}
   m_Father: {fileID: 4000012721534654}
   m_RootOrder: 0
+--- !u!50 &50000012068796964
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012030643454}
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!58 &58000013806326538
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012030643454}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.1
 --- !u!114 &114000013232570184
 MonoBehaviour:
   m_ObjectHideFlags: 1
