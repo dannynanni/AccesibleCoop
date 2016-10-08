@@ -10,8 +10,6 @@ public class SimplePlatformController : MonoBehaviour {
 	public float maxSpeed = 5f;
 	public float jumpForce = 1000f;
 	public Transform groundCheck;
-	private Vector2 startPos;
-	private Vector2 explodePos; //the location where a player lands on an incorrectly-colored platform
 	private bool resetting = false;
 
 
@@ -22,6 +20,13 @@ public class SimplePlatformController : MonoBehaviour {
     private bool controllerJump;
     private bool controllerLeft;
     private bool controllerRight;
+
+	private Vector2 startPos; //where the player started the level
+	private Vector2 explodePos; //the location where a player lands on an incorrectly-colored platform
+	public float returnDelay = 2.0f; //how long it takes to reset after landing on a wrong-colored platform
+	public AnimationCurve returnCurve;
+	private float returnTimer = 0.0f;
+	public GameObject explosion; //particle effect for when player lands on wrong-colored platform
 
 
 	// Use this for initialization
@@ -50,7 +55,11 @@ public class SimplePlatformController : MonoBehaviour {
 	            jump = true;
 	        }
 		} else {
-
+			transform.position = ResetPosition();
+			if (Vector2.Distance(rb2d.position, startPos) <= Mathf.Epsilon){
+				returnTimer = 0.0f;
+				resetting = false;
+			}
 		}
 	}
 
@@ -68,15 +77,24 @@ public class SimplePlatformController : MonoBehaviour {
 			if (hit.collider.tag == gameObject.tag || hit.collider.tag == "Ground"){
 				return true; //found ground of the appropriate color, or a neutral color
 			} else {
-				ResetPosition(); //oops! landed on the wrong color
+				CrashLand(); //oops! landed on the wrong color
 				return true;
 			}
 		}
 	}
 
-	private void ResetPosition(){
+	private void CrashLand(){
 		resetting = true;
-		rb2d.position = startPos;
+		explodePos = rb2d.position;
+		Instantiate(explosion, rb2d.position, Quaternion.identity);
+	}
+
+	private Vector2 ResetPosition(){
+		returnTimer += Time.deltaTime;
+
+		Vector2 temp = Vector2.Lerp(explodePos, startPos, returnCurve.Evaluate(returnTimer/returnDelay));
+
+		return temp;
 	}
 
 	void FixedUpdate()
