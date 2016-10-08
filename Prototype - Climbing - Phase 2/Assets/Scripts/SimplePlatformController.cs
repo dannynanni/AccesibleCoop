@@ -9,6 +9,7 @@ public class SimplePlatformController : MonoBehaviour {
 	public float maxSpeed = 5f;
 	public float jumpForce = 1000f;
 	public Transform groundCheck;
+	private Vector2 startPos;
 
 
 	private bool grounded = false;
@@ -21,17 +22,43 @@ public class SimplePlatformController : MonoBehaviour {
 	{
 		//anim = GetComponent<Animator>();
 		rb2d = GetComponent<Rigidbody2D>();
+		startPos = transform.position;
 	}
 
 	// Update is called once per frame
 	void Update () 
 	{
-		grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+		grounded = CheckGround();
+			
 
 		if (Input.GetButtonDown("Jump") && grounded)
 		{
 			jump = true;
 		}
+	}
+
+	/// <summary>
+	/// Determines whether the player is on the ground. If so, and it's the wrong color, resets the player's position.
+	/// </summary>
+	/// <returns><c>true</c>, if player is on the ground, <c>false</c> otherwise.</returns>
+	private bool CheckGround(){
+		RaycastHit2D hit = Physics2D.Linecast(transform.position,
+											  groundCheck.position,
+											  1 << LayerMask.NameToLayer("Ground"));
+		if (hit == null){
+			return false; //didn't find any ground; player is in the air
+		} else {
+			if (hit.collider.tag == gameObject.tag || hit.collider.tag == "Ground"){
+				return true; //found ground of the appropriate color, or a neutral color
+			} else {
+				ResetPosition();
+				return true;
+			}
+		}
+	}
+
+	private void ResetPosition(){
+
 	}
 
 	void FixedUpdate()
