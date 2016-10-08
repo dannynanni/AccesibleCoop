@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Blue
   - Red
+  - Purple
   layers:
   - Default
   - TransparentFX
