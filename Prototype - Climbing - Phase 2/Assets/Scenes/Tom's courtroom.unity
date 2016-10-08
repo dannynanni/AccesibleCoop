@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4469245, g: 0.49678475, b: 0.5750831, a: 1}
+  m_IndirectSpecularColor: {r: 0.44692558, g: 0.49678743, b: 0.57508624, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -666,6 +666,7 @@ GameObject:
   - 50: {fileID: 1050533560}
   - 114: {fileID: 1050533559}
   - 58: {fileID: 1050533561}
+  - 114: {fileID: 1050533564}
   m_Layer: 0
   m_Name: Physics player
   m_TagString: Untagged
@@ -769,6 +770,19 @@ Transform:
   - {fileID: 1612135817}
   m_Father: {fileID: 949944662}
   m_RootOrder: 1
+--- !u!114 &1050533564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1050533558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea93364b2928f3f49989cbdb7cfd70cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNum: 0
+  myControl: {fileID: 0}
 --- !u!1 &1206926659 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1000014148008752, guid: 29f40f65da49f4b44b277207f79ce9c3,

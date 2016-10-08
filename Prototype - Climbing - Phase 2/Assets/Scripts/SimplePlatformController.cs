@@ -16,6 +16,10 @@ public class SimplePlatformController : MonoBehaviour {
 	private Animator anim;
 	private Rigidbody2D rb2d;
 
+    private bool controllerJump;
+    private bool controllerLeft;
+    private bool controllerRight;
+
 
 	// Use this for initialization
 	void Awake () 
@@ -35,6 +39,11 @@ public class SimplePlatformController : MonoBehaviour {
 		{
 			jump = true;
 		}
+
+        else if (controllerJump && grounded)
+        {
+            jump = true;
+        }
 	}
 
 	/// <summary>
@@ -64,6 +73,21 @@ public class SimplePlatformController : MonoBehaviour {
 	void FixedUpdate()
 	{
 		float h = Input.GetAxis("Horizontal");
+        if (h == 0)
+        {
+            if (controllerRight)
+            {
+                h = 1;
+            }
+            else if (controllerLeft)
+            {
+                h = -1;
+            }
+            else
+            {
+                h = 0;
+            }
+        }
 
 		//anim.SetFloat("Speed", Mathf.Abs(h));
 
@@ -94,4 +118,31 @@ public class SimplePlatformController : MonoBehaviour {
 		theScale.x *= -1;
 		transform.localScale = theScale;
 	}
+
+    public void ControllerJumpInput (bool buttonDown)
+    {
+        if (buttonDown)
+            jump = true;
+        //else if (!buttonDown)
+        //    jump = false;
+    }
+
+    public void ControllerLeftRight (float leftRight)
+    {
+        if (leftRight > 0)
+        {
+            controllerRight = true;
+            controllerLeft = false;
+        }
+        else if (leftRight < 0)
+        {
+            controllerRight = false;
+            controllerLeft = true;
+        }
+        else
+        {
+            controllerRight = false;
+            controllerLeft = false;
+        }
+    }
 }
