@@ -137,10 +137,20 @@ MonoBehaviour:
   returnDelay: 2
   returnCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 10
+    - time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 10
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   explosion: {fileID: 1000013040013872, guid: d188ef09cb1827e49bc5a2a1f00e04ca, type: 2}
 --- !u!212 &212000010384884970
 SpriteRenderer:

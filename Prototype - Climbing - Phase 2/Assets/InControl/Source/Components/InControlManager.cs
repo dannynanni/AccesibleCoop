@@ -83,11 +83,11 @@ namespace InControl
 			}
 
 #if UNITY_5_4_OR_NEWER
-			SceneManager.sceneLoaded -= OnSceneWasLoaded;
-			SceneManager.sceneLoaded += OnSceneWasLoaded;
+            SceneManager.sceneLoaded -= OnSceneWasLoaded;
+            SceneManager.sceneLoaded += OnSceneWasLoaded;
 #endif
 
-			if (dontDestroyOnLoad)
+            if (dontDestroyOnLoad)
 			{
 				DontDestroyOnLoad( this );
 			}
@@ -97,10 +97,10 @@ namespace InControl
 		void OnDisable()
 		{
 #if UNITY_5_4_OR_NEWER
-			SceneManager.sceneLoaded -= OnSceneWasLoaded;
+            SceneManager.sceneLoaded -= OnSceneWasLoaded;
 #endif
 
-			if (InControlManager.Instance == this)
+            if (InControlManager.Instance == this)
 			{
 				InputManager.ResetInternal();
 			}
