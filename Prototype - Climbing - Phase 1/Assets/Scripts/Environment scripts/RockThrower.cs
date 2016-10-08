@@ -103,8 +103,11 @@
 		private void LinkPlayers(){
 			for (int i = 0; i < players.Count; i++){
 				for (int j = 0; j < players.Count; j++){
+					//in order to be linked, players must (1) be different, (2) be close, and (3) be on the same
+					//mountain face
 					if (players[i].gameObject.name != players[j].gameObject.name && 
-						Vector3.Distance(players[i].transform.position, players[j].transform.position) <= ropeDistance){
+						Vector3.Distance(players[i].transform.position, players[j].transform.position) <= ropeDistance &&
+						players[i].transform.eulerAngles.y == players[j].transform.eulerAngles.y){
 						players[i].constraints = RigidbodyConstraints.FreezeAll;
 						players[j].constraints = RigidbodyConstraints.FreezeAll;
 					}

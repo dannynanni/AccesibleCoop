@@ -5,6 +5,8 @@
 
 	public class PlayerMovement : ThingsThatTakeTurns {
 
+		public float inputWait = 1.0f; //delay before a new player can enter inputs
+		private float inputTimer = 0.0f;
 		public float speed;
 		public float moveDistance = 10.0f;
 		protected float usedDistance = 0.0f;
@@ -63,7 +65,8 @@
 
 
 		protected void FixedUpdate(){
-			if (active){
+			inputTimer += Time.deltaTime;
+			if (active && inputTimer >= inputWait){
 				KeyboardMove();
 				ControllerMove();
 				usedDistance = GetDistanceTraveled();
@@ -213,6 +216,7 @@
 			active = true;
 			timeKeeper.Timescale = 1.0f;
 			render.material.color = activeColor;
+			inputTimer = 0.0f;
 		}
 	}
 }

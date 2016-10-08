@@ -51,7 +51,6 @@ public class CameraManagerScript : MonoBehaviour {
     {
         for (int i = spinePoints.Count - 1; i >= 0; i--)
         {
-            Debug.Log(i);
             if (targetPlayer.transform.position.y >= spinePoints[i].y)
             {
                 return i;
