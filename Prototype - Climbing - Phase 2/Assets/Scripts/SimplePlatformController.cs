@@ -72,6 +72,8 @@ public class SimplePlatformController : MonoBehaviour {
 											  groundCheck.position,
 											  1 << LayerMask.NameToLayer("Ground"));
 		if (!hit){
+            //prevents player from re-inputting a jump command while mid-air so as to prevent inadvertant bounce.
+            controllerJump = false;
 			return false; //didn't find any ground; player is in the air
 		} else {
 			if (hit.collider.tag == gameObject.tag || hit.collider.tag == "Ground"){
@@ -152,8 +154,8 @@ public class SimplePlatformController : MonoBehaviour {
     {
         if (buttonDown)
             controllerJump = true;
-        //else if (!buttonDown)
-        //    jump = false;
+        else if (!buttonDown)
+            jump = false;
     }
 
     public void ControllerLeftRight (float leftRight)
