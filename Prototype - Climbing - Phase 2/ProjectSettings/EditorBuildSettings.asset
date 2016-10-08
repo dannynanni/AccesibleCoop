@@ -9,3 +9,5 @@ EditorBuildSettings:
     path: Assets/Scenes/MultiplayerWithBindings.unity
   - enabled: 1
     path: Assets/Scenes/Tom's courtroom.unity
+  - enabled: 1
+    path: Assets/Scenes/Chris' stateroom.unity

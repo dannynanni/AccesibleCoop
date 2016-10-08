@@ -21,6 +21,7 @@ GameObject:
   - 4: {fileID: 4000013208929150}
   - 198: {fileID: 198000012220489506}
   - 199: {fileID: 199000011442375074}
+  - 114: {fileID: 114000011917819414}
   m_Layer: 0
   m_Name: PlaceholderExplosionPrefab
   m_TagString: Untagged
@@ -41,6 +42,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &114000011917819414
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013040013872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88de5b8977738e64f90de20108bddbb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SecondsUntilCleanup: 0
 --- !u!198 &198000012220489506
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -160,7 +160,7 @@ public class SimplePlatformController : MonoBehaviour {
 
     public void ControllerLeftRight (float leftRight)
     {
-        Debug.Log("controller left stick input");
+        //Debug.Log("controller left stick input");
         if (leftRight > 0.25)
         {
             controllerRight = true;
