@@ -175,4 +175,10 @@ public class SimplePlatformController : MonoBehaviour {
             controllerLeft = false;
         }
     }
+
+	private void OnTriggerEnter2D(Collider2D other){
+		if (other.gameObject.name.Contains("idol")){
+			other.GetComponent<BasicIdol>().CheckForDestruction(gameObject);
+		}
+	}
 }
