@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44692504, g: 0.4967869, b: 0.57508504, a: 1}
+  m_IndirectSpecularColor: {r: 0.4469245, g: 0.49678475, b: 0.5750831, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -3745,8 +3745,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d651d18db4e7490eba899e4bd23baac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnDuration: 5
-  rocksPerTurn: 2
+  turnDuration: 3
+  rocksPerTurn: 5
   maxForce: 1
 --- !u!114 &192754855
 MonoBehaviour:
@@ -3911,8 +3911,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a035f9dfff74d4fc4ad2ddd0fe1467d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputWait: 1
   speed: 10
-  moveDistance: 10
+  moveDistance: 3
   activeColor: {r: 0.047685977, g: 0.81738013, b: 0.9264706, a: 0}
   up: 273
   down: 274
@@ -6190,8 +6191,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a035f9dfff74d4fc4ad2ddd0fe1467d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputWait: 1
   speed: 10
-  moveDistance: 10
+  moveDistance: 3
   activeColor: {r: 0.047058824, g: 0.8156863, b: 0.9254902, a: 0}
   up: 273
   down: 274
@@ -6318,8 +6320,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a035f9dfff74d4fc4ad2ddd0fe1467d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputWait: 1
   speed: 10
-  moveDistance: 10
+  moveDistance: 3
   activeColor: {r: 0.047058824, g: 0.8156863, b: 0.9254902, a: 0}
   up: 273
   down: 274
@@ -6446,8 +6449,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a035f9dfff74d4fc4ad2ddd0fe1467d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputWait: 1
   speed: 10
-  moveDistance: 10
+  moveDistance: 3
   activeColor: {r: 0.047058824, g: 0.8156863, b: 0.9254902, a: 0}
   up: 273
   down: 274
