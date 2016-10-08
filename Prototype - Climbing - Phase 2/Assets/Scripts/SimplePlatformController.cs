@@ -134,6 +134,7 @@ public class SimplePlatformController : MonoBehaviour {
 				//anim.SetTrigger("Jump");
 				rb2d.AddForce(new Vector2(0f, jumpForce));
 				jump = false;
+                controllerJump = false;
 			}
 		}
 	}
@@ -150,7 +151,7 @@ public class SimplePlatformController : MonoBehaviour {
     public void ControllerJumpInput (bool buttonDown)
     {
         if (buttonDown)
-            jump = true;
+            controllerJump = true;
         //else if (!buttonDown)
         //    jump = false;
     }
