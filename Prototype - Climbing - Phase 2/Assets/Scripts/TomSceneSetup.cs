@@ -8,6 +8,7 @@ public class TomSceneSetup : MonoBehaviour {
 	public float platformScale = 0.25f;
 	public float playerScale = 0.5f;
 	public float playerSpeed = 3.0f;
+	protected const float USE_PREFAB_VALUE = 10000000.0f;
 
 	protected void Start(){
 		
@@ -17,7 +18,7 @@ public class TomSceneSetup : MonoBehaviour {
 		ChangeJump(players);
 
 		List<GameObject> blocks = FindObjects("block");
-		Shrink(blocks, new Vector3(1.0f, platformScale, 1.0f));
+		Shrink(blocks, new Vector3(USE_PREFAB_VALUE, platformScale, 1.0f));
 
 	}
 
@@ -38,7 +39,7 @@ public class TomSceneSetup : MonoBehaviour {
 	protected void Shrink(List<GameObject> objs, Vector3 scale){
 		foreach (GameObject obj in objs){
 			Vector3 newScale = scale;
-			if (newScale.x == 1.0f) { newScale.x = obj.transform.localScale.x; }
+			if (newScale.x == USE_PREFAB_VALUE) { newScale.x = obj.transform.localScale.x; }
 
 			obj.transform.localScale = newScale;
 		}
