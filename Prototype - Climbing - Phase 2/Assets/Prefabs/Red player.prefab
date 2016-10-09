@@ -152,6 +152,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   explosion: {fileID: 1000013040013872, guid: d188ef09cb1827e49bc5a2a1f00e04ca, type: 2}
+  stunDuration: 1
 --- !u!212 &212000010384884970
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -181,7 +182,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a61393989915241c89a29e6548e48284, type: 3}
-  m_Color: {r: 0.9338235, g: 0.2511663, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 0fe193fb6869942649786ea99e42b60e, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
