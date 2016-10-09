@@ -17,3 +17,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Tom's scenes/Tom's appellate court.unity
   - enabled: 1
     path: Assets/Scenes/Tom's scenes/Tom's courtroom revised.unity
+  - enabled: 1
+    path: Assets/Scenes/Tom's scenes/Tom's supreme court.unity
