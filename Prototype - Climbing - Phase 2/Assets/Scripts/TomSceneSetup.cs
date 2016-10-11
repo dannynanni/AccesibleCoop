@@ -8,6 +8,7 @@ public class TomSceneSetup : MonoBehaviour {
 	public float platformScale = 0.25f;
 	public float playerScale = 0.5f;
 	public float playerSpeed = 3.0f;
+	public float newTimeScale = 0.3f;
 	protected const float USE_PREFAB_VALUE = 10000000.0f;
 
 	protected void Start(){
@@ -19,7 +20,7 @@ public class TomSceneSetup : MonoBehaviour {
 
 		List<GameObject> blocks = FindObjects("block");
 		Shrink(blocks, new Vector3(USE_PREFAB_VALUE, platformScale, 1.0f));
-
+		Time.timeScale = newTimeScale;
 	}
 
 	protected List<GameObject> FindObjects(string target){
