@@ -35,6 +35,7 @@ public class SimplePlatformController : MonoBehaviour {
 	public float stunDuration = 1.0f;
 	private float stunTimer = 0.0f;
 
+    public GameObject JumpSound;
 
 	// Use this for initialization
 	void Awake () 
@@ -156,6 +157,7 @@ public class SimplePlatformController : MonoBehaviour {
 				rb2d.AddForce(new Vector2(0f, jumpForce));
 				jump = false;
                 controllerJump = false;
+                Instantiate(JumpSound, Vector3.zero, Quaternion.identity);
 			}
 		}
 	}

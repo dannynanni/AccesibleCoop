@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4469245, g: 0.49678475, b: 0.5750831, a: 1}
+  m_IndirectSpecularColor: {r: 0.44692504, g: 0.4967869, b: 0.57508504, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1765,6 +1765,12 @@ Prefab:
       propertyPath: m_Name
       value: Blue idol (small) (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012659306846, guid: 29bb0d274c9c547f98a61bd33526c3cb,
+        type: 2}
+      propertyPath: soundSmash
+      value: 
+      objectReference: {fileID: 1000013146983416, guid: 1ddc7a311243e5f4a8b3989481d70a3c,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 29bb0d274c9c547f98a61bd33526c3cb, type: 2}
   m_IsPrefabParent: 0
@@ -2193,6 +2199,12 @@ Prefab:
       propertyPath: m_Name
       value: Red idol (small) (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013947689980, guid: 1f1e21a5f02c047d198416849580f5c1,
+        type: 2}
+      propertyPath: soundSmash
+      value: 
+      objectReference: {fileID: 1000013146983416, guid: 1ddc7a311243e5f4a8b3989481d70a3c,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1f1e21a5f02c047d198416849580f5c1, type: 2}
   m_IsPrefabParent: 0
@@ -2882,6 +2894,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpForce: 1000
   platformScale: 0.25
+  playerScale: 0.5
+  playerSpeed: 3
 --- !u!1 &950398031
 GameObject:
   m_ObjectHideFlags: 0
@@ -3257,6 +3271,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012659306846, guid: 29bb0d274c9c547f98a61bd33526c3cb,
+        type: 2}
+      propertyPath: soundSmash
+      value: 
+      objectReference: {fileID: 1000013146983416, guid: 1ddc7a311243e5f4a8b3989481d70a3c,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 29bb0d274c9c547f98a61bd33526c3cb, type: 2}
   m_IsPrefabParent: 0
@@ -3351,6 +3371,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013947689980, guid: 1f1e21a5f02c047d198416849580f5c1,
+        type: 2}
+      propertyPath: soundSmash
+      value: 
+      objectReference: {fileID: 1000013146983416, guid: 1ddc7a311243e5f4a8b3989481d70a3c,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1f1e21a5f02c047d198416849580f5c1, type: 2}
   m_IsPrefabParent: 0
@@ -3444,6 +3470,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012659306846, guid: 29bb0d274c9c547f98a61bd33526c3cb,
+        type: 2}
+      propertyPath: soundSmash
+      value: 
+      objectReference: {fileID: 1000013146983416, guid: 1ddc7a311243e5f4a8b3989481d70a3c,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 29bb0d274c9c547f98a61bd33526c3cb, type: 2}
   m_IsPrefabParent: 0
@@ -4233,6 +4265,12 @@ Prefab:
       propertyPath: m_Name
       value: Blue idol (small) (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012659306846, guid: 29bb0d274c9c547f98a61bd33526c3cb,
+        type: 2}
+      propertyPath: soundSmash
+      value: 
+      objectReference: {fileID: 1000013146983416, guid: 1ddc7a311243e5f4a8b3989481d70a3c,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 29bb0d274c9c547f98a61bd33526c3cb, type: 2}
   m_IsPrefabParent: 0
@@ -4773,6 +4811,12 @@ Prefab:
       propertyPath: m_Name
       value: Red idol (small) (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013947689980, guid: 1f1e21a5f02c047d198416849580f5c1,
+        type: 2}
+      propertyPath: soundSmash
+      value: 
+      objectReference: {fileID: 1000013146983416, guid: 1ddc7a311243e5f4a8b3989481d70a3c,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1f1e21a5f02c047d198416849580f5c1, type: 2}
   m_IsPrefabParent: 0
@@ -5070,6 +5114,12 @@ Prefab:
       propertyPath: m_Name
       value: Blue idol (small) (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012659306846, guid: 29bb0d274c9c547f98a61bd33526c3cb,
+        type: 2}
+      propertyPath: soundSmash
+      value: 
+      objectReference: {fileID: 1000013146983416, guid: 1ddc7a311243e5f4a8b3989481d70a3c,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 29bb0d274c9c547f98a61bd33526c3cb, type: 2}
   m_IsPrefabParent: 0
@@ -5322,6 +5372,12 @@ Prefab:
       propertyPath: m_Name
       value: Red idol (small) (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013947689980, guid: 1f1e21a5f02c047d198416849580f5c1,
+        type: 2}
+      propertyPath: soundSmash
+      value: 
+      objectReference: {fileID: 1000013146983416, guid: 1ddc7a311243e5f4a8b3989481d70a3c,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1f1e21a5f02c047d198416849580f5c1, type: 2}
   m_IsPrefabParent: 0
@@ -5687,6 +5743,12 @@ Prefab:
       propertyPath: m_Name
       value: Red idol (small) (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013947689980, guid: 1f1e21a5f02c047d198416849580f5c1,
+        type: 2}
+      propertyPath: soundSmash
+      value: 
+      objectReference: {fileID: 1000013146983416, guid: 1ddc7a311243e5f4a8b3989481d70a3c,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1f1e21a5f02c047d198416849580f5c1, type: 2}
   m_IsPrefabParent: 0
@@ -5789,6 +5851,12 @@ Prefab:
       propertyPath: m_Name
       value: Purple idol (small) (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013206706530, guid: bef8d2ac1d9e84c20a1a1f28ab645587,
+        type: 2}
+      propertyPath: soundSmash
+      value: 
+      objectReference: {fileID: 1000013146983416, guid: 1ddc7a311243e5f4a8b3989481d70a3c,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bef8d2ac1d9e84c20a1a1f28ab645587, type: 2}
   m_IsPrefabParent: 0
@@ -6026,6 +6094,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013206706530, guid: bef8d2ac1d9e84c20a1a1f28ab645587,
+        type: 2}
+      propertyPath: soundSmash
+      value: 
+      objectReference: {fileID: 1000013146983416, guid: 1ddc7a311243e5f4a8b3989481d70a3c,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bef8d2ac1d9e84c20a1a1f28ab645587, type: 2}
   m_IsPrefabParent: 0
@@ -6598,6 +6672,12 @@ Prefab:
       propertyPath: m_Name
       value: Blue idol (small) (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012659306846, guid: 29bb0d274c9c547f98a61bd33526c3cb,
+        type: 2}
+      propertyPath: soundSmash
+      value: 
+      objectReference: {fileID: 1000013146983416, guid: 1ddc7a311243e5f4a8b3989481d70a3c,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 29bb0d274c9c547f98a61bd33526c3cb, type: 2}
   m_IsPrefabParent: 0
@@ -6896,6 +6976,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013947689980, guid: 1f1e21a5f02c047d198416849580f5c1,
+        type: 2}
+      propertyPath: soundSmash
+      value: 
+      objectReference: {fileID: 1000013146983416, guid: 1ddc7a311243e5f4a8b3989481d70a3c,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1f1e21a5f02c047d198416849580f5c1, type: 2}
   m_IsPrefabParent: 0

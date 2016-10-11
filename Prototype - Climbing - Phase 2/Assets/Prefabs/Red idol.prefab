@@ -68,6 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 1000013040013872, guid: d188ef09cb1827e49bc5a2a1f00e04ca, type: 2}
+  soundSmash: {fileID: 1000013146983416, guid: 1ddc7a311243e5f4a8b3989481d70a3c, type: 2}
 --- !u!212 &212000011404808974
 SpriteRenderer:
   m_ObjectHideFlags: 1
