@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myScene1: Tom's courtroom
-  myScene2: 
+  myScene2: dnScene
 --- !u!4 &4621309
 Transform:
   m_ObjectHideFlags: 0
@@ -171,6 +171,17 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 50000011311046048, guid: 244b9fca6c4f84777833c5c0c2e148f1,
+        type: 2}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010921446776, guid: 244b9fca6c4f84777833c5c0c2e148f1,
+        type: 2}
+      propertyPath: JumpSound
+      value: 
+      objectReference: {fileID: 1000013838205930, guid: 6ccb80d4ef12c7341bc5144bbade4455,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 244b9fca6c4f84777833c5c0c2e148f1, type: 2}
   m_IsPrefabParent: 0
@@ -213,6 +224,17 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 50000010092880186, guid: 10fa2c3ce75de427f98fe27a9e19ff87,
+        type: 2}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013666874998, guid: 10fa2c3ce75de427f98fe27a9e19ff87,
+        type: 2}
+      propertyPath: JumpSound
+      value: 
+      objectReference: {fileID: 1000010831006714, guid: 9cb11c3241a953c4ab1da10677619e0e,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 10fa2c3ce75de427f98fe27a9e19ff87, type: 2}
   m_IsPrefabParent: 0

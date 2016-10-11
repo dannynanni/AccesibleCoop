@@ -11,7 +11,7 @@ public class SceneLoaderScript : MonoBehaviour {
         if (myScene1.Substring(0).Length > 0)
             SceneManager.LoadScene(myScene1, LoadSceneMode.Additive);
 
-//        if (myScene2.Substring(0).Length > 0)
-//            SceneManager.LoadScene(myScene2, LoadSceneMode.Additive);
+        if (myScene2.Substring(0).Length > 0)
+            SceneManager.LoadScene(myScene2, LoadSceneMode.Additive);
     }
 }
