@@ -117,8 +117,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58f55f6a08c57e94298f6b131db8cce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myScene1: Tom's courtroom
-  myScene2: dnScene
+  myScene1: Tom's supreme court
+  myScene2: 
 --- !u!4 &4621309
 Transform:
   m_ObjectHideFlags: 0
