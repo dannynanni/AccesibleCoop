@@ -67,7 +67,7 @@ public class BasicPlayer : MonoBehaviour {
 	}
 
 	private float AmIDashing(){
-		if (Input.GetButton(CIRCLE_BUTTON + playerNum.ToString())){
+		if (Input.GetButton(CIRCLE_BUTTON + playerNum.ToString()) || Input.GetKey(dash)){
 			return dashSpeed;
 		} else {
 			return baseSpeed;
@@ -93,14 +93,23 @@ public class BasicPlayer : MonoBehaviour {
 	}
 
 	private bool TryToThrow(){
-		if (Input.GetButton(CIRCLE_BUTTON + playerNum.ToString())){
+		if (Input.GetButton(CIRCLE_BUTTON + playerNum.ToString()) || Input.GetKey(toss)){
 			if (transform.childCount > 0){
-				transform.Find(BALL_OBJ).GetComponent<BallBehavior>().PassBetweenPlayers(transform, otherPlayer);
+				StartCoroutine(transform.Find(BALL_OBJ).GetComponent<BallBehavior>()
+					.PassBetweenPlayers(transform, otherPlayer));
 				return false;
 			}
 		}
 
 		return true;
+	}
+
+	private void OnTriggerEnter2D(Collider2D other){
+		if (other.name.Contains(BALL_OBJ)){
+			other.transform.position = transform.position;
+			other.transform.parent = transform;
+			BallCarrier = true;
+		}
 	}
 
 }
