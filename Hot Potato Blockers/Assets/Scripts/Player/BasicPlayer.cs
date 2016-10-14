@@ -40,12 +40,15 @@ public class BasicPlayer : MonoBehaviour {
 	public float tackleKnockback = 5.0f;
 	public float tackleDuration = 2.0f;
 	private float tackleTimer = 0.0f;
-
+	EnemyCreator enemyCreator;
 
 
 	private void Start(){
+		const string ENEMYCREATOR_OBJ = "Enemy creator";
+
 		rb2D = GetComponent<Rigidbody2D>();
 		otherPlayer = FindOtherPlayer();
+		enemyCreator = GameObject.Find(ENEMYCREATOR_OBJ).GetComponent<EnemyCreator>();
 	}
 
 	private Transform FindOtherPlayer(){
@@ -114,6 +117,7 @@ public class BasicPlayer : MonoBehaviour {
 			if (transform.childCount > 0){
 				StartCoroutine(transform.Find(BALL_OBJ).GetComponent<BallBehavior>()
 					.PassBetweenPlayers(transform, otherPlayer));
+				enemyCreator.ResetNumEnemies();
 				return false;
 			}
 		}

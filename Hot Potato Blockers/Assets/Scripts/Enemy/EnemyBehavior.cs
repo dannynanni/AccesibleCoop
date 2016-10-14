@@ -4,22 +4,32 @@ using System.Collections;
 public class EnemyBehavior : MonoBehaviour {
 
 	public float chanceOfGoForBall = 0.8f; //between 1.0 and 0.0
-	private Transform target;
+	public Transform target;
 	private Rigidbody2D rb2D;
 	public float speed = 0.3f;
+	public float Speed{
+		get { return speed; }
+		set { speed = value; }
+	}
 
 	private void Start(){
+		transform.parent = GameObject.Find("Scene").transform;
+		Debug.Log("Start called");
 		target = ChooseTarget();
+		Debug.Log("target is " + target.name);
 		rb2D = GetComponent<Rigidbody2D>();
 	}
 
 	private Transform ChooseTarget(){
+		//Debug.Log("ChooseTarget called");
 		const string BALL_OBJ = "Ball";
 		const string PLAYER_ORGANIZER = "Players";
 
 		if (Random.Range(0.0f, 1.0f) <= chanceOfGoForBall){
-			return transform.root.Find(BALL_OBJ);
+			//Debug.Log("going for ball");
+			return GameObject.Find(BALL_OBJ).transform;
 		} else {
+			//Debug.Log("going for player");
 			Transform players = transform.root.Find(PLAYER_ORGANIZER);
 
 			return (players.GetChild(Random.Range(0, players.childCount)));
@@ -28,12 +38,14 @@ public class EnemyBehavior : MonoBehaviour {
 	}
 
 	private void FixedUpdate(){
+		//Debug.Log("FixedUpdate called");
 		Move();
 	}
 
 	private void Move(){
 		Vector3 direction = (target.position - transform.position).normalized;
 
+		//Debug.Log(direction);
 		rb2D.AddRelativeForce(direction * speed, ForceMode2D.Force);
 	}
 
