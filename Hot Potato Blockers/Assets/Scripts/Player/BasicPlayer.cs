@@ -32,6 +32,16 @@ public class BasicPlayer : MonoBehaviour {
 	private Transform otherPlayer;
 	private const string BALL_OBJ = "Ball";
 
+	private bool tackled = false;
+	public bool Tackled{
+		get { return tackled; }
+		set { tackled = value; }
+	}
+	public float tackleKnockback = 5.0f;
+	public float tackleDuration = 2.0f;
+	private float tackleTimer = 0.0f;
+
+
 
 	private void Start(){
 		rb2D = GetComponent<Rigidbody2D>();
@@ -54,15 +64,22 @@ public class BasicPlayer : MonoBehaviour {
 	}
 
 	private void Update(){
+		if (BallCarrier){
+			BallCarrier = TryToThrow();
+		}
+	}
+
+	private void FixedUpdate(){
 		float currentSpeed = baseSpeed;
 
 		if (!BallCarrier){
 			currentSpeed = AmIDashing();
 		}
-		rb2D.MovePosition(transform.position + Move(currentSpeed));
 
-		if (BallCarrier){
-			BallCarrier = TryToThrow();
+		if (!Tackled){
+			rb2D.MovePosition(transform.position + Move(currentSpeed));
+		} else if (Tackled){
+			Tackled = RunTackleTimer();
 		}
 	}
 
@@ -112,4 +129,22 @@ public class BasicPlayer : MonoBehaviour {
 		}
 	}
 
+	public void GetTackled(Transform opposingPlayer){
+		Tackled = true;
+		Vector3 tackleDirection = (opposingPlayer.position - transform.position).normalized;
+
+		rb2D.AddRelativeForce(tackleDirection * tackleKnockback, ForceMode2D.Impulse);
+	}
+
+	private bool RunTackleTimer(){
+		tackleTimer += Time.deltaTime;
+
+		if (tackleTimer >= tackleDuration){
+			tackleTimer = 0.0f;
+			rb2D.velocity = Vector3.zero;
+			return false;
+		} else {
+			return true;
+		}
+	}
 }
