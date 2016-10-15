@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class EnemyBehavior : MonoBehaviour {
@@ -11,6 +12,7 @@ public class EnemyBehavior : MonoBehaviour {
 		get { return speed; }
 		set { speed = value; }
 	}
+	public float resetDelay = 1.0f;
 
 	private void Start(){
 		transform.parent = GameObject.Find("Scene").transform;
@@ -72,8 +74,27 @@ public class EnemyBehavior : MonoBehaviour {
 				ball.position = transform.position;
 				ball.parent = transform;
 				collision.gameObject.GetComponent<BasicPlayer>().BallCarrier = false;
+				Time.timeScale = 0.0f;
+				StartCoroutine(Reset());
 				Debug.Log("You lose!");
 			}
 		}
+	}
+
+	private IEnumerator Reset(){
+		float timer = 0.0f;
+		float start = Time.realtimeSinceStartup;
+
+		while (timer < resetDelay){
+			timer = Time.realtimeSinceStartup - start;
+
+			yield return null;
+		}
+
+		Time.timeScale = 1.0f; //put the timescale back to normal, or else the game will be stopped on reload
+
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+		yield break;
 	}
 }

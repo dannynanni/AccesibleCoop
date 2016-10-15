@@ -24,7 +24,15 @@ public class EnemyCreator : MonoBehaviour {
 	private bool firstPass = false; //nothing will spawn until the players have passed the ball once
 	public bool FirstPass{
 		get { return firstPass; }
-		set { firstPass = true; }
+		set {
+			if (firstPass != value){
+				firstPass = value;
+
+				if (firstPass == true){
+					MakeEnemy(); //make an enemy right away on the first pass, to provide clearer feedback
+				}
+			}
+		}
 	}
 
 	private void Start(){
