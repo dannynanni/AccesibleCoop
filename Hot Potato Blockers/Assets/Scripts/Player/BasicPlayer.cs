@@ -40,7 +40,9 @@ public class BasicPlayer : MonoBehaviour {
 	public float tackleKnockback = 5.0f;
 	public float tackleDuration = 2.0f;
 	private float tackleTimer = 0.0f;
-	EnemyCreator enemyCreator;
+	private EnemyCreator enemyCreator;
+	private FieldBehavior fieldBehavior;
+	private const string FIELD_OBJ = "Field";
 
 
 	private void Start(){
@@ -49,6 +51,7 @@ public class BasicPlayer : MonoBehaviour {
 		rb2D = GetComponent<Rigidbody2D>();
 		otherPlayer = FindOtherPlayer();
 		enemyCreator = GameObject.Find(ENEMYCREATOR_OBJ).GetComponent<EnemyCreator>();
+		fieldBehavior = GameObject.Find(FIELD_OBJ).GetComponent<FieldBehavior>();
 	}
 
 	private Transform FindOtherPlayer(){
@@ -69,6 +72,7 @@ public class BasicPlayer : MonoBehaviour {
 	private void Update(){
 		if (BallCarrier){
 			BallCarrier = TryToThrow();
+			TryToMoveField();
 		}
 	}
 
@@ -84,6 +88,8 @@ public class BasicPlayer : MonoBehaviour {
 		} else if (Tackled){
 			Tackled = RunTackleTimer();
 		}
+
+		//transform.position = KeepPlayerOnScreen();
 	}
 
 	private float AmIDashing(){
@@ -117,6 +123,7 @@ public class BasicPlayer : MonoBehaviour {
 			if (transform.childCount > 0){
 				StartCoroutine(transform.Find(BALL_OBJ).GetComponent<BallBehavior>()
 					.PassBetweenPlayers(transform, otherPlayer));
+				enemyCreator.FirstPass = true; //we've passed at least once, OK to start spawning enemies
 				enemyCreator.ResetNumEnemies();
 				return false;
 			}
@@ -149,6 +156,12 @@ public class BasicPlayer : MonoBehaviour {
 			return false;
 		} else {
 			return true;
+		}
+	}
+
+	private void TryToMoveField(){
+		if (Input.GetKey(up) || Input.GetAxis(VERT_AXIS + playerNum.ToString()) > 0.3f){
+			fieldBehavior.ScrollField();
 		}
 	}
 }
