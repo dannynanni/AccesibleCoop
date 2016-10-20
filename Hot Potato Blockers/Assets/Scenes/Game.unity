@@ -719,7 +719,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnDist: 10
   minSpawnRate: 1
-  startSpawnRate: 3
+  startSpawnRate: 1
   enemy: {fileID: 1000010222212648, guid: 403af4830c7994e0f8db9feb0c450beb, type: 2}
 --- !u!1 &1044966306
 GameObject:
