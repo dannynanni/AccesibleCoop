@@ -9,7 +9,7 @@ public class BasicPlayer : MonoBehaviour {
 		set { ballCarrier = value; }
 	}
 
-	public int playerNum = 0;
+	public char playerNum = '0';
 
 	private const string SQUARE_BUTTON = "PS4_Square_";
 	private const string TRIANGLE_BUTTON = "PS4_Triangle_";
@@ -44,10 +44,12 @@ public class BasicPlayer : MonoBehaviour {
 	private FieldBehavior fieldBehavior;
 	private const string FIELD_OBJ = "Field";
 
+	private const string PHASE_CHANGE_OBJ = "Change";
+
 
 	private void Start(){
 		const string ENEMYCREATOR_OBJ = "Enemy creator";
-
+		playerNum = gameObject.name[7]; //assumes players are named using the convention "Player #"
 		rb2D = GetComponent<Rigidbody2D>();
 		otherPlayer = FindOtherPlayer();
 		enemyCreator = GameObject.Find(ENEMYCREATOR_OBJ).GetComponent<EnemyCreator>();
@@ -64,6 +66,7 @@ public class BasicPlayer : MonoBehaviour {
 			}
 		}
 
+		Debug.Log("otherPlayer for " + gameObject.name + " set to " + temp);
 		if (temp == transform) { Debug.Log("Couldn't find other player for " + gameObject.name); }
 
 		return temp;
@@ -72,7 +75,7 @@ public class BasicPlayer : MonoBehaviour {
 	private void Update(){
 		if (BallCarrier){
 			BallCarrier = TryToThrow();
-			TryToMoveField();
+			//TryToMoveField();
 		}
 	}
 
@@ -93,7 +96,7 @@ public class BasicPlayer : MonoBehaviour {
 	}
 
 	private float AmIDashing(){
-		if (Input.GetButton(CIRCLE_BUTTON + playerNum.ToString()) || Input.GetKey(dash)){
+		if (Input.GetButton(CIRCLE_BUTTON + playerNum) || Input.GetKey(dash)){
 			return dashSpeed;
 		} else {
 			return baseSpeed;
@@ -103,15 +106,15 @@ public class BasicPlayer : MonoBehaviour {
 	private Vector3 Move(float currentSpeed){
 		Vector3 temp = new Vector3(0.0f, 0.0f, 0.0f);
 
-		if (Input.GetKey(up) || Input.GetAxis(VERT_AXIS + playerNum.ToString()) > 0.3f){
+		if (Input.GetKey(up) || Input.GetAxis(VERT_AXIS + playerNum) > 0.3f){
 			temp.y += currentSpeed;
-		} else if (Input.GetKey(down) || Input.GetAxis(VERT_AXIS + playerNum.ToString()) < -0.3f){
+		} else if (Input.GetKey(down) || Input.GetAxis(VERT_AXIS + playerNum) < -0.3f){
 			temp.y -= currentSpeed;
 		}
 
-		if (Input.GetKey(left) || Input.GetAxis(HORIZ_AXIS + playerNum.ToString()) < -0.3f){
+		if (Input.GetKey(left) || Input.GetAxis(HORIZ_AXIS + playerNum) < -0.3f){
 			temp.x -= currentSpeed;
-		} else if (Input.GetKey(right) || Input.GetAxis(HORIZ_AXIS + playerNum.ToString()) > 0.3f){
+		} else if (Input.GetKey(right) || Input.GetAxis(HORIZ_AXIS + playerNum) > 0.3f){
 			temp.x += currentSpeed;
 		}
 
@@ -119,8 +122,10 @@ public class BasicPlayer : MonoBehaviour {
 	}
 
 	private bool TryToThrow(){
-		if (Input.GetButton(CIRCLE_BUTTON + playerNum.ToString()) || Input.GetKey(toss)){
+		if (Input.GetButton(CIRCLE_BUTTON + playerNum) || Input.GetKey(toss)){
+			Debug.Log("Input read");
 			if (transform.childCount > 0){
+				Debug.Log("Trying to throw");
 				StartCoroutine(transform.Find(BALL_OBJ).GetComponent<BallBehavior>()
 					.PassBetweenPlayers(transform, otherPlayer));
 				enemyCreator.FirstPass = true; //we've passed at least once, OK to start spawning enemies
@@ -137,6 +142,8 @@ public class BasicPlayer : MonoBehaviour {
 			other.transform.position = transform.position;
 			other.transform.parent = transform;
 			BallCarrier = true;
+		} else if (other.name.Contains(PHASE_CHANGE_OBJ)){
+			enemyCreator.NewEnemyPhase(other.name);
 		}
 	}
 
@@ -160,7 +167,7 @@ public class BasicPlayer : MonoBehaviour {
 	}
 
 	private void TryToMoveField(){
-		if (Input.GetKey(up) || Input.GetAxis(VERT_AXIS + playerNum.ToString()) > 0.3f){
+		if (Input.GetKey(up) || Input.GetAxis(VERT_AXIS + playerNum) > 0.3f){
 			fieldBehavior.ScrollField();
 		}
 	}

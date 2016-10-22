@@ -8,6 +8,7 @@ public class BallBehavior : MonoBehaviour {
 	private const string END_ZONE_OBJ = "End zone";
 
 	public IEnumerator PassBetweenPlayers(Transform start, Transform destination){
+		Debug.Log("Passing between players");
 		float totalFlightTime = Vector3.Distance(start.position, destination.position) * flightTimePerUnitDistance;
 		float timer = 0.0f;
 
