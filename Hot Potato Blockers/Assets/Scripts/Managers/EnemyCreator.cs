@@ -36,10 +36,12 @@ public class EnemyCreator : MonoBehaviour {
 	}
 
 	private GameObject currentEnemy;
+	private Transform enemyOrganizer;
 
 	private const string BALL_OBJ = "Ball";
 	private const string HOMING_ENEMY_OBJ = "HomingEnemy";
 	private const string RUSHING_ENEMY_OBJ = "RushingEnemy";
+	private const string ENEMY_ORGANIZER = "Enemies";
 
 	private void Start(){
 		
@@ -47,6 +49,7 @@ public class EnemyCreator : MonoBehaviour {
 		SpawnRate = startSpawnRate;
 		ball = transform.root.Find(BALL_OBJ);
 		currentEnemy = Resources.Load(HOMING_ENEMY_OBJ) as GameObject;
+		enemyOrganizer = transform.root.Find(ENEMY_ORGANIZER);
 	}
 
 	private void Update(){
@@ -69,7 +72,9 @@ public class EnemyCreator : MonoBehaviour {
 		numEnemies += 1;
 		SpawnRate--;
 
-		newEnemy.GetComponent<EnemyBehavior>().Speed = numEnemies;
+		if (newEnemy.GetComponent<EnemyBehavior>() != null){
+			newEnemy.GetComponent<EnemyBehavior>().Speed = numEnemies;
+		}
 
 		return numEnemies;
 	}
@@ -86,6 +91,12 @@ public class EnemyCreator : MonoBehaviour {
 	public void NewEnemyPhase(string phase){
 		if (phase.Contains(RUSHING_ENEMY_OBJ)){
 			currentEnemy = Resources.Load(RUSHING_ENEMY_OBJ) as GameObject;
+
+			foreach (Transform enemy in enemyOrganizer){
+				if (enemy.GetComponent<EnemyBehavior>() != null){
+					enemy.GetComponent<EnemyBehavior>().GetDestroyed();
+				}
+			}
 		}
 	}
 }

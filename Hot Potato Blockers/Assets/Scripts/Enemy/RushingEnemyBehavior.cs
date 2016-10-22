@@ -13,12 +13,15 @@ public class RushingEnemyBehavior : MonoBehaviour {
 	}
 	public float resetDelay = 1.0f;
 	private bool rushing = true;
+	Vector3 direction = new Vector3(0.0f, 0.0f, 0.0f);
 
 	private void Start(){
-		transform.parent = GameObject.Find("Scene").transform;
+		transform.parent = GameObject.Find("Scene").transform.Find("Enemies");
 		Debug.Log("Start called");
 		target = ChooseTarget();
+		direction = (target - transform.position).normalized;
 		rb2D = GetComponent<Rigidbody2D>();
+		rb2D.AddRelativeForce(direction * speed, ForceMode2D.Force);
 	}
 
 	private Vector3 ChooseTarget(){
@@ -33,17 +36,11 @@ public class RushingEnemyBehavior : MonoBehaviour {
 		if (rushing){
 			Move();
 		}
-
-		if (Vector3.Distance(transform.position, target) <= Mathf.Epsilon){
-			rushing = false; //stop adding force once you pass through the target position
-		}
 	}
 
 	private void Move(){
-		Vector3 direction = (target - transform.position).normalized;
-
 		//Debug.Log(direction);
-		rb2D.AddRelativeForce(direction * speed, ForceMode2D.Force);
+
 	}
 
 	private void OnTriggerEnter2D(Collider2D other){

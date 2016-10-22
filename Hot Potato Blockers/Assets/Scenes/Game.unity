@@ -113,7 +113,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 16658337}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 12.35, z: 0}
+  m_LocalPosition: {x: 0, y: 9.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -405,6 +405,7 @@ Transform:
   - {fileID: 16658338}
   - {fileID: 1169094344}
   - {fileID: 1044966307}
+  - {fileID: 1043248578}
   m_Father: {fileID: 1103805503}
   m_RootOrder: 0
 --- !u!1 &749679589
@@ -495,8 +496,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children:
-  - {fileID: 1589078915}
+  m_Children: []
   m_Father: {fileID: 2130402730}
   m_RootOrder: 4
 --- !u!114 &1005570026
@@ -514,6 +514,49 @@ MonoBehaviour:
   minSpawnRate: 1
   startSpawnRate: 5
   enemy: {fileID: 0}
+--- !u!1 &1043248577
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1043248578}
+  - 61: {fileID: 1043248579}
+  m_Layer: 8
+  m_Name: Right
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1043248578
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1043248577}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 9.17, y: 5.32, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 659811061}
+  m_RootOrder: 3
+--- !u!61 &1043248579
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1043248577}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 15.48}
 --- !u!1 &1044966306
 GameObject:
   m_ObjectHideFlags: 0
@@ -736,7 +779,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1169094343}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.31, z: 0}
+  m_LocalPosition: {x: 0, y: -1.93, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -848,6 +891,34 @@ Transform:
   - {fileID: 478209922}
   m_Father: {fileID: 2130402730}
   m_RootOrder: 2
+--- !u!1 &1493449604
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1493449605}
+  m_Layer: 0
+  m_Name: Enemies
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1493449605
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1493449604}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 2130402730}
+  m_RootOrder: 6
 --- !u!1 &1589078914
 GameObject:
   m_ObjectHideFlags: 0
@@ -871,12 +942,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1589078914}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 58.6, y: 4.93, z: 0}
+  m_LocalPosition: {x: 55.6, y: 4.93, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 1005570025}
-  m_RootOrder: 0
+  m_Father: {fileID: 1902942427}
+  m_RootOrder: 6
 --- !u!61 &1589078917
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -998,6 +1069,7 @@ Transform:
   - {fileID: 1327428762}
   - {fileID: 1151061877}
   - {fileID: 483848471}
+  - {fileID: 1589078915}
   m_Father: {fileID: 2130402730}
   m_RootOrder: 5
 --- !u!1 &1913196062
@@ -1341,5 +1413,6 @@ Transform:
   - {fileID: 2100767484}
   - {fileID: 1005570025}
   - {fileID: 1902942427}
+  - {fileID: 1493449605}
   m_Father: {fileID: 0}
   m_RootOrder: 0

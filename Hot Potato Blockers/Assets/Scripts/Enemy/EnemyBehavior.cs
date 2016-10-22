@@ -13,13 +13,15 @@ public class EnemyBehavior : MonoBehaviour {
 		set { speed = value; }
 	}
 	public float resetDelay = 1.0f;
+	private GameObject destroyParticle;
 
 	private void Start(){
-		transform.parent = GameObject.Find("Scene").transform;
+		transform.parent = GameObject.Find("Scene").transform.Find("Enemies");
 		Debug.Log("Start called");
 		target = ChooseTarget();
 		Debug.Log("target is " + target.name);
 		rb2D = GetComponent<Rigidbody2D>();
+		destroyParticle = Resources.Load("DestroyParticle") as GameObject;
 	}
 
 	private Transform ChooseTarget(){
@@ -49,6 +51,11 @@ public class EnemyBehavior : MonoBehaviour {
 
 		//Debug.Log(direction);
 		rb2D.AddRelativeForce(direction * speed, ForceMode2D.Force);
+	}
+
+	public void GetDestroyed(){
+		Instantiate(destroyParticle, transform.position, Quaternion.Euler(new Vector3(180.0f, 0.0f, 0.0f)));
+		Destroy(gameObject);
 	}
 
 	private void OnTriggerEnter2D(Collider2D other){
