@@ -84,6 +84,8 @@ public class EnemyBehavior : MonoBehaviour {
 				Time.timeScale = 0.0f;
 				StartCoroutine(Reset());
 				Debug.Log("You lose!");
+			} else {
+				GetDestroyed(); //enemies are destroyed if body-blocked
 			}
 		}
 	}

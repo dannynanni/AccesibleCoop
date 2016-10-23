@@ -21,7 +21,7 @@ public class EnemyCreator : MonoBehaviour {
 	public GameObject enemy;
 	private int numEnemies = 0;
 	private Transform ball;
-	private bool firstPass = true; //nothing will spawn until the players have passed the ball once
+	private bool firstPass = true; //if false, nothing will spawn until the players have passed the ball once
 	public bool FirstPass{
 		get { return firstPass; }
 		set {
@@ -85,7 +85,7 @@ public class EnemyCreator : MonoBehaviour {
 
 	public void ResetNumEnemies(){
 		numEnemies = 0;
-		SpawnRate = startSpawnRate;
+		//SpawnRate = startSpawnRate;
 	}
 
 	public void NewEnemyPhase(string phase){

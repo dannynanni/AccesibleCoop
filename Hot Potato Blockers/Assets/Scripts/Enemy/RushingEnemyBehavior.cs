@@ -44,6 +44,7 @@ public class RushingEnemyBehavior : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter2D(Collider2D other){
+		const string PLAYER_OBJ = "Player";
 		const string BALL_OBJ = "Ball";
 
 		if (other.name.Contains(BALL_OBJ)){
@@ -52,21 +53,12 @@ public class RushingEnemyBehavior : MonoBehaviour {
 			ball.parent = transform;
 			StartCoroutine(Reset());
 			Debug.Log("You lose!");
-		}
-	}
-
-	private void OnCollisionEnter2D(Collision2D collision){
-		const string PLAYER_OBJ = "Player";
-		const string BALL_OBJ = "Ball";
-
-		if (collision.gameObject.name.Contains(PLAYER_OBJ)){
-
-			collision.gameObject.GetComponent<BasicPlayer>().GetTackled(transform);
-			if (collision.gameObject.GetComponent<BasicPlayer>().BallCarrier){
+		} else if (other.gameObject.name.Contains(PLAYER_OBJ)){
+			if (other.gameObject.GetComponent<BasicPlayer>().BallCarrier){
 				Transform ball = GameObject.Find(BALL_OBJ).transform;
 				ball.position = transform.position;
 				ball.parent = transform;
-				collision.gameObject.GetComponent<BasicPlayer>().BallCarrier = false;
+				other.gameObject.GetComponent<BasicPlayer>().BallCarrier = false;
 				Time.timeScale = 0.0f;
 				StartCoroutine(Reset());
 				Debug.Log("You lose!");

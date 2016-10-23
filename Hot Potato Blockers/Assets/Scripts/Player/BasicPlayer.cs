@@ -89,6 +89,7 @@ public class BasicPlayer : MonoBehaviour {
 		if (!Tackled){
 			rb2D.MovePosition(transform.position + Move(currentSpeed));
 		} else if (Tackled){
+			rb2D.velocity = Vector3.zero;
 			Tackled = RunTackleTimer();
 		}
 
