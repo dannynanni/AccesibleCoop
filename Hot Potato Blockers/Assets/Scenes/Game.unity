@@ -240,8 +240,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNum: 0
-  baseSpeed: 0.15
-  dashSpeed: 0.3
+  baseSpeed: 0.1
+  dashSpeed: 0.2
   up: 0
   down: 0
   left: 0
@@ -1536,8 +1536,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNum: 0
-  baseSpeed: 0.15
-  dashSpeed: 0.3
+  baseSpeed: 0.1
+  dashSpeed: 0.2
   up: 0
   down: 0
   left: 0

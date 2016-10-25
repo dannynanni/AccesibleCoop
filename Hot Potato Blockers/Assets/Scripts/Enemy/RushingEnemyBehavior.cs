@@ -15,6 +15,9 @@ public class RushingEnemyBehavior : MonoBehaviour {
 	private bool rushing = true;
 	Vector3 direction = new Vector3(0.0f, 0.0f, 0.0f);
 
+	private const string PLAYER_OBJ = "Player";
+	private const string BALL_OBJ = "Ball";
+
 	private void Start(){
 		transform.parent = GameObject.Find("Scene").transform.Find("Enemies");
 		Debug.Log("Start called");
@@ -44,8 +47,6 @@ public class RushingEnemyBehavior : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter2D(Collider2D other){
-		const string PLAYER_OBJ = "Player";
-		const string BALL_OBJ = "Ball";
 
 		if (other.name.Contains(BALL_OBJ)){
 			Transform ball = other.transform;
@@ -57,7 +58,6 @@ public class RushingEnemyBehavior : MonoBehaviour {
 			if (other.gameObject.GetComponent<BasicPlayer>().BallCarrier){
 				Transform ball = GameObject.Find(BALL_OBJ).transform;
 				ball.position = transform.position;
-				ball.parent = transform;
 				other.gameObject.GetComponent<BasicPlayer>().BallCarrier = false;
 				Time.timeScale = 0.0f;
 				StartCoroutine(Reset());

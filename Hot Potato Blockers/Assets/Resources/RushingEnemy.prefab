@@ -86,7 +86,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {x: 0, y: 0, z: 0}
-  speed: 60
+  speed: 240
   resetDelay: 1
 --- !u!212 &212000013779344958
 SpriteRenderer:
