@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BasicPlayer : MonoBehaviour {
 
-	private bool ballCarrier = false;
+	public bool ballCarrier = false;
 	public bool BallCarrier{
 		get { return ballCarrier; }
 		set { ballCarrier = value; }

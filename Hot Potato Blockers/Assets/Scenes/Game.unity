@@ -239,6 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 652eb7c991155404c802f248070bb0a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballCarrier: 0
   playerNum: 0
   baseSpeed: 0.1
   dashSpeed: 0.2
@@ -828,7 +829,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnDelay: 1.5
-  spawnDist: 10
+  spawnDist: 13
 --- !u!1 &1103805502
 GameObject:
   m_ObjectHideFlags: 0
@@ -1535,6 +1536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 652eb7c991155404c802f248070bb0a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballCarrier: 0
   playerNum: 0
   baseSpeed: 0.1
   dashSpeed: 0.2

@@ -5,7 +5,7 @@ public class BallBehavior : MonoBehaviour {
 
 	public float flightTimePerUnitDistance = 0.1f;
 	public AnimationCurve flightCurve;
-	private const string END_ZONE_OBJ = "End zone";
+
 
 	public IEnumerator PassBetweenPlayers(Transform start, Transform destination){
 		Debug.Log("Passing between players");
@@ -23,11 +23,5 @@ public class BallBehavior : MonoBehaviour {
 		}
 
 		yield break;
-	}
-
-	private void OnTriggerEnter2D(Collider2D other){
-		if (other.transform.parent.name.Contains(END_ZONE_OBJ)){
-			Debug.Log("You win!");
-		}
 	}
 }
