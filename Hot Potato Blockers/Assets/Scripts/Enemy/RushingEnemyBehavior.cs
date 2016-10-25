@@ -2,7 +2,7 @@
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class RushingEnemyBehavior : MonoBehaviour {
+public class RushingEnemyBehavior : EnemyBaseScript {
 
 	public Vector3 target;
 	private Rigidbody2D rb2D;
@@ -81,5 +81,9 @@ public class RushingEnemyBehavior : MonoBehaviour {
 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
 		yield break;
+	}
+
+	public override void GetDestroyed(){
+		Destroy(gameObject);
 	}
 }

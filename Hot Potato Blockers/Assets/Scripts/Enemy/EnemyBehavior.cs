@@ -2,7 +2,7 @@
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class EnemyBehavior : MonoBehaviour {
+public class EnemyBehavior : EnemyBaseScript {
 
 	public float chanceOfGoForBall = 0.8f; //between 1.0 and 0.0
 	public Transform target;
@@ -53,7 +53,7 @@ public class EnemyBehavior : MonoBehaviour {
 		rb2D.AddRelativeForce(direction * speed, ForceMode2D.Force);
 	}
 
-	public void GetDestroyed(){
+	public override void GetDestroyed(){
 		Instantiate(destroyParticle, transform.position, Quaternion.Euler(new Vector3(180.0f, 0.0f, 0.0f)));
 		Destroy(gameObject);
 	}

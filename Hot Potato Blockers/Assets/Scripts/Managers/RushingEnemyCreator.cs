@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RushingEnemyCreator : MonoBehaviour {
+public class RushingEnemyCreator : EnemyBaseScript {
 
 	private GameObject rushingEnemy;
 	private const string RUSHING_ENEMY_OBJ = "RushingEnemy";
@@ -11,14 +11,14 @@ public class RushingEnemyCreator : MonoBehaviour {
 	private Transform ball;
 	private const string BALL_OBJ = "Ball";
 
-	public float spawnDist = 10.0f; //the y-axis location where enemies will spawn
+	public float ySpawnLoc = 10.0f; //the y-axis location where enemies will spawn
+
+	private const string ENEMY_ORGANIZER = "Enemies";
 
 	private void Start(){
+		transform.parent = GameObject.Find(ENEMY_ORGANIZER).transform;
 		rushingEnemy = Resources.Load(RUSHING_ENEMY_OBJ) as GameObject;
-		Debug.Log(rushingEnemy);
 		ball = transform.root.Find(BALL_OBJ);
-		Debug.Log(ball);
-		gameObject.SetActive(false); //turn this enemy creator off until the player reaches a certain distance
 	}
 
 	private void Update(){
@@ -31,6 +31,10 @@ public class RushingEnemyCreator : MonoBehaviour {
 	}
 
 	private void MakeEnemy(){
-		Instantiate(rushingEnemy, new Vector3(ball.position.x, spawnDist, 0.0f), Quaternion.identity);
+		Instantiate(rushingEnemy, new Vector3(ball.position.x, ySpawnLoc, 0.0f), Quaternion.identity);
+	}
+
+	public override void GetDestroyed(){
+		Destroy(gameObject);
 	}
 }

@@ -31,7 +31,6 @@ public class BasicPlayer : MonoBehaviour {
 
 	private Transform otherPlayer;
 	private const string BALL_OBJ = "Ball";
-	private const string ENEMYCREATOR_OBJ = "Homing enemy creator";
 
 	private bool tackled = false;
 	public bool Tackled{
@@ -41,7 +40,7 @@ public class BasicPlayer : MonoBehaviour {
 	public float tackleKnockback = 5.0f;
 	public float tackleDuration = 2.0f;
 	private float tackleTimer = 0.0f;
-	private HomingEnemyCreator enemyCreator;
+	private ChangeEnemyType changeEnemyType;
 	private FieldBehavior fieldBehavior;
 	private const string FIELD_OBJ = "Field";
 
@@ -52,7 +51,6 @@ public class BasicPlayer : MonoBehaviour {
 		playerNum = gameObject.name[7]; //assumes players are named using the convention "Player #"
 		rb2D = GetComponent<Rigidbody2D>();
 		otherPlayer = FindOtherPlayer();
-		enemyCreator = GameObject.Find(ENEMYCREATOR_OBJ).GetComponent<HomingEnemyCreator>();
 		fieldBehavior = GameObject.Find(FIELD_OBJ).GetComponent<FieldBehavior>();
 	}
 
@@ -129,8 +127,8 @@ public class BasicPlayer : MonoBehaviour {
 				Debug.Log("Trying to throw");
 				StartCoroutine(transform.Find(BALL_OBJ).GetComponent<BallBehavior>()
 					.PassBetweenPlayers(transform, otherPlayer));
-				enemyCreator.FirstPass = true; //we've passed at least once, OK to start spawning enemies
-				enemyCreator.ResetNumEnemies();
+//				enemyCreator.FirstPass = true; //we've passed at least once, OK to start spawning enemies
+//				enemyCreator.ResetNumEnemies();
 				return false;
 			}
 		}
@@ -144,7 +142,7 @@ public class BasicPlayer : MonoBehaviour {
 			other.transform.parent = transform;
 			BallCarrier = true;
 		} else if (other.name.Contains(PHASE_CHANGE_OBJ)){
-			enemyCreator.NewEnemyPhase();
+			other.gameObject.GetComponent<ChangeEnemyType>().NewEnemyPhase();
 		}
 	}
 

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HomingEnemyCreator : MonoBehaviour {
+public class HomingEnemyCreator : EnemyBaseScript {
 
 	public float spawnDist = 10.0f;
 	public float minSpawnRate = 1.0f;
@@ -36,20 +36,19 @@ public class HomingEnemyCreator : MonoBehaviour {
 	}
 
 	private GameObject currentEnemy;
-	private Transform enemyOrganizer;
 
 	private const string BALL_OBJ = "Ball";
 	private const string HOMING_ENEMY_OBJ = "HomingEnemy";
 	private const string RUSHING_ENEMY_CREATOR = "Rushing enemy creator";
 	private const string ENEMY_ORGANIZER = "Enemies";
 
-	private void Start(){
-		
-
+	public void Start(){
+		Debug.Log("Start() called");
+		transform.parent = GameObject.Find(ENEMY_ORGANIZER).transform;
 		SpawnRate = startSpawnRate;
-		ball = transform.root.Find(BALL_OBJ);
+		ball = GameObject.Find(BALL_OBJ).transform;
 		currentEnemy = Resources.Load(HOMING_ENEMY_OBJ) as GameObject;
-		enemyOrganizer = transform.root.Find(ENEMY_ORGANIZER);
+		Debug.Log(currentEnemy);
 	}
 
 	private void Update(){
@@ -59,11 +58,14 @@ public class HomingEnemyCreator : MonoBehaviour {
 
 		if (timer >= spawnRate){
 			timer = 0.0f;
+			Debug.Log(currentEnemy);
 			numEnemies = MakeEnemy(currentEnemy);
 		}
 	}
 
 	private int MakeEnemy(GameObject enemyType){
+		Debug.Log(enemyType);
+		Debug.Log(ball);
 		GameObject newEnemy = Instantiate(enemyType,
 										  new Vector3(ball.position.x + spawnDist * PosOrNegOne(),
 													  ball.position.y + spawnDist * PosOrNegOne(),
@@ -88,14 +90,7 @@ public class HomingEnemyCreator : MonoBehaviour {
 		//SpawnRate = startSpawnRate;
 	}
 
-	public void NewEnemyPhase(){
-		foreach (Transform enemy in enemyOrganizer){
-			if (enemy.GetComponent<EnemyBehavior>() != null){
-				enemy.GetComponent<EnemyBehavior>().GetDestroyed();
-			}
-		}
-
-		transform.root.Find(RUSHING_ENEMY_CREATOR).gameObject.SetActive(true);
-		gameObject.SetActive(false);
+	public override void GetDestroyed(){
+		Destroy(gameObject);
 	}
 }
