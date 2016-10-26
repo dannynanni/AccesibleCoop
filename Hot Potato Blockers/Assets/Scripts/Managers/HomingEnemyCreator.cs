@@ -7,6 +7,7 @@ public class HomingEnemyCreator : EnemyBaseScript {
 	public float minSpawnRate = 1.0f;
 	public float startSpawnRate = 5.0f;
 	private float spawnRate = 1.0f;
+	public float spawnDecrement = 1f;
 	public float SpawnRate{
 		get { return spawnRate; }
 		set { 
@@ -72,7 +73,7 @@ public class HomingEnemyCreator : EnemyBaseScript {
 													  0.0f),
 										  Quaternion.identity) as GameObject;
 		numEnemies += 1;
-		SpawnRate--;
+		SpawnRate -= spawnDecrement;
 
 		if (newEnemy.GetComponent<EnemyBehavior>() != null){
 			newEnemy.GetComponent<EnemyBehavior>().Speed = numEnemies;
