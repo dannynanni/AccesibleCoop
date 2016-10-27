@@ -88,6 +88,10 @@ MonoBehaviour:
   chanceOfGoForBall: 0.8
   target: {fileID: 0}
   speed: 100
+  maxSpeeds:
+  - 2
+  - 5
+  - 7
   resetDelay: 1
 --- !u!212 &212000014219526820
 SpriteRenderer:

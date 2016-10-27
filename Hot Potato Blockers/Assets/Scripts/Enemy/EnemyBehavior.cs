@@ -12,16 +12,17 @@ public class EnemyBehavior : EnemyBaseScript {
 		get { return speed; }
 		set { speed = value; }
 	}
+	public float[] maxSpeeds = { 2.0f, 4.0f, 7.0f };
+	private float myMaxSpeed = 0.0f;
 	public float resetDelay = 1.0f;
 	private GameObject destroyParticle;
 
 	private void Start(){
 		transform.parent = GameObject.Find("Scene").transform.Find("Enemies");
-		Debug.Log("Start called");
 		target = ChooseTarget();
-		Debug.Log("target is " + target.name);
 		rb2D = GetComponent<Rigidbody2D>();
 		destroyParticle = Resources.Load("DestroyParticle") as GameObject;
+		myMaxSpeed = maxSpeeds[Random.Range(0, maxSpeeds.Length)];
 	}
 
 	private Transform ChooseTarget(){
@@ -50,7 +51,7 @@ public class EnemyBehavior : EnemyBaseScript {
 		Vector3 direction = (target.position - transform.position).normalized;
 
 		//Debug.Log(direction);
-		rb2D.AddRelativeForce(direction * speed, ForceMode2D.Force);
+		rb2D.AddRelativeForce(Vector2.ClampMagnitude((direction * speed), myMaxSpeed), ForceMode2D.Force);
 	}
 
 	public override void GetDestroyed(){
