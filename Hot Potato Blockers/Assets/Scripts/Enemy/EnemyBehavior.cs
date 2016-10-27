@@ -64,7 +64,7 @@ public class EnemyBehavior : EnemyBaseScript {
 		if (other.name.Contains(BALL_OBJ)){
 			Transform ball = other.transform;
 			ball.position = transform.position;
-			ball.parent = transform;
+			StartCoroutine(Reset());
 			Debug.Log("You lose!");
 		}
 	}
@@ -79,7 +79,6 @@ public class EnemyBehavior : EnemyBaseScript {
 			if (collision.gameObject.GetComponent<BasicPlayer>().BallCarrier){
 				Transform ball = GameObject.Find(BALL_OBJ).transform;
 				ball.position = transform.position;
-				ball.parent = transform;
 				collision.gameObject.GetComponent<BasicPlayer>().BallCarrier = false;
 				Time.timeScale = 0.0f;
 				StartCoroutine(Reset());

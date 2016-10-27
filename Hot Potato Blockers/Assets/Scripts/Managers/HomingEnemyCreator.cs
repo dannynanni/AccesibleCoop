@@ -43,12 +43,10 @@ public class HomingEnemyCreator : EnemyBaseScript {
 	private const string ENEMY_ORGANIZER = "Enemies";
 
 	public void Start(){
-		Debug.Log("Start() called");
 		transform.parent = GameObject.Find(ENEMY_ORGANIZER).transform;
 		SpawnRate = startSpawnRate;
 		ball = GameObject.Find(BALL_OBJ).transform;
 		currentEnemy = Resources.Load(HOMING_ENEMY_OBJ) as GameObject;
-		Debug.Log(currentEnemy);
 	}
 
 	private void Update(){
@@ -64,8 +62,6 @@ public class HomingEnemyCreator : EnemyBaseScript {
 	}
 
 	private int MakeEnemy(GameObject enemyType){
-		Debug.Log(enemyType);
-		Debug.Log(ball);
 		GameObject newEnemy = Instantiate(enemyType,
 										  new Vector3(ball.position.x + spawnDist * PosOrNegOne(),
 													  ball.position.y + spawnDist * PosOrNegOne(),

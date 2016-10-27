@@ -2,9 +2,13 @@
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class RushingEnemyBehavior : EnemyBaseScript {
+public class BossHelperEnemyBehavior : EnemyBaseScript {
 
-	public Vector3 target;
+	private Transform target;
+	public Transform Target{
+		get { return target; }
+		set { target = value; }
+	}
 	private Rigidbody2D rb2D;
 	public float speed = 0.3f;
 	public float Speed{
@@ -12,55 +16,58 @@ public class RushingEnemyBehavior : EnemyBaseScript {
 		set { speed = value; }
 	}
 	public float resetDelay = 1.0f;
-	private bool rushing = true;
-	Vector3 direction = new Vector3(0.0f, 0.0f, 0.0f);
-
-	private const string PLAYER_OBJ = "Player";
-	private const string BALL_OBJ = "Ball";
+	private GameObject destroyParticle;
+	private const string PLAYER_ORGANIZER = "Players";
 
 	private void Start(){
 		transform.parent = GameObject.Find("Scene").transform.Find("Enemies");
-		Debug.Log("Start called");
-		target = ChooseTarget();
-		direction = (target - transform.position).normalized;
 		rb2D = GetComponent<Rigidbody2D>();
-		rb2D.AddRelativeForce(direction * speed, ForceMode2D.Force);
-	}
-
-	private Vector3 ChooseTarget(){
-		//Debug.Log("ChooseTarget called");
-		const string BALL_OBJ = "Ball";
-
-		return GameObject.Find(BALL_OBJ).transform.position;
+		destroyParticle = Resources.Load("DestroyParticle") as GameObject;
 	}
 
 	private void FixedUpdate(){
-		//Debug.Log("FixedUpdate called");
-		if (rushing){
-			Move();
-		}
+		Move();
 	}
 
 	private void Move(){
-		//Debug.Log(direction);
+		Vector3 direction = (target.position - transform.position).normalized;
 
+		rb2D.AddRelativeForce(direction * speed, ForceMode2D.Force);
+	}
+
+	public override void GetDestroyed(){
+		Instantiate(destroyParticle, transform.position, Quaternion.Euler(new Vector3(180.0f, 0.0f, 0.0f)));
+		Destroy(gameObject);
 	}
 
 	private void OnTriggerEnter2D(Collider2D other){
+		const string BALL_OBJ = "Ball";
 
 		if (other.name.Contains(BALL_OBJ)){
 			Transform ball = other.transform;
 			ball.position = transform.position;
-			StartCoroutine(Reset());
+			ball.parent = transform;
 			Debug.Log("You lose!");
-		} else if (other.gameObject.name.Contains(PLAYER_OBJ)){
-			if (other.gameObject.GetComponent<BasicPlayer>().BallCarrier){
+		}
+	}
+
+	private void OnCollisionEnter2D(Collision2D collision){
+		const string PLAYER_OBJ = "Player";
+		const string BALL_OBJ = "Ball";
+
+		if (collision.gameObject.name.Contains(PLAYER_OBJ)){
+
+			collision.gameObject.GetComponent<BasicPlayer>().GetTackled(transform);
+			if (collision.gameObject.GetComponent<BasicPlayer>().BallCarrier){
 				Transform ball = GameObject.Find(BALL_OBJ).transform;
 				ball.position = transform.position;
-				other.gameObject.GetComponent<BasicPlayer>().BallCarrier = false;
+				ball.parent = transform;
+				collision.gameObject.GetComponent<BasicPlayer>().BallCarrier = false;
 				Time.timeScale = 0.0f;
 				StartCoroutine(Reset());
 				Debug.Log("You lose!");
+			} else {
+				GetDestroyed(); //enemies are destroyed if body-blocked
 			}
 		}
 	}
@@ -80,9 +87,5 @@ public class RushingEnemyBehavior : EnemyBaseScript {
 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
 		yield break;
-	}
-
-	public override void GetDestroyed(){
-		Destroy(gameObject);
 	}
 }

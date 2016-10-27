@@ -63,8 +63,7 @@ public class BasicPlayer : MonoBehaviour {
 				temp = player;
 			}
 		}
-
-		Debug.Log("otherPlayer for " + gameObject.name + " set to " + temp);
+			
 		if (temp == transform) { Debug.Log("Couldn't find other player for " + gameObject.name); }
 
 		return temp;
