@@ -37,8 +37,7 @@ public class CannonBehavior : MonoBehaviour {
 	}
 
 	private Vector3 BackAndForth(){
-		posVec.x = startX + range * Mathf.Sin(Time.time * speed); //using Time.time means all bobbing things will
-		//be at the same place in their bob
+		posVec.x = startX + range * Mathf.Sin(Time.time * speed) + transform.parent.position.x;
 
 		return posVec;
 	}

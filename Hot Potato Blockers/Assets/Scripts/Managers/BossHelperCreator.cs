@@ -20,6 +20,7 @@ public class BossHelperCreator : MonoBehaviour {
 	private void Start(){
 		helpingEnemy = Resources.Load(HELPING_ENEMY) as GameObject;
 		myTargetPlayer = GameObject.Find(PLAYER_OBJ + FindTargetPlayer()).transform;
+		MakeEnemy();
 	}
 
 	private void Update(){
@@ -51,7 +52,7 @@ public class BossHelperCreator : MonoBehaviour {
 	}
 
 	private void MakeEnemy(){
-			GameObject newEnemy = Instantiate(helpingEnemy, transform.position, Quaternion.identity) as GameObject;
-			newEnemy.GetComponent<BossHelperEnemyBehavior>().Target = myTargetPlayer;
+		GameObject newEnemy = Instantiate(helpingEnemy, transform.position, Quaternion.identity) as GameObject;
+		newEnemy.GetComponent<BossHelperEnemyBehavior>().Target = myTargetPlayer;
 	}
 }

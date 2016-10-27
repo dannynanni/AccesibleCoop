@@ -15,13 +15,13 @@ public class BossEnemyBehavior : EnemyBaseScript {
 	private Vector3 posVec;
 	private float startY;
 	private float startX;
+	public float finalX = 6.6f; //the x-axis localPosition where the boss should stop
 
 	public int health = 3;
 	private bool gotHit = false;
 	private GameObject destroyParticle;
 
 	private const string DESTROY_PARTICLE = "DestroyParticle";
-	private const string ENEMY_ORGANIZER = "Enemies";
 
 	void Awake(){
 		rb2D = GetComponent<Rigidbody2D>();
@@ -29,7 +29,6 @@ public class BossEnemyBehavior : EnemyBaseScript {
 		startY = posVec.y;
 		startX = posVec.x;
 		destroyParticle = Resources.Load(DESTROY_PARTICLE) as GameObject;
-		transform.parent = GameObject.Find(ENEMY_ORGANIZER).transform;
 	}
 
 	//The boss normally moves up and down. When hit, it shakes left and right.
@@ -37,7 +36,6 @@ public class BossEnemyBehavior : EnemyBaseScript {
 		if (!gotHit){
 			rb2D.MovePosition(BobUpAndDown());
 		} else {
-			Debug.Log("shaking");
 			rb2D.MovePosition(BackAndForth());
 		}
 	}
@@ -49,6 +47,11 @@ public class BossEnemyBehavior : EnemyBaseScript {
 	}
 
 	private Vector3 BobUpAndDown(){
+		posVec.x = transform.parent.position.x;
+		if (posVec.x < finalX){
+			posVec.x = finalX;
+		}
+
 		posVec.y = startY + range * Mathf.Sin(Time.time * speed); //using Time.time means all bobbing things will
 		//be at the same place in their bob
 
@@ -82,6 +85,13 @@ public class BossEnemyBehavior : EnemyBaseScript {
 
 	public override void GetDestroyed(){
 		Instantiate(destroyParticle, transform.position, destroyParticle.transform.rotation);
-		Destroy(gameObject);
+
+		foreach (Transform obj in transform.parent){
+			if (obj.GetComponent<EnemyBaseScript>() != null){
+				obj.GetComponent<EnemyBaseScript>().GetDestroyed();
+			} else {
+				Destroy(obj.gameObject);
+			}
+		}
 	}
 }

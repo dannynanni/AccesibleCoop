@@ -140,7 +140,7 @@ public class BasicPlayer : MonoBehaviour {
 			other.transform.position = transform.position;
 			other.transform.parent = transform;
 			BallCarrier = true;
-		} else if (other.name.Contains(PHASE_CHANGE_OBJ)){
+		} else if (other.name.Contains(PHASE_CHANGE_OBJ) && playerNum == '1'){ //only player 1 starts a new phase; this avoids restarting same phase
 			other.gameObject.GetComponent<ChangeEnemyType>().NewEnemyPhase();
 		}
 	}

@@ -8,7 +8,7 @@ public class CannonballBehavior : MonoBehaviour {
 
 	public float maxXDist = 20.0f; //get rid of cannonballs at this x-axis location; they're definitely off the screen
 
-	private const string BOSS_FIGHT_ORGANIZER = "BossFight";
+	private const string BOSS_FIGHT_ORGANIZER = "BossFight(Clone)";
 	private const string BOSS_MONSTER = "BossEnemy";
 
 	private void Start(){
@@ -23,8 +23,8 @@ public class CannonballBehavior : MonoBehaviour {
 	}
 
 	private void FixedUpdate(){
-		rb2D.MovePosition(new Vector3(transform.position.x + speed,
-									  transform.position.y,
+		rb2D.MovePosition(new Vector3(transform.localPosition.x + speed,
+									  transform.localPosition.y,
 									  0.0f));
 	}
 

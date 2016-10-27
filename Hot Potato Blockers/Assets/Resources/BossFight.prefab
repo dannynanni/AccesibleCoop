@@ -35,6 +35,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011737912422}
+  - 114: {fileID: 114000011831504258}
   m_Layer: 0
   m_Name: BossFight
   m_TagString: Untagged
@@ -358,7 +359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba795cba39594c8bb0aefb95ed0c9ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenEnemies: 1.5
+  timeBetweenEnemies: 4.5
   spawnOffset: 0.3
 --- !u!114 &114000010605152670
 MonoBehaviour:
@@ -371,7 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba795cba39594c8bb0aefb95ed0c9ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenEnemies: 1.5
+  timeBetweenEnemies: 4.5
   spawnOffset: 0
 --- !u!114 &114000010730592520
 MonoBehaviour:
@@ -403,6 +404,7 @@ MonoBehaviour:
   hitShakeDuration: 1
   range: 3
   shakeRange: 0.2
+  finalX: 6.6
   health: 3
 --- !u!114 &114000011241780742
 MonoBehaviour:
@@ -415,7 +417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba795cba39594c8bb0aefb95ed0c9ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenEnemies: 1.5
+  timeBetweenEnemies: 4.5
   spawnOffset: 0
 --- !u!114 &114000011816551956
 MonoBehaviour:
@@ -428,8 +430,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba795cba39594c8bb0aefb95ed0c9ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenEnemies: 1.5
+  timeBetweenEnemies: 4.5
   spawnOffset: 0.3
+--- !u!114 &114000011831504258
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012021910280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 625df7ee0d311478e835c3daa384df0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startLoc: {x: 13, y: 0, z: 0}
 --- !u!114 &114000012683987178
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -441,7 +455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba795cba39594c8bb0aefb95ed0c9ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenEnemies: 1.5
+  timeBetweenEnemies: 4.5
   spawnOffset: 0.15
 --- !u!114 &114000013111340066
 MonoBehaviour:
@@ -454,7 +468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba795cba39594c8bb0aefb95ed0c9ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenEnemies: 1.5
+  timeBetweenEnemies: 4.5
   spawnOffset: 0.15
 --- !u!212 &212000010326394454
 SpriteRenderer:
